@@ -95,6 +95,7 @@
     <Compile Include="Models\DataModels\DataNode\IDataNode.cs" />
     <Compile Include="Models\DataModels\Field\Field.cs" />
     <Compile Include="Models\DataModels\Field\IField.cs" />
+    <Compile Include="Models\DataModels\Field\NewItem.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="HelperClasses\ObservableObject.cs" />
     <Compile Include="HelperClasses\Readers\DirectoryReader\IDirectoryReader.cs" />
