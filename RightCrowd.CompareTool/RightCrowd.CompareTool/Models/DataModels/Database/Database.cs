@@ -27,8 +27,11 @@ namespace RightCrowd.CompareTool.Models.DataModels.Database
 
             set
             {
-                _data = value;
-                OnPropertyChanged("Data");
+                if(_data != value)
+                {
+                    _data = value;
+                    OnPropertyChanged("Data");
+                }
             }
         }
 
@@ -41,8 +44,11 @@ namespace RightCrowd.CompareTool.Models.DataModels.Database
 
             set
             {
-                _directoryName = value;
-                OnPropertyChanged("DirectoryName");
+                if(_directoryName != value)
+                {
+                    _directoryName = value;
+                    OnPropertyChanged("DirectoryName");
+                }
             }
         }
     }

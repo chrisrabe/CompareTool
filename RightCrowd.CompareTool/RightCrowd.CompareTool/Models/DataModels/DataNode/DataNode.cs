@@ -30,8 +30,11 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
 
             private set
             {
-                _type = value;
-                OnPropertyChanged("Type");
+                if(_type != value)
+                {
+                    _type = value;
+                    OnPropertyChanged("Type");
+                }
             }
         }
 
@@ -47,8 +50,11 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
 
             private set
             {
-                _fields = value;
-                OnPropertyChanged("Fields");
+                if(_fields != value)
+                {
+                    _fields = value;
+                    OnPropertyChanged("Fields");
+                }
             }
         }
     }
