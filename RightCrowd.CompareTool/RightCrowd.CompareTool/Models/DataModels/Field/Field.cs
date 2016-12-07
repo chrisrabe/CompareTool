@@ -4,7 +4,7 @@ using System;
 namespace RightCrowd.CompareTool.Models.DataModels.Field
 {
     /// <summary>
-    /// Represents a field inside a data node.
+    /// Represents a field inside a data node. --- Testing Comment
     /// </summary>
     internal class Field : ObservableObject, IField
     {
