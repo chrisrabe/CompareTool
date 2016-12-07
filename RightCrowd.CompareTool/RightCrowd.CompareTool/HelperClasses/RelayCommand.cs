@@ -32,7 +32,7 @@ namespace RightCrowd.CompareTool.HelperClasses
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute == null)
-                throw new ArgumentException("excute must not be null");
+                throw new ArgumentException("execute must not be null");
             _execute = execute;
             _canExecute = canExecute;
         }
