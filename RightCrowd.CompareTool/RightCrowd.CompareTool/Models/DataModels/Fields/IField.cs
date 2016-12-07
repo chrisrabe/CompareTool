@@ -1,4 +1,4 @@
-﻿namespace RightCrowd.CompareTool.Models.DataModels.Field
+﻿namespace RightCrowd.CompareTool.Models.DataModels.Fields
 {
     /// <summary>
     /// This represents a field inside a data node.
@@ -9,10 +9,5 @@
         /// Gets or sets the name of the field.
         /// </summary>
         string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the value of the field.
-        /// </summary>
-        string Value { get; set; }
     }
 }

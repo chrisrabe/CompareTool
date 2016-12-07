@@ -1,5 +1,5 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
-using RightCrowd.CompareTool.Models.DataModels.Field;
+using RightCrowd.CompareTool.Models.DataModels.Fields;
 using System.Collections.ObjectModel;
 
 namespace RightCrowd.CompareTool.Models.DataModels.DataNode

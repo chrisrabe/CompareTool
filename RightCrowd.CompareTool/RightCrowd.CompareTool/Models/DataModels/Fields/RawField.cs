@@ -1,20 +1,31 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
 
-namespace RightCrowd.CompareTool.Models.DataModels.Field
+namespace RightCrowd.CompareTool.Models.DataModels.Fields
 {
     /// <summary>
-    /// Represents a field inside a data node.
+    /// Represents a field which can hold a single value.
     /// </summary>
-    internal class Field : ObservableObject, IField
+    internal class RawField : ObservableObject, IField
     {
+        #region Fields
+
         private string _name;
         private string _value;
 
-        public Field(string name, string value)
+        #endregion // Fields
+
+        #region Constructor
+
+        public RawField(string name, string value)
         {
             Name = name;
             Value = value;
         }
+
+        #endregion // Constructor
+
+
+        #region Properties
 
         /// <summary>
         /// gets or sets the name of the field.
@@ -58,5 +69,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Field
                 }
             }
         }
+
+        #endregion // Properties
     }
 }

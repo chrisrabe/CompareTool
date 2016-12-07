@@ -1,6 +1,6 @@
 ﻿using RightCrowd.CompareTool.Models.DataModels.Database;
 
-namespace RightCrowd.CompareTool.HelperClasses.Readers.DirectoryReader
+namespace RightCrowd.CompareTool.HelperClasses.Readers.DirectoryReaders
 {
     /// <summary>
     /// This class is responsible for placing data from the files inside the directory into a IDatabase object.

@@ -87,18 +87,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HelperClasses\Readers\DirectoryReader\DirectoryReader.cs" />
-    <Compile Include="HelperClasses\Readers\XMLReader\XMLReader.cs" />
+    <Compile Include="HelperClasses\Readers\DirectoryReaders\DirectoryReader.cs" />
+    <Compile Include="HelperClasses\Readers\XMLReaders\XMLReader.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\IDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\TwoDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\Database\IDatabase.cs" />
     <Compile Include="Models\DataModels\DataNode\IDataNode.cs" />
-    <Compile Include="Models\DataModels\Field\Field.cs" />
-    <Compile Include="Models\DataModels\Field\IField.cs" />
+    <Compile Include="Models\DataModels\Fields\CompositeField.cs" />
+    <Compile Include="Models\DataModels\Fields\RawField.cs" />
+    <Compile Include="Models\DataModels\Fields\IField.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="HelperClasses\ObservableObject.cs" />
-    <Compile Include="HelperClasses\Readers\DirectoryReader\IDirectoryReader.cs" />
-    <Compile Include="HelperClasses\Readers\XMLReader\IXMLReader.cs" />
+    <Compile Include="HelperClasses\Readers\DirectoryReaders\IDirectoryReader.cs" />
+    <Compile Include="HelperClasses\Readers\XMLReaders\IXMLReader.cs" />
     <Compile Include="HelperClasses\RelayCommand.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="Views\ApplicationView.xaml.cs">
