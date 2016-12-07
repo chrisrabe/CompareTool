@@ -87,6 +87,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\DataModels\DatabaseStorage\IDatabaseStorage.cs" />
+    <Compile Include="Models\DataModels\DatabaseStorage\TwoDatabaseStorage.cs" />
+    <Compile Include="Models\DataModels\Database\IDatabase.cs" />
+    <Compile Include="Models\DataModels\DataNode\IDataNode.cs" />
+    <Compile Include="Models\DataModels\Field\Field.cs" />
+    <Compile Include="Models\DataModels\Field\IField.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="HelperClasses\ObservableObject.cs" />
     <Compile Include="HelperClasses\Readers\DirectoryReader\IDirectoryReader.cs" />
@@ -99,7 +105,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DataModels\DatabaseStorage\DatabaseStorage.cs" />
     <Compile Include="Models\DataModels\Database\Database.cs" />
     <Compile Include="Models\DataModels\DataNode\DataNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
