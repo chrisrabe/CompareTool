@@ -7,12 +7,15 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="RC Compare Tool" 
-        Height="800" Width="1200"
+        Height="800" Width="1200" 
         ResizeMode="CanMinimize" 
-        ShowMaxRestoreButton="False"
-        WindowStartupLocation="CenterScreen"
-        NonActiveWindowTitleBrush="#FF0080C6" NonActiveGlowBrush="#FF32B2F8" NonActiveBorderBrush="#FF0080C6" 
-        WindowTitleBrush="#FF8CC63F" BorderBrush="#FF8CC63F" GlowBrush="#FFBEF867">
+        ShowMaxRestoreButton="False" 
+        WindowStartupLocation="CenterScreen" 
+        NonActiveWindowTitleBrush="#FF0080C6" 
+        NonActiveGlowBrush="#FF32B2F8" 
+        NonActiveBorderBrush="#FF0080C6" 
+        WindowTitleBrush="#FF8CC63F" BorderBrush="#FF8CC63F" GlowBrush="#FFBEF867" 
+        Icon="pack://application:,,,/Resources/app_logo.ico">
     <Controls:MetroWindow.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFF2F6B0" Offset="0"/>

@@ -129,18 +129,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\compare_tool_icon.png" />
+    <Resource Include="Resources\app_logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\compare-btn.png" />
+    <Resource Include="Resources\compare-btn.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\db1_load.png" />
+    <Resource Include="Resources\db1_load.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\db2_load.png" />
+    <Resource Include="Resources\db2_load.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

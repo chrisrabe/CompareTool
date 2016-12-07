@@ -61,21 +61,21 @@ namespace RightCrowd.CompareTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Bitmap compare_btn {
+        internal static System.Drawing.Icon app_logo {
             get {
-                object obj = ResourceManager.GetObject("compare_btn", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("app_logo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap compare_tool_icon {
+        internal static System.Drawing.Bitmap compare_btn {
             get {
-                object obj = ResourceManager.GetObject("compare_tool_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("compare_btn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
