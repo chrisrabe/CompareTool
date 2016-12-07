@@ -18,7 +18,7 @@ namespace RightCrowd.CompareTool
 
         public ApplicationViewModel()
         {
-
+            // Add some page view models here...
         }
 
         #region Properties / Commands
