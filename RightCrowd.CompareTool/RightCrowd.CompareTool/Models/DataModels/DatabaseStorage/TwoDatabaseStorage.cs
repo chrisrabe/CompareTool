@@ -19,6 +19,9 @@ namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage
 
         #region Properties
 
+        /// <summary>
+        /// Directory Path of the first database.
+        /// </summary>
         public string DirectoryOne
         {
             get
@@ -27,6 +30,9 @@ namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage
             }
         }
 
+        /// <summary>
+        /// Directory Path of the second database.
+        /// </summary>
         public string DirectoryTwo
         {
             get

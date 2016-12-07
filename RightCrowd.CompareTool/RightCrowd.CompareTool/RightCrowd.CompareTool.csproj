@@ -87,6 +87,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HelperClasses\Readers\DirectoryReader\DirectoryReader.cs" />
+    <Compile Include="HelperClasses\Readers\XMLReader\XMLReader.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\IDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\TwoDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\Database\IDatabase.cs" />

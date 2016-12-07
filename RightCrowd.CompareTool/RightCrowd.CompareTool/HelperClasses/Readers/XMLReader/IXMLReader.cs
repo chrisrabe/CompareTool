@@ -13,6 +13,6 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReader
         /// </summary>
         /// <param name="doc"></param>
         /// <returns></returns>
-        DataNode ReadXMLFile(XDocument doc);
+        IDataNode ReadXMLFile(XDocument doc);
     }
 }

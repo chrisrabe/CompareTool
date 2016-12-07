@@ -1,9 +1,4 @@
 ﻿using RightCrowd.CompareTool.Models.DataModels.Database;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.DirectoryReader
 {
@@ -18,6 +13,6 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.DirectoryReader
         /// </summary>
         /// <param name="directoryPath"></param>
         /// <returns></returns>
-        Database ReadDirectory(string directoryPath);
+        IDatabase ReadDirectory(string directoryPath);
     }
 }
