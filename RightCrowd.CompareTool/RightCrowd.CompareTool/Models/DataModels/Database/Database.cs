@@ -12,16 +12,17 @@ namespace RightCrowd.CompareTool.Models.DataModels.Database
         private ObservableCollection<IDataNode> _data;
         private string _directoryName;
 
-        public Database(ObservableCollection<IDataNode> data, string directoryName)
+        public Database(string directoryName)
         {
-            _data = data;
-            _directoryName = directoryName;
+            DirectoryName = directoryName;
         }
 
         public ObservableCollection<IDataNode> Data
         {
             get
             {
+                if (_data == null)
+                    _data = new ObservableCollection<IDataNode>();
                 return _data;
             }
 
