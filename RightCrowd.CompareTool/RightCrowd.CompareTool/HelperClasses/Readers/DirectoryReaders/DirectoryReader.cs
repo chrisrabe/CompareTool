@@ -1,7 +1,6 @@
 ﻿using RightCrowd.CompareTool.Models.DataModels.Database;
 using System.IO;
 using RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders;
-using System.Xml.Linq;
 using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 
@@ -28,7 +27,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.DirectoryReaders
             {
                 if (file.EndsWith(".xml")) // only parse the XML files.
                 {
-                    IDataNode node = xmlReader.ReadXMLFile(XDocument.Load(file));
+                    IDataNode node = xmlReader.ReadXMLFile(file);
                     if (node != null)
                         data.Add(node);
                 }

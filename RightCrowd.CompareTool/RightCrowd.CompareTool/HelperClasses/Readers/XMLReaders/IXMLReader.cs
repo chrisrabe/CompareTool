@@ -12,7 +12,8 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
         /// Parses the XML file and returns the contents inside a data node. 
         /// </summary>
         /// <param name="doc"></param>
+        /// <param name="filename"></param>
         /// <returns></returns>
-        IDataNode ReadXMLFile(XDocument doc);
+        IDataNode ReadXMLFile(string filename);
     }
 }

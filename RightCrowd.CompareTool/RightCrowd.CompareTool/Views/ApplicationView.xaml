@@ -15,11 +15,32 @@
         NonActiveGlowBrush="#FF32B2F8" 
         NonActiveBorderBrush="#FF0080C6" 
         WindowTitleBrush="#FF8CC63F" BorderBrush="#FF8CC63F" GlowBrush="#FFBEF867" 
-        Icon="pack://application:,,,/Resources/app_logo.ico">
-    <Controls:MetroWindow.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FFF2F6B0" Offset="0"/>
-            <GradientStop Color="#FFDAB575" Offset="1"/>
-        </LinearGradientBrush>
-    </Controls:MetroWindow.Background>
+        Icon="pack://application:,,,/Resources/app_logo.ico" Background="#FF3C3C3C">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:LoadViewModel}">
+            <local:LoadView />
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel>
+        <Border DockPanel.Dock="Left"  BorderBrush="#FF188CCA" BorderThickness="0,0,3,0" Width="100">
+            <ItemsControl ItemsSource="{Binding PageViewModels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                CommandParameter="{Binding }"
+                                Width="50" Height="50"
+                                ToolTip="{Binding Name}"
+                                Margin="10,10"
+                                Cursor="Hand">
+                            <Image Source="{Binding ImagePath}"></Image>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+        
+        <ContentControl Content="{Binding CurrentPageViewModel}" />
+    </DockPanel>
 </Controls:MetroWindow>

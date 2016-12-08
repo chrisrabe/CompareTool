@@ -8,9 +8,10 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
 {
     public class XMLReader : IXMLReader
     {
-        public IDataNode ReadXMLFile(XDocument doc)
+        public IDataNode ReadXMLFile(string filename)
         {
-            ObservableCollection<IField> fields = new ObservableCollection<IField>();
+            XDocument doc = XDocument.Load(filename);
+
             return null;
         }
     }

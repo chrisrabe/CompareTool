@@ -18,7 +18,11 @@ namespace RightCrowd.CompareTool
 
         public ApplicationViewModel()
         {
-            // Add some page view models here...
+            // Add available pages
+            PageViewModels.Add(new LoadViewModel());
+
+            // Set starting page
+            CurrentPageViewModel = PageViewModels[0];
         }
 
         #region Properties / Commands
