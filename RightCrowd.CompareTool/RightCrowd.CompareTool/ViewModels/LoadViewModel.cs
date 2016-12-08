@@ -13,7 +13,7 @@ namespace RightCrowd.CompareTool
         {
             get
             {
-                return "Load Databases.";
+                return "Load Databases";
             }
         }
     }

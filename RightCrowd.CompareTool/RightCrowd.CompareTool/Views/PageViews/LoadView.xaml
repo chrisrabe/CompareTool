@@ -28,8 +28,8 @@
         <Label x:Name="lbl3" Content="Database 1 Directory" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,450,0,0" Width="250" Height="50" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF188CCA" BorderBrush="White" BorderThickness="5"/>
         <Label x:Name="lbl4" Content="Database 2 Directory" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="650,450,0,0" Width="250" Height="50" FontFamily="Segeo UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF8CC63F" BorderBrush="White" BorderThickness="5"/>
 
-        <TextBox x:Name="directory1" HorizontalAlignment="Left" Margin="200,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="50"/>
-        <TextBox x:Name="directory2" HorizontalAlignment="Left" Margin="650,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="50"/>
+        <TextBlock x:Name="directory1" HorizontalAlignment="Left" Margin="200,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="50" Background="White"/>
+        <TextBlock x:Name="directory2" HorizontalAlignment="Left" Margin="650,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="50" Background="White"/>
 
         <ProgressBar x:Name="progress1"  HorizontalAlignment="Left" Margin="200,570,0,0" VerticalAlignment="Top" Width="250" Height="25" Maximum="100" Minimum="0" Foreground="White" Background="White" BorderBrush="#FF188CCA"/>
         <ProgressBar x:Name="progress2" HorizontalAlignment="Left" Margin="650,570,0,0" VerticalAlignment="Top" Width="250" Height="25" Maximum="100" Minimum="0" Foreground="White" Background="White" BorderBrush="#FF8CC63F"/>
