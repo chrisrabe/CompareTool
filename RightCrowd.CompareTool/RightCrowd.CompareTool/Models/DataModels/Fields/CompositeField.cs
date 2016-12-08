@@ -18,10 +18,9 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
         #region Constructors
 
-        public CompositeField(string name, ObservableCollection<IField> fields)
+        public CompositeField(string name)
         {
             Name = name;
-            Fields = fields;
         }
 
         #endregion // Constructors
@@ -49,6 +48,8 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
         {
             get
             {
+                if (_fields == null)
+                    _fields = new ObservableCollection<IField>();
                 return _fields;
             }
             set

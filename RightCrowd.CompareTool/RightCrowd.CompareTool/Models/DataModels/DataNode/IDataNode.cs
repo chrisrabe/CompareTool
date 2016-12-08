@@ -8,7 +8,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
         /// <summary>
         /// Gets or sets the type of the data node.
         /// </summary>
-        string Type { get;}
+        string FileName { get;}
 
         /// <summary>
         /// Gets or sets the fields related to this data node.

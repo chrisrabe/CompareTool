@@ -9,30 +9,30 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
     /// </summary>
     internal class DataNode : ObservableObject, IDataNode
     {
-        private string _type;
+        private string _filename;
         private ObservableCollection<IField> _fields;
 
-        public DataNode(string type, ObservableCollection<IField> fields)
+        public DataNode(string filename, ObservableCollection<IField> fields)
         {
-            Type = type;
+            FileName = filename;
             Fields = fields;
         }
 
         /// <summary>
         /// Gets the type of the data node.
         /// </summary>
-        public string Type
+        public string FileName
         {
             get
             {
-                return _type;
+                return _filename;
             }
 
             private set
             {
-                if(_type != value)
+                if(_filename != value)
                 {
-                    _type = value;
+                    _filename = value;
                     OnPropertyChanged("Type");
                 }
             }
