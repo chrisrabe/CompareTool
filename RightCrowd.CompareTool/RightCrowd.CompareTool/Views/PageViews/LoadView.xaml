@@ -17,7 +17,8 @@
                 Command="{Binding Path=LoadDatabaseOne}">
             <Image Source="/RightCrowd.CompareTool;component/Resources/db1_load.png"></Image>
         </Button>
-        <Button x:Name="btnCompare" HorizontalAlignment="Left" Margin="450,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Compare Databases">
+        <Button x:Name="btnCompare" HorizontalAlignment="Left" Margin="450,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Compare Databases"
+                IsEnabled="{Binding Path=DatabasesLoaded}">
             <Image Source="/RightCrowd.CompareTool;component/Resources/compare-btn.png"></Image>
         </Button>
         <Button x:Name="btnLoad2" HorizontalAlignment="Left" Margin="700,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Load Database Two"

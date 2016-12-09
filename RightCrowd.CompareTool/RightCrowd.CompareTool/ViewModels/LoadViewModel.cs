@@ -1,5 +1,6 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
 using RightCrowd.CompareTool.HelperClasses.LoadEventHandlers;
+using RightCrowd.CompareTool.Models.DataModels.Database;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -26,6 +27,9 @@ namespace RightCrowd.CompareTool
         private ICommand _loadDatabaseOneCommand;
         private ICommand _loadDatabaseTwoCommand;
         private ICommand _compareDatabaseCommand;
+
+        // Validation Checks
+        private bool _databasesLoaded; // True if database storage has two databases
 
         #endregion // Fields
 
@@ -65,6 +69,19 @@ namespace RightCrowd.CompareTool
         #endregion // ICommands
 
         #region Database Related Properties
+
+        public bool DatabasesLoaded
+        {
+            get { return _databasesLoaded; }
+            set
+            {
+                if(_databasesLoaded != value)
+                {
+                    _databasesLoaded = value;
+                    OnPropertyChanged("DatabasesLoaded");
+                }
+            }
+        }
 
         public string DirectoryOne
         {
@@ -158,6 +175,24 @@ namespace RightCrowd.CompareTool
         #endregion // IPageViewModel Members
 
         #region Methods
+
+        /// <summary>
+        /// Checks if the storage inside the application view model is full.
+        /// This method sets the '_databaseLoaded' flag to true if the database storage is full.
+        /// </summary>
+        public void CheckIfDatabaseLoaded()
+        {
+            IDatabase[] databases = ApplicationViewModel.Instance.DatabaseStorage.Databases;
+            for(int i = 0; i < databases.Length; i++)
+            {
+                if(databases[i] == null)
+                {
+                    DatabasesLoaded = false;
+                    return; // at least one database is empty...
+                }
+            }
+            DatabasesLoaded = true;
+        }
 
         private void LoadDatabase(int databaseIndex)
         {

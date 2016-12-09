@@ -76,9 +76,14 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
                 ApplicationViewModel.Instance.DatabaseStorage[_databaseIndex] = _database;
                 UpdateProgress(100);
                 MessageBox.Show(String.Format("Database {0} has been loaded.", (_databaseIndex + 1)));
+                _viewModel.CheckIfDatabaseLoaded();
             }
             else
+            {
+                SetDirectory("");
+                UpdateProgress(0);
                 MessageBox.Show(String.Format("Database cannot be loaded because no xml files detected."));
+            }
         }
 
         private void LoadDirectory(string directoryPath, DoWorkEventArgs e)
