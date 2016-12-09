@@ -17,32 +17,6 @@ namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage
             _databases = new IDatabase[STORAGE_SIZE];
         }
 
-        #region Properties
-
-        /// <summary>
-        /// Directory Path of the first database.
-        /// </summary>
-        public string DirectoryOne
-        {
-            get
-            {
-                return _databases[0] == null ? "" : _databases[0].DirectoryName;
-            }
-        }
-
-        /// <summary>
-        /// Directory Path of the second database.
-        /// </summary>
-        public string DirectoryTwo
-        {
-            get
-            {
-                return _databases[1] == null ? "" : _databases[1].DirectoryName;
-            }
-        }
-
-        #endregion // Properties
-
         #region IDatabase Members
 
         public IDatabase this[int index]

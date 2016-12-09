@@ -1,5 +1,9 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
+using RightCrowd.CompareTool.HelperClasses.LoadEventHandlers;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace RightCrowd.CompareTool
 {
@@ -9,10 +13,18 @@ namespace RightCrowd.CompareTool
 
         private IDatabaseStorage _databaseStorage;
 
+        // Processes...
+        private Dictionary<int, LoadEventHandler> _loadEvents;
+
         // Progress bar fields
         private int _loadDB1Progress;
         private int _loadDB2Progress;
         private int _compareProgress;
+
+        // Commands
+        private ICommand _loadDatabaseOneCommand;
+        private ICommand _loadDatabaseTwoCommand;
+        private ICommand _compareDatabaseCommand;
 
         #endregion // Fields
 
@@ -21,13 +33,34 @@ namespace RightCrowd.CompareTool
         public LoadViewModel()
         {
             _databaseStorage = ApplicationViewModel.Instance.DatabaseStorage;
+            _loadEvents = new Dictionary<int, LoadEventHandler>();
         }
 
         #endregion // Constructors
 
         #region ICommands
 
+        public ICommand LoadDatabaseOne
+        {
+            get
+            {
+                if (_loadDatabaseOneCommand == null)
+                    _loadDatabaseOneCommand = new RelayCommand(i => LoadDatabase(0));
 
+                return _loadDatabaseOneCommand;
+            }
+        }
+
+        public ICommand LoadDatabaseTwo
+        {
+            get
+            {
+                if (_loadDatabaseTwoCommand == null)
+                    _loadDatabaseTwoCommand = new RelayCommand(i => LoadDatabase(1));
+
+                return _loadDatabaseTwoCommand;
+            }
+        }
 
         #endregion // ICommands
 
@@ -93,5 +126,32 @@ namespace RightCrowd.CompareTool
         }
 
         #endregion // IPageViewModel Members
+
+        #region Methods
+
+        private void LoadDatabase(int databaseIndex)
+        {
+            FolderBrowserDialog browser = new FolderBrowserDialog();
+            if(browser.ShowDialog() == DialogResult.OK)
+            {
+                // Stop any event handlers at that particular database
+                LoadEventHandler handler;
+                if(_loadEvents.TryGetValue(databaseIndex, out handler))
+                {
+                    // Handler detected. Stop the old handler..
+                    handler.StopLoading();
+                    // Lose reference to the handler so that it's garbage collected.
+                    _loadEvents.Remove(databaseIndex);
+                }
+                // Create a new handler
+                handler = new LoadEventHandler(this);
+                // Start the handler...
+                handler.LoadDirectory(browser.SelectedPath, databaseIndex);
+                // Keep a reference to the handler
+                _loadEvents.Add(databaseIndex, handler); 
+            }
+        }
+
+        #endregion // Methods
     }
 }

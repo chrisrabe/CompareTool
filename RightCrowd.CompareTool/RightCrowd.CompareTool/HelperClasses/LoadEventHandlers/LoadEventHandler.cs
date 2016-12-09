@@ -4,6 +4,7 @@ using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System;
 
 namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
 {
@@ -25,6 +26,9 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
             _worker = new BackgroundWorker();
             _viewModel = viewModel;
         }
+
+        #region Methods
+
         /// <summary>
         /// Creates a background worker thread
         /// </summary>
@@ -33,7 +37,7 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
         {
             _databaseIndex = databaseIndex;
             UpdateProgress(0);
-            _worker.DoWork += (obj, e) => LoadDirectory(directoryPath);
+            _worker.DoWork += (obj, e) => LoadDirectory(directoryPath, e);
             _worker.WorkerReportsProgress = true;
             _worker.ProgressChanged += (obj,e) => UpdateProgress(e.ProgressPercentage);
             _worker.RunWorkerCompleted += AddDatabaseToStorage;
@@ -41,11 +45,28 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
             _worker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Aborts any worker processes.
+        /// </summary>
+        public void StopLoading()
+        {
+            _worker.CancelAsync();
+        }
+
+        #endregion // Methods
+
+        #region Worker Methods
+
         private void AddDatabaseToStorage(object sender, RunWorkerCompletedEventArgs e)
         {
-            ApplicationViewModel.Instance.DatabaseStorage[_databaseIndex] = _database;
-            UpdateProgress(100);
-            MessageBox.Show(string.Format("Database {0} has been loaded.", (_databaseIndex + 1)));
+            if (_database != null)
+            {
+                ApplicationViewModel.Instance.DatabaseStorage[_databaseIndex] = _database;
+                UpdateProgress(100);
+                MessageBox.Show(String.Format("Database {0} has been loaded.", (_databaseIndex + 1)));
+            }
+            else
+                MessageBox.Show(String.Format("Database cannot be loaded because no xml files detected."));
         }
 
         private void UpdateProgress(int newValue)
@@ -56,13 +77,14 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
                 _viewModel.LoadDB2Progress = newValue;
         }
 
-        private void LoadDirectory(string directoryPath)
+        private void LoadDirectory(string directoryPath, DoWorkEventArgs e)
         {
             string[] files = Directory.GetFiles(directoryPath);
             _database = new Database(directoryPath);
             IXMLReader xmlReader = new XMLReader();
             int numFiles = files.Length;
-            int numProcessed = 0;
+            int xmlProcessed = 0; // keeps track of xml files read in total.
+            int numProcessed = 0; // keeps track of files read in total.
 
             foreach(string file in files)
             {
@@ -70,11 +92,23 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
                 {
                     IDataNode node = xmlReader.ReadXMLFile(file);
                     if (node != null)
+                        xmlProcessed++;
                         _database.Data.Add(node);
                 }
                 numProcessed++;
                 _worker.ReportProgress((numProcessed / numFiles) * 100);
+                // Check if the user wants to cancel the previous load...
+                if (_worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return; // abort work if it's cancelled.
+                }
             }
+
+            if (xmlProcessed == 0) // no xml files processed..
+                _database = null; // no point keeping the database object
         }
+
+        #endregion // Worker Methods
     }
 }
