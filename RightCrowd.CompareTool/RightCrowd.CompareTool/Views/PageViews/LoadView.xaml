@@ -13,13 +13,15 @@
         </LinearGradientBrush>
     </UserControl.Background>
     <Grid>
-        <Button x:Name="btnLoad1" HorizontalAlignment="Left" Margin="200,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Load Database One">
+        <Button x:Name="btnLoad1" HorizontalAlignment="Left" Margin="200,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Load Database One"
+                Command="{Binding Path=LoadDatabaseOne}">
             <Image Source="/RightCrowd.CompareTool;component/Resources/db1_load.png"></Image>
         </Button>
         <Button x:Name="btnCompare" HorizontalAlignment="Left" Margin="450,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Compare Databases">
             <Image Source="/RightCrowd.CompareTool;component/Resources/compare-btn.png"></Image>
         </Button>
-        <Button x:Name="btnLoad2" HorizontalAlignment="Left" Margin="700,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Load Database Two">
+        <Button x:Name="btnLoad2" HorizontalAlignment="Left" Margin="700,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Load Database Two"
+                Command="{Binding Path=LoadDatabaseTwo}">
             <Image Source="/RightCrowd.CompareTool;component/Resources/db2_load.png"></Image>
         </Button>
 
@@ -28,10 +30,10 @@
         <Label x:Name="lbl3" Content="Database 1 Directory" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,450,0,0" Width="250" Height="50" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF188CCA" BorderBrush="White" BorderThickness="5"/>
         <Label x:Name="lbl4" Content="Database 2 Directory" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="650,450,0,0" Width="250" Height="50" FontFamily="Segeo UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF8CC63F" BorderBrush="White" BorderThickness="5"/>
 
-        <TextBlock x:Name="directory1" HorizontalAlignment="Left" Margin="200,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="50" Background="White"/>
-        <TextBlock x:Name="directory2" HorizontalAlignment="Left" Margin="650,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="50" Background="White"/>
+        <TextBlock x:Name="directory1" HorizontalAlignment="Left" Margin="200,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="50" Background="White" Text="{Binding Path=DirectoryOne}"/>
+        <TextBlock x:Name="directory2" HorizontalAlignment="Left" Margin="650,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="50" Background="White" Text="{Binding Path=DirectoryTwo}"/>
 
-        <ProgressBar x:Name="progress1"  HorizontalAlignment="Left" Margin="200,570,0,0" VerticalAlignment="Top" Width="250" Height="25" Maximum="100" Minimum="0" Foreground="White" Background="White" BorderBrush="#FF188CCA"/>
-        <ProgressBar x:Name="progress2" HorizontalAlignment="Left" Margin="650,570,0,0" VerticalAlignment="Top" Width="250" Height="25" Maximum="100" Minimum="0" Foreground="White" Background="White" BorderBrush="#FF8CC63F"/>
+        <ProgressBar x:Name="progress1"  HorizontalAlignment="Left" Margin="200,570,0,0" VerticalAlignment="Top" Width="250" Height="25" Maximum="100" Minimum="0" Foreground="White" Background="White" BorderBrush="#FF188CCA" Value="{Binding Path=LoadDB1Progress}"/>
+        <ProgressBar x:Name="progress2" HorizontalAlignment="Left" Margin="650,570,0,0" VerticalAlignment="Top" Width="250" Height="25" Maximum="100" Minimum="0" Foreground="White" Background="White" BorderBrush="#FF8CC63F" Value="{Binding Path=LoadDB2Progress}"/>
     </Grid>
 </UserControl>

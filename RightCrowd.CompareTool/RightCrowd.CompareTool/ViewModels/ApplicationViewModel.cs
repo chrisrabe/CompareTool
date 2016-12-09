@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace RightCrowd.CompareTool
 {
+    /// <summary>
+    /// This class is responsible for changing the view of the main window.
+    /// </summary>
     public class ApplicationViewModel : ObservableObject
     {
 

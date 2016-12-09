@@ -16,16 +16,24 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
     /// </summary>
     public class LoadEventHandler
     {
+        #region Fields
+
         private IDatabase _database;
         private int _databaseIndex;
         private BackgroundWorker _worker;
         private LoadViewModel _viewModel;
+
+        #endregion // Fields
+
+        #region Constructors
 
         public LoadEventHandler(LoadViewModel viewModel)
         {
             _worker = new BackgroundWorker();
             _viewModel = viewModel;
         }
+
+        #endregion // Constructors
 
         #region Methods
 
@@ -36,12 +44,16 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
         public void LoadDirectory(string directoryPath, int databaseIndex)
         {
             _databaseIndex = databaseIndex;
+            // Initialise properties of the view model
+            SetDirectory(directoryPath);
             UpdateProgress(0);
+            // Initialise properties of the background worker
             _worker.DoWork += (obj, e) => LoadDirectory(directoryPath, e);
             _worker.WorkerReportsProgress = true;
-            _worker.ProgressChanged += (obj,e) => UpdateProgress(e.ProgressPercentage);
+            _worker.WorkerSupportsCancellation = true;
+            _worker.ProgressChanged += (obj, e) => UpdateProgress(e.ProgressPercentage);
             _worker.RunWorkerCompleted += AddDatabaseToStorage;
-
+            // run the worker
             _worker.RunWorkerAsync();
         }
 
@@ -69,14 +81,6 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
                 MessageBox.Show(String.Format("Database cannot be loaded because no xml files detected."));
         }
 
-        private void UpdateProgress(int newValue)
-        {
-            if (_databaseIndex == 0)
-                _viewModel.LoadDB1Progress = newValue;
-            else
-                _viewModel.LoadDB2Progress = newValue;
-        }
-
         private void LoadDirectory(string directoryPath, DoWorkEventArgs e)
         {
             string[] files = Directory.GetFiles(directoryPath);
@@ -86,14 +90,14 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
             int xmlProcessed = 0; // keeps track of xml files read in total.
             int numProcessed = 0; // keeps track of files read in total.
 
-            foreach(string file in files)
+            foreach (string file in files)
             {
                 if (file.EndsWith(".xml"))
                 {
                     IDataNode node = xmlReader.ReadXMLFile(file);
                     if (node != null)
                         xmlProcessed++;
-                        _database.Data.Add(node);
+                    _database.Data.Add(node);
                 }
                 numProcessed++;
                 _worker.ReportProgress((numProcessed / numFiles) * 100);
@@ -110,5 +114,33 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
         }
 
         #endregion // Worker Methods
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Updates the directory path related to the data index inside the view model.
+        /// </summary>
+        /// <param name="directoryPath"></param>
+        private void SetDirectory(string directoryPath)
+        {
+            if (_databaseIndex == 0)
+                _viewModel.DirectoryOne = directoryPath;
+            else
+                _viewModel.DirectoryTwo = directoryPath;
+        }
+
+        /// <summary>
+        /// Updates the progress value related to the data index inside the view model.
+        /// </summary>
+        /// <param name="newValue"></param>
+        private void UpdateProgress(int newValue)
+        {
+            if (_databaseIndex == 0)
+                _viewModel.LoadDB1Progress = newValue;
+            else
+                _viewModel.LoadDB2Progress = newValue;
+        }
+
+        #endregion // Helper Methods
     }
 }

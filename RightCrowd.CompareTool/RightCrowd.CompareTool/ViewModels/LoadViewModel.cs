@@ -1,6 +1,5 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
 using RightCrowd.CompareTool.HelperClasses.LoadEventHandlers;
-using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -11,10 +10,12 @@ namespace RightCrowd.CompareTool
     {
         #region Fields
 
-        private IDatabaseStorage _databaseStorage;
-
-        // Processes...
+        // Processes
         private Dictionary<int, LoadEventHandler> _loadEvents;
+
+        // Directories
+        private string _directoryOne;
+        private string _directoryTwo;
 
         // Progress bar fields
         private int _loadDB1Progress;
@@ -32,7 +33,6 @@ namespace RightCrowd.CompareTool
 
         public LoadViewModel()
         {
-            _databaseStorage = ApplicationViewModel.Instance.DatabaseStorage;
             _loadEvents = new Dictionary<int, LoadEventHandler>();
         }
 
@@ -63,6 +63,36 @@ namespace RightCrowd.CompareTool
         }
 
         #endregion // ICommands
+
+        #region Database Related Properties
+
+        public string DirectoryOne
+        {
+            get { return _directoryOne; }
+            set
+            {
+                if(_directoryOne != value)
+                {
+                    _directoryOne = value;
+                    OnPropertyChanged("DirectoryOne");
+                }
+            }
+        }
+
+        public string DirectoryTwo
+        {
+            get { return _directoryTwo; }
+            set
+            {
+                if(_directoryTwo != value)
+                {
+                    _directoryTwo = value;
+                    OnPropertyChanged("DirectoryTwo");
+                }
+            }
+        }
+
+        #endregion // Database Related Properties
 
         #region Progress Bar Properties
 

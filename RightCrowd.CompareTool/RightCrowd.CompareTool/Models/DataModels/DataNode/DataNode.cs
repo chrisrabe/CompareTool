@@ -33,7 +33,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
                 if(_filename != value)
                 {
                     _filename = value;
-                    OnPropertyChanged("Type");
+                    OnPropertyChanged("FileName");
                 }
             }
         }

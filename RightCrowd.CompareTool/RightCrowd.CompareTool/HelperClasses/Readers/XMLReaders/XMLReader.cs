@@ -3,6 +3,7 @@ using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 using System.Linq;
+using System.IO;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
 {
@@ -13,6 +14,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
     {
         public IDataNode ReadXMLFile(string filename)
         {
+            string nodeName = Path.GetFileName(filename);
             XDocument doc = XDocument.Load(filename);
             ObservableCollection<IField> fields = new ObservableCollection<IField>();
             XElement root = doc.Elements().First();
@@ -22,7 +24,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
                 if (field != null) // discard invalid fields
                     fields.Add(field);
             }
-            return new DataNode(filename, fields);
+            return new DataNode(nodeName, fields);
         }
 
         /// <summary>
@@ -40,7 +42,11 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
             {
                 field = new CompositeField(fieldName);
                 // Parse each children and add them to the fields collection
-                ((CompositeField)field).Fields.Concat(element.Elements().Select(child => Parse(child)));
+                foreach(XElement child in element.Elements())
+                {
+                    IField childField = Parse(child);
+                    ((CompositeField)field).Fields.Add(childField);
+                }
             }
             else
             {
