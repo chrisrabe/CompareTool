@@ -57,5 +57,10 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
                 }
             }
         }
+
+        public override string ToString()
+        {
+            return FileName;
+        }
     }
 }

@@ -45,7 +45,6 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
         {
             _databaseIndex = databaseIndex;
             // Initialise properties of the view model
-            SetDirectory(directoryPath);
             UpdateProgress(0);
             // Initialise properties of the background worker
             _worker.DoWork += (obj, e) => LoadDirectory(directoryPath, e);
@@ -74,16 +73,13 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
             if (_database != null)
             {
                 ApplicationViewModel.Instance.DatabaseStorage[_databaseIndex] = _database;
+                SetDirectory(_database.DirectoryName);
                 UpdateProgress(100);
                 MessageBox.Show(String.Format("Database {0} has been loaded.", (_databaseIndex + 1)));
                 _viewModel.CheckIfDatabaseLoaded();
             }
             else
-            {
-                SetDirectory("");
-                UpdateProgress(0);
-                MessageBox.Show(String.Format("Database cannot be loaded because no xml files detected."));
-            }
+                MessageBox.Show(String.Format("Database cannot be loaded because no xml files with at least one child element detected."));
         }
 
         private void LoadDirectory(string directoryPath, DoWorkEventArgs e)
@@ -101,8 +97,10 @@ namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
                 {
                     IDataNode node = xmlReader.ReadXMLFile(file);
                     if (node != null)
+                    {
                         xmlProcessed++;
-                    _database.Data.Add(node);
+                        _database.Data.Add(node);
+                    }
                 }
                 numProcessed++;
                 _worker.ReportProgress((numProcessed / numFiles) * 100);

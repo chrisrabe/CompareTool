@@ -18,6 +18,15 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
             XDocument doc = XDocument.Load(filename);
             ObservableCollection<IField> fields = new ObservableCollection<IField>();
             XElement root = doc.Elements().First();
+
+            if (root.Elements().Count() == 0)
+                return null; // no elements to parse, no need to make a node.
+
+            // If it only has one child, replace the root with its only child.
+            if (root.Elements().Count() == 1)
+                root = root.Elements().First();
+
+            // Iterate through the chilren of the root node.
             foreach (XElement element in root.Elements())
             {
                 IField field = Parse(element);

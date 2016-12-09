@@ -63,5 +63,10 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
         }
 
         #endregion // Properties
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
