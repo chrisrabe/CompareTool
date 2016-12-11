@@ -131,7 +131,7 @@ namespace RightCrowd.CompareTool
 
         public int LoadDB2Progress
         {
-            get { return _loadDB1Progress; }
+            get { return _loadDB2Progress; }
             set
             {
                 if (this._loadDB2Progress != value)

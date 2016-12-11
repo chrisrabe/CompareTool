@@ -1,5 +1,5 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
-using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage;
+using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -16,7 +16,7 @@ namespace RightCrowd.CompareTool
 
         private static ApplicationViewModel _instance;
 
-        private IDatabaseStorage _databaseStorage;
+        private ListDatabaseStorage _databaseStorage;
 
         private ICommand _changePageCommand;
 
@@ -58,7 +58,7 @@ namespace RightCrowd.CompareTool
         /// <summary>
         /// Returns an instance of a database storage.
         /// </summary>
-        public IDatabaseStorage DatabaseStorage
+        public ListDatabaseStorage DatabaseStorage
         {
             get
             {

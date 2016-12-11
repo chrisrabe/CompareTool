@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
+    <Compile Include="Models\DataModels\DatabaseStorage\List\ListDatabaseStorage.cs" />
     <Compile Include="ViewModels\LoadViewModel.cs" />
     <Compile Include="Views\PageViews\LoadView.xaml.cs">
       <DependentUpon>LoadView.xaml</DependentUpon>
@@ -96,7 +97,7 @@
     </Compile>
     <Compile Include="HelperClasses\Readers\XML\XMLReader.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\IDatabaseStorage.cs" />
-    <Compile Include="Models\DataModels\DatabaseStorage\TwoDatabaseStorage.cs" />
+    <Compile Include="Models\DataModels\DatabaseStorage\List\TwoDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\Database\IDatabase.cs" />
     <Compile Include="Models\DataModels\DataNode\IDataNode.cs" />
     <Compile Include="Models\DataModels\Fields\CompositeField.cs" />
@@ -173,7 +174,10 @@
   <ItemGroup>
     <Resource Include="Resources\load_view-logo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="HelperClasses\EventHandlers\Compare\" />
+    <Folder Include="Models\Compare\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
