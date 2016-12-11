@@ -1,4 +1,4 @@
-﻿using RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders;
+﻿using RightCrowd.CompareTool.HelperClasses.Readers.XML;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using System.ComponentModel;
@@ -6,15 +6,17 @@ using System.IO;
 using System.Windows;
 using System;
 
-namespace RightCrowd.CompareTool.HelperClasses.LoadEventHandlers
+namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
 {
     /// <summary>
     /// This class loads the database in the background while reporting
     /// The progress back to the LoadViewModel. When the background task
     /// is complete, it automatically places the newly created database
     /// into ApplicationViewModel's database storage.
+    /// 
+    /// This event handler only works with two databases.
     /// </summary>
-    public class LoadEventHandler
+    public class LoadEventHandler : ILoadEventHandler
     {
         #region Fields
 

@@ -80,7 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="HelperClasses\LoadEventHandlers\LoadEventHandler.cs" />
+    <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
+    <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
     <Compile Include="ViewModels\LoadViewModel.cs" />
     <Compile Include="Views\PageViews\LoadView.xaml.cs">
       <DependentUpon>LoadView.xaml</DependentUpon>
@@ -93,7 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HelperClasses\Readers\XMLReaders\XMLReader.cs" />
+    <Compile Include="HelperClasses\Readers\XML\XMLReader.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\IDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\TwoDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\Database\IDatabase.cs" />
@@ -103,7 +104,7 @@
     <Compile Include="Models\DataModels\Fields\IField.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="HelperClasses\ObservableObject.cs" />
-    <Compile Include="HelperClasses\Readers\XMLReaders\IXMLReader.cs" />
+    <Compile Include="HelperClasses\Readers\XML\IXMLReader.cs" />
     <Compile Include="HelperClasses\RelayCommand.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="Views\ApplicationView.xaml.cs">

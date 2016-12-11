@@ -1,5 +1,5 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
-using RightCrowd.CompareTool.HelperClasses.LoadEventHandlers;
+using RightCrowd.CompareTool.HelperClasses.EventHandlers.Load;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using System.Collections.Generic;
 using System.Windows.Forms;

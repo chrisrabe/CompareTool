@@ -1,7 +1,7 @@
 ﻿using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using System.Xml.Linq;
 
-namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
+namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {
     /// <summary>
     /// This class is responsible for parsing and reading XML files.

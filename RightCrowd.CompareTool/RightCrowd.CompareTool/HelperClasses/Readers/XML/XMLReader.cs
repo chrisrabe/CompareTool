@@ -5,7 +5,7 @@ using RightCrowd.CompareTool.Models.DataModels.Fields;
 using System.Linq;
 using System.IO;
 
-namespace RightCrowd.CompareTool.HelperClasses.Readers.XMLReaders
+namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {
     /// <summary>
     /// Reads through the XML file and returns a data node.
