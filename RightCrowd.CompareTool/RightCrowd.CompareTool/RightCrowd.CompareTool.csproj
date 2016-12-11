@@ -82,7 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
-    <Compile Include="Models\DataModels\DatabaseStorage\List\ListDatabaseStorage.cs" />
+    <Compile Include="Models\DataModels\DatabaseStorage\List\IListDatabaseStorage.cs" />
     <Compile Include="ViewModels\LoadViewModel.cs" />
     <Compile Include="Views\PageViews\LoadView.xaml.cs">
       <DependentUpon>LoadView.xaml</DependentUpon>

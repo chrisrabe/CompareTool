@@ -6,7 +6,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List
     /// <summary>
     /// This class is is a storage for exactly two databases.
     /// </summary>
-    public class TwoDatabaseStorage : ObservableObject, ListDatabaseStorage
+    public class TwoDatabaseStorage : ObservableObject, IListDatabaseStorage
     {
         private const int STORAGE_SIZE = 2;
         private IDatabase[] _databases;

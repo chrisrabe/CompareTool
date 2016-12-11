@@ -16,7 +16,7 @@ namespace RightCrowd.CompareTool
 
         private static ApplicationViewModel _instance;
 
-        private ListDatabaseStorage _databaseStorage;
+        private IListDatabaseStorage _databaseStorage;
 
         private ICommand _changePageCommand;
 
@@ -58,7 +58,7 @@ namespace RightCrowd.CompareTool
         /// <summary>
         /// Returns an instance of a database storage.
         /// </summary>
-        public ListDatabaseStorage DatabaseStorage
+        public IListDatabaseStorage DatabaseStorage
         {
             get
             {

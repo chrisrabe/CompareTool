@@ -3,7 +3,7 @@ using RightCrowd.CompareTool.Models.DataModels.Database;
 
 namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List
 {
-    public interface ListDatabaseStorage : IDatabaseStorage
+    public interface IListDatabaseStorage : IDatabaseStorage
     {
         
         /// <summary>
