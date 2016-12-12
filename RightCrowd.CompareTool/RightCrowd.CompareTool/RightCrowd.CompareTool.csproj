@@ -80,9 +80,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HelperClasses\CompareTask\Buffer\Builder\ICompareTaskBufferBuilder.cs" />
+    <Compile Include="HelperClasses\CompareTask\Buffer\ICompareTaskBuffer.cs" />
+    <Compile Include="HelperClasses\CompareTask\Manager\ICompareTaskManager.cs" />
+    <Compile Include="HelperClasses\CompareTask\Task\ICompareTask.cs" />
+    <Compile Include="HelperClasses\CompareTask\Worker\ICompareTaskWorker.cs" />
     <Compile Include="HelperClasses\EventHandlers\Compare\ICompareEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
+    <Compile Include="Models\Comparison\DataStorage\IComparisonDataStorage.cs" />
+    <Compile Include="Models\Comparison\Data\IComparisonData.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\List\IListDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\IMapDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\SubDatabaseStorage.cs" />
