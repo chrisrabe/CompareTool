@@ -1,5 +1,4 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
-using System;
 using System.Collections.ObjectModel;
 
 namespace RightCrowd.CompareTool.Models.DataModels.Fields
@@ -7,7 +6,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
     /// <summary>
     /// This is a field type which holds multiple field values.
     /// </summary>
-    internal class CompositeField : ObservableObject, IField
+    public class CompositeField : ObservableObject, IField
     {
         #region Fields
 

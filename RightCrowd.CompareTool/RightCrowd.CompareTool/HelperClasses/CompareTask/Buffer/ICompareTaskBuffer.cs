@@ -1,14 +1,31 @@
-﻿namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer
+﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
+
+namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer
 {
     /// <summary>
     /// Contains a collection of tasks which could be retrieved
-    /// by the manager. It is important to note that the 'Next'
-    /// property has a synchronous 'get' accessor. This is because
-    /// multiple compare task worker threads will be using this
-    /// method and making this accessor synchronous avoids
-    /// unintended errors or unexpected outcomes.
+    /// by the manager. 
     /// </summary>
     public interface ICompareTaskBuffer
     {
+        /// <summary>
+        /// Sets the tasks inside the buffer.
+        /// </summary>
+        ICompareTask[] Tasks { set; }
+
+        /// <summary>
+        /// Indicates whether or not there are
+        /// no more tasks available.
+        /// </summary>
+        bool Done { get; }
+
+        /// <summary>
+        /// Retrieves the next task available in the
+        /// buffer.
+        /// </summary>
+        ICompareTask Next
+        {
+            get;
+        }
     }
 }

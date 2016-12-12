@@ -1,4 +1,6 @@
-﻿namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer.Builder
+﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
+
+namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer.Builder
 {
     /// <summary>
     /// This class stores all the compare task objects and then provides a
@@ -6,5 +8,15 @@
     /// </summary>
     public interface ICompareTaskBufferBuilder
     {
+        /// <summary>
+        /// Adds a task into the buffer builder
+        /// </summary>
+        /// <param name="task"></param>
+        void Add(ICompareTask task);
+
+        /// <summary>
+        /// Builds and retrieves the buffer.
+        /// </summary>
+        ICompareTaskBuffer Buffer { get; }
     }
 }

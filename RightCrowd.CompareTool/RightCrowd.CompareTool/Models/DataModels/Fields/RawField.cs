@@ -1,12 +1,11 @@
-﻿using System;
-using RightCrowd.CompareTool.HelperClasses;
+﻿using RightCrowd.CompareTool.HelperClasses;
 
 namespace RightCrowd.CompareTool.Models.DataModels.Fields
 {
     /// <summary>
     /// Represents a field which can hold a single value.
     /// </summary>
-    internal class RawField : ObservableObject, IField
+    public class RawField : ObservableObject, IField
     {
         #region Fields
 

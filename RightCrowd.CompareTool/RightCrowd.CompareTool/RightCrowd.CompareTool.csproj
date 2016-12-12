@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="HelperClasses\CompareTask\Buffer\Builder\ICompareTaskBufferBuilder.cs" />
     <Compile Include="HelperClasses\CompareTask\Buffer\ICompareTaskBuffer.cs" />
+    <Compile Include="HelperClasses\CompareTask\Helper\ICompareTaskHelper.cs" />
     <Compile Include="HelperClasses\CompareTask\Manager\ICompareTaskManager.cs" />
     <Compile Include="HelperClasses\CompareTask\Task\ICompareTask.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\ICompareTaskWorker.cs" />
