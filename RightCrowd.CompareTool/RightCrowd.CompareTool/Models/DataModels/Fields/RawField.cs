@@ -1,4 +1,5 @@
-﻿using RightCrowd.CompareTool.HelperClasses;
+﻿using System;
+using RightCrowd.CompareTool.HelperClasses;
 
 namespace RightCrowd.CompareTool.Models.DataModels.Fields
 {
@@ -11,6 +12,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
         private string _name;
         private string _value;
+        private bool _different;
 
         #endregion // Fields
 
@@ -20,12 +22,34 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
         {
             Name = name;
             Value = value;
+            Different = false;
         }
 
         #endregion // Constructor
 
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the flag which indicates whether or
+        /// not this field exists in the other database(s).
+        /// </summary>
+        public bool Different
+        {
+            get
+            {
+                return _different;
+            }
+
+            set
+            {
+                if(_different != value)
+                {
+                    _different = value;
+                    OnPropertyChanged("Different");
+                }
+            }
+        }
 
         /// <summary>
         /// gets or sets the name of the field.

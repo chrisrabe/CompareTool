@@ -14,5 +14,12 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
         /// Gets or sets the fields related to this data node.
         /// </summary>
         ObservableCollection<IField> Fields{ get;}
+
+        /// <summary>
+        /// This returns a boolean flag which indicates that this
+        /// node does not exist in the other database. The field
+        /// is mainly used in comparison logic.
+        /// </summary>
+        bool Different { get; set; }
     }
 }
