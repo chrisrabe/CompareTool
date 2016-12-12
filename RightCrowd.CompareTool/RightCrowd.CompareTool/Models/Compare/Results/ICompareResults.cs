@@ -14,7 +14,7 @@ namespace RightCrowd.CompareTool.Models.Compare.Results
         void Add(ICompareData data);
 
         /// <summary>
-        /// Retrieves all the stored compare data.
+        /// Retrieves the results from the comparison.
         /// </summary>
         ICompareData[] Results { get; }
     }

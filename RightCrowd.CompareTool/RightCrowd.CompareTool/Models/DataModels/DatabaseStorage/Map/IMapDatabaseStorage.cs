@@ -5,7 +5,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.Map
     /// <summary>
     /// Stores databases and maps them to a key string.
     /// </summary>
-    interface IMapDatabaseStorage : IDatabaseStorage
+    public interface IMapDatabaseStorage : IDatabaseStorage
     {
         /// <summary>
         /// Gets or sets the database based on the key.
