@@ -81,9 +81,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="HelperClasses\CompareTask\Buffer\Builder\ICompareTaskBufferBuilder.cs" />
+    <Compile Include="HelperClasses\CompareTask\Buffer\Builder\ListTaskBufferBuilder.cs" />
     <Compile Include="HelperClasses\CompareTask\Buffer\ICompareTaskBuffer.cs" />
+    <Compile Include="HelperClasses\CompareTask\Buffer\ListTaskBuffer.cs" />
+    <Compile Include="HelperClasses\CompareTask\Helper\CompareTaskHelper.cs" />
     <Compile Include="HelperClasses\CompareTask\Helper\ICompareTaskHelper.cs" />
     <Compile Include="HelperClasses\CompareTask\Manager\ICompareTaskManager.cs" />
+    <Compile Include="HelperClasses\CompareTask\Task\CompareTask.cs" />
     <Compile Include="HelperClasses\CompareTask\Task\ICompareTask.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\ICompareTaskWorker.cs" />
     <Compile Include="HelperClasses\EventHandlers\Compare\ICompareEventHandler.cs" />
