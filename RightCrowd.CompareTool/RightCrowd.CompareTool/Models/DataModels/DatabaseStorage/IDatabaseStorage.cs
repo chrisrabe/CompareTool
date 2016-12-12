@@ -3,7 +3,7 @@
 namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage
 {
     /// <summary>
-    /// Provides a skeletal implementation of a database storage.
+    /// Stores a collection of databases.
     /// </summary>
     public interface IDatabaseStorage
     {
