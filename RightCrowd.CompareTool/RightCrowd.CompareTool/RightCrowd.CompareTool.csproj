@@ -83,13 +83,6 @@
     <Compile Include="HelperClasses\EventHandlers\Compare\ICompareEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
-    <Compile Include="Models\Compare\Data\Collector\ICompareDataCollector.cs" />
-    <Compile Include="Models\Compare\Data\ICompareData.cs" />
-    <Compile Include="Models\Compare\Results\ICompareResults.cs" />
-    <Compile Include="Models\Compare\Task\Buffer\Builder\ICompareTaskBufferBuilder.cs" />
-    <Compile Include="Models\Compare\Task\Buffer\ICompareTaskBuffer.cs" />
-    <Compile Include="Models\Compare\Task\ICompareTask.cs" />
-    <Compile Include="Models\Compare\Task\Manager\ICompareTaskManager.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\List\IListDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\IMapDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\SubDatabaseStorage.cs" />
