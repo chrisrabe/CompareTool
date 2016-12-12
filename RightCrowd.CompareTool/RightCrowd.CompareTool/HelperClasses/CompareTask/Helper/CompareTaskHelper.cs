@@ -1,6 +1,7 @@
 ﻿using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
+using System.Linq;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Helper
 {
@@ -24,12 +25,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Helper
         /// <returns></returns>
         public IField GetOther(IField field, CompositeField composite)
         {
-            foreach(IField other in composite.Fields)
-            {
-                if (field.Name.Equals(other.Name))
-                    return other;
-            }
-            return null;
+            return composite.Fields.FirstOrDefault(other => field.Name.Equals(other.Name));
         }
 
         /// <summary>
@@ -42,12 +38,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Helper
         /// <returns></returns>
         public IField GetOther(IField field, IDataNode node)
         {
-            foreach(IField other in node.Fields)
-            {
-                if (field.Name.Equals(other.Name))
-                    return other;
-            }
-            return null;
+            return node.Fields.FirstOrDefault(other => field.Name.Equals(other.Name));
         }
 
         /// <summary>
@@ -59,14 +50,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Helper
         /// <returns></returns>
         public IDataNode GetOther(IDataNode node, IDatabase database)
         {
-            foreach(IDataNode other in database.Data)
-            {
-                if (node.FileName.Equals(other.FileName))
-                {
-                    return other;
-                }
-            }
-            return null;
+            return database.Data.FirstOrDefault(other => node.FileName.Equals(other.FileName));
         }
     }
 }
