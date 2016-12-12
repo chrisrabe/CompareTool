@@ -89,7 +89,9 @@
     <Compile Include="HelperClasses\EventHandlers\Compare\ICompareEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
+    <Compile Include="Models\Comparison\DataStorage\ComparisonDataStorage.cs" />
     <Compile Include="Models\Comparison\DataStorage\IComparisonDataStorage.cs" />
+    <Compile Include="Models\Comparison\Data\ComparisonData.cs" />
     <Compile Include="Models\Comparison\Data\IComparisonData.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\List\IListDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\IMapDatabaseStorage.cs" />
