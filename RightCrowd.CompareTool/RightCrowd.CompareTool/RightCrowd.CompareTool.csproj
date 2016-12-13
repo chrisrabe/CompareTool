@@ -82,7 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="HelperClasses\Builders\DatabaseStorage\IDatabaseStorageBuilder.cs" />
     <Compile Include="HelperClasses\Builders\DatabaseStorage\List\IListDatabaseStorageBuilder.cs" />
-    <Compile Include="HelperClasses\Builders\DatabaseStorage\Map\IMapDatabaseStorage.cs" />
+    <Compile Include="HelperClasses\Builders\DatabaseStorage\Map\IMapDatabaseStorageBuilder.cs" />
     <Compile Include="HelperClasses\Builders\TaskBuffer\ICompareTaskBufferBuilder.cs" />
     <Compile Include="HelperClasses\Builders\TaskBuffer\ListTaskBufferBuilder.cs" />
     <Compile Include="HelperClasses\CompareTask\Buffer\ICompareTaskBuffer.cs" />
