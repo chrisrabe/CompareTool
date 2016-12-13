@@ -19,20 +19,5 @@ namespace RightCrowd.CompareTool.HelperClasses.Builders.DatabaseStorage.List
         /// Add data node into the database index.
         /// </summary>
         void AddNode(IDataNode node, int databaseIndex);
-
-        /// <summary>
-        /// Swap a database from one index to another.
-        /// </summary>
-        void Swap(int from, int to);
-
-        /// <summary>
-        /// Replace database at a given index.
-        /// </summary>
-        void Set(IDatabase newDatabase, int index);
-
-        /// <summary>
-        /// Remove database at a given index.
-        /// </summary>
-        void Remove(int index);
     }
 }
