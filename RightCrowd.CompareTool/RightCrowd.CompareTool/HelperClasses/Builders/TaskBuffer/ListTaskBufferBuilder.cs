@@ -1,7 +1,8 @@
-﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
+﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
 using System.Collections.Generic;
 
-namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer.Builder
+namespace RightCrowd.CompareTool.HelperClasses.Builders.TaskBuffer
 {
     /// <summary>
     /// This class creates a list task buffer from all the tasks stored.

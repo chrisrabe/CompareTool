@@ -12,11 +12,19 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
     {
         ICompareTask Task { set; }
 
-        void DoTask(ICompareTaskManager manager);
+        /// <summary>
+        /// Compares the databases inside the task.
+        /// </summary>
+        void DoTask();
 
         /// <summary>
         /// Reports to the manager that it has completed its task.
         /// </summary>
-        void ReportProgress();
+        void ReportCompleted();
+
+        /// <summary>
+        /// Stops the worker from doing its task.
+        /// </summary>
+        void Stop();
     }
 }

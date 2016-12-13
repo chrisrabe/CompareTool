@@ -1,6 +1,7 @@
-﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
+﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
 
-namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer.Builder
+namespace RightCrowd.CompareTool.HelperClasses.Builders.TaskBuffer
 {
     /// <summary>
     /// This class stores all the compare task objects and then provides a
