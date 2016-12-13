@@ -6,14 +6,13 @@ using System.Linq;
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Helper
 {
     /// <summary>
-    /// This class assists the task worker in the compare logic.
-    /// 
-    /// It is responsible for finding an object B with the
+    /// This class is responsible for finding an object B with the
     /// same name property as object A from object C; such that
     /// there exists a collection of objects which are the same 
     /// type as object A inside object C.
+    /// 
     /// </summary>
-    public class CompareTaskHelper : ICompareTaskHelper
+    public class WorkerObjectFinder : IWorkerObjectFinder
     {
         /// <summary>
         /// Gets the other field with the same name as the field parameter

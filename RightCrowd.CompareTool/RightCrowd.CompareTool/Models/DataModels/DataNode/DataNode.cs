@@ -80,6 +80,9 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
         {
             get
             {
+                if (HasDifferentFields())
+                    Different = true;
+
                 return _different;
             }
 
@@ -100,6 +103,23 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
         public override string ToString()
         {
             return FileName;
+        }
+
+        /// <summary>
+        /// This method iterates through the fields of
+        /// the data node and if it detects any
+        /// fields which are different, then it returns
+        /// true.
+        /// </summary>
+        /// <returns></returns>
+        private bool HasDifferentFields()
+        {
+            foreach (IField field in Fields)
+            {
+                if (field.Different)
+                    return true;
+            }
+            return false;
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
@@ -7,6 +8,8 @@ using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 using RightCrowd.CompareTool.Models.Comparison.Data;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
+using RightCrowd.CompareTool.HelperClasses.Builders.DatabaseStorage.List;
+using RightCrowd.CompareTool.Models.DataModels.Fields;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 {
@@ -20,12 +23,10 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 
         private string _assignedDataType;
         private ICompareTask _task;
-        private ICompareTaskManager _manager;
-        private BackgroundWorker _worker;
-        private ICompareTaskHelper _assistant;
 
-        private IListDatabaseStorage _difference;
-        private IListDatabaseStorage _similarities;
+        private BackgroundWorker _worker;
+        private ICompareTaskManager _manager;
+        private IWorkerObjectFinder _objectFinder;
 
         #endregion // Fields
 
@@ -36,7 +37,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _assignedDataType = assignedDataType;
             _manager = manager;
             _worker = new BackgroundWorker();
-            _assistant = new CompareTaskHelper();
+            _objectFinder = new WorkerObjectFinder();
         }
 
         #endregion // Constructors
@@ -88,20 +89,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         /// <param name="e"></param>
         private void Compare(IDatabase[] databases, DoWorkEventArgs e)
         {
-            // So far only supports comparison between two databases.
-            if (databases.Length > 2)
-            {
-                e.Cancel = true;
-                return; // abort work because a lot of databases detected.
-            }
-            // Retrieve both databases
-            IDatabase db1 = databases[0];
-            IDatabase db2 = databases[1];
-            // Iterate through each node of the first database
-            foreach (IDataNode node in db1.Data)
-            {
-                IDataNode other = _assistant.GetOther(node, db2);
-            }
+            // Do Compare Logic Here...
         }
 
         /// <summary>
@@ -111,8 +99,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         public void ReportCompleted()
         {
             IComparisonData data = new ComparisonData(_assignedDataType);
-            data.Difference = _difference;
-            data.Similarities = _similarities;
+            
             _manager.SubmitData(data);
         }
 

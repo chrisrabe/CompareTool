@@ -1,4 +1,5 @@
-﻿using RightCrowd.CompareTool.Models.DataModels.Database;
+﻿using RightCrowd.CompareTool.HelperClasses.Builders.DatabaseStorage.List;
+using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 
@@ -12,7 +13,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Helper
     /// there exists a collection of objects which are the same 
     /// type as object A inside object C.
     /// </summary>
-    public interface ICompareTaskHelper
+    public interface IWorkerObjectFinder
     {
         /// <summary>
         /// Gets the other node with the same name property as
