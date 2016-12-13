@@ -3,7 +3,7 @@ using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 
-namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinder
+namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
 {
     /// <summary>
     /// This class is responsible for finding an object B with the

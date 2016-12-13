@@ -4,7 +4,7 @@ using RightCrowd.CompareTool.Models.Comparison.Data;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
-using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinder;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 
@@ -35,7 +35,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _assignedDataType = assignedDataType;
             _manager = manager;
             _worker = new BackgroundWorker();
-            _objectFinder = new ObjectFinder.ObjectFinder();
+            _objectFinder = new ObjectFinder();
         }
 
         #endregion // Constructors

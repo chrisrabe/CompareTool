@@ -91,8 +91,8 @@
     <Compile Include="HelperClasses\CompareTask\Buffer\ListTaskBuffer.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\DataHandlers\DataHandler.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\DataHandlers\IDataHandler.cs" />
-    <Compile Include="HelperClasses\CompareTask\Worker\ObjectFinder\ObjectFinder.cs" />
-    <Compile Include="HelperClasses\CompareTask\Worker\ObjectFinder\IObjectFinder.cs" />
+    <Compile Include="HelperClasses\CompareTask\Worker\ObjectFinders\ObjectFinder.cs" />
+    <Compile Include="HelperClasses\CompareTask\Worker\ObjectFinders\IObjectFinder.cs" />
     <Compile Include="HelperClasses\CompareTask\Manager\ICompareTaskManager.cs" />
     <Compile Include="HelperClasses\CompareTask\Task\CompareTask.cs" />
     <Compile Include="HelperClasses\CompareTask\Task\ICompareTask.cs" />

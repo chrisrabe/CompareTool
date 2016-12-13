@@ -2,7 +2,7 @@
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 
-namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinder
+namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
 {
     /// <summary>
     /// This class assists the task worker in the compare logic.
