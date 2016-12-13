@@ -1,9 +1,9 @@
-﻿using RightCrowd.CompareTool.Models.DataModels.Database;
+﻿using System.Linq;
+using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
-using System.Linq;
 
-namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Helper
+namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinder
 {
     /// <summary>
     /// This class is responsible for finding an object B with the
@@ -12,7 +12,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Helper
     /// type as object A inside object C.
     /// 
     /// </summary>
-    public class WorkerObjectFinder : IWorkerObjectFinder
+    public class ObjectFinder : IObjectFinder
     {
         /// <summary>
         /// Gets the other field with the same name as the field parameter

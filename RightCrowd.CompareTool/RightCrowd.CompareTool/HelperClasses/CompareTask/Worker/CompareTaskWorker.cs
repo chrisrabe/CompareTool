@@ -1,15 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Linq;
 
-using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
-using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
-using RightCrowd.CompareTool.HelperClasses.CompareTask.Helper;
-using RightCrowd.CompareTool.Models.DataModels.Database;
-using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 using RightCrowd.CompareTool.Models.Comparison.Data;
-using RightCrowd.CompareTool.Models.DataModels.DataNode;
-using RightCrowd.CompareTool.HelperClasses.Builders.DatabaseStorage.List;
-using RightCrowd.CompareTool.Models.DataModels.Fields;
+using RightCrowd.CompareTool.Models.DataModels.Database;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinder;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 {
@@ -26,7 +21,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 
         private BackgroundWorker _worker;
         private ICompareTaskManager _manager;
-        private IWorkerObjectFinder _objectFinder;
+        private IObjectFinder _objectFinder;
 
         #endregion // Fields
 
@@ -37,7 +32,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _assignedDataType = assignedDataType;
             _manager = manager;
             _worker = new BackgroundWorker();
-            _objectFinder = new WorkerObjectFinder();
+            _objectFinder = new ObjectFinder.ObjectFinder();
         }
 
         #endregion // Constructors
@@ -99,7 +94,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         public void ReportCompleted()
         {
             IComparisonData data = new ComparisonData(_assignedDataType);
-            
+            // Assign Differences here...
+            // Assign Similarities here...
             _manager.SubmitData(data);
         }
 
