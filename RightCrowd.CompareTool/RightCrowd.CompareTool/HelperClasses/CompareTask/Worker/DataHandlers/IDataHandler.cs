@@ -2,7 +2,7 @@
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 
-namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandler
+namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers
 {
     /// <summary>
     /// Handles all the recording logic for the CompareTaskWorker.

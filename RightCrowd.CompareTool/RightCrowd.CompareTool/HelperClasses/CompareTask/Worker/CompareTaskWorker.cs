@@ -5,6 +5,8 @@ using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinder;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers;
+using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 {
@@ -22,6 +24,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         private BackgroundWorker _worker;
         private ICompareTaskManager _manager;
         private IObjectFinder _objectFinder;
+        private IDataHandler _dataHandler;
 
         #endregion // Fields
 
@@ -84,6 +87,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         /// <param name="e"></param>
         private void Compare(IDatabase[] databases, DoWorkEventArgs e)
         {
+            _dataHandler = new DataHandler(databases); // Create data handler
             // Do Compare Logic Here...
         }
 
@@ -94,8 +98,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         public void ReportCompleted()
         {
             IComparisonData data = new ComparisonData(_assignedDataType);
-            // Assign Differences here...
-            // Assign Similarities here...
+            data.Difference = (IListDatabaseStorage) _dataHandler.Differences.Storage;
+            data.Similarities = (IListDatabaseStorage)_dataHandler.Similarities.Storage;
             _manager.SubmitData(data);
         }
 
