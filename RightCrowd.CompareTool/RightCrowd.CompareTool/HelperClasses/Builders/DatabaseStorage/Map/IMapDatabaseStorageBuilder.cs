@@ -22,18 +22,5 @@ namespace RightCrowd.CompareTool.HelperClasses.Builders.DatabaseStorage.Map
         /// <param name="node"></param>
         /// <param name="databaseKey"></param>
         void AddNode(IDataNode node, string databaseKey);
-
-        /// <summary>
-        /// Assigns the database to the given key.
-        /// </summary>
-        /// <param name="newData"></param>
-        /// <param name="key"></param>
-        void Set(IDatabase newData, string key);
-
-        /// <summary>
-        /// Removes the database relating to the key.
-        /// </summary>
-        /// <param name="key"></param>
-        void Remove(string key);
     }
 }

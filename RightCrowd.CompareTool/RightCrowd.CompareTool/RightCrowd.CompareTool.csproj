@@ -84,6 +84,7 @@
     <Compile Include="HelperClasses\Builders\DatabaseStorage\List\IListDatabaseStorageBuilder.cs" />
     <Compile Include="HelperClasses\Builders\DatabaseStorage\List\ListDatabaseStorageBuilder.cs" />
     <Compile Include="HelperClasses\Builders\DatabaseStorage\Map\IMapDatabaseStorageBuilder.cs" />
+    <Compile Include="HelperClasses\Builders\DatabaseStorage\Map\MapDatabaseStorageBuilder.cs" />
     <Compile Include="HelperClasses\Builders\TaskBuffer\ICompareTaskBufferBuilder.cs" />
     <Compile Include="HelperClasses\Builders\TaskBuffer\ListTaskBufferBuilder.cs" />
     <Compile Include="HelperClasses\CompareTask\Buffer\ICompareTaskBuffer.cs" />
