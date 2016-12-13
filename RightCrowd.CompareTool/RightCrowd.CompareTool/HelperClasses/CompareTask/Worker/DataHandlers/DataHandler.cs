@@ -7,7 +7,7 @@ using RightCrowd.CompareTool.Models.DataModels.Database;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers
 {
-    public class DataHandler : IDataHandler
+    internal class DataHandler : IDataHandler
     {
         #region Fields
 
@@ -113,10 +113,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers
         private IListDatabaseStorageBuilder CreateBuilder(IDatabase[] databases)
         {
             IListDatabaseStorageBuilder builder = new ListDatabaseStorageBuilder();
-            foreach(IDatabase database in databases)
-            {
-                builder.Add(new Database(database.DirectoryName));
-            }
+            databases.ToList().ForEach(database => builder.Add(new Database(database.DirectoryName)));
             return builder;
         }
 

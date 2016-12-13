@@ -21,10 +21,4 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         /// Reports to the manager that it has completed its task.
         /// </summary>
         void ReportCompleted();
-
-        /// <summary>
-        /// Stops the worker from doing its task.
-        /// </summary>
-        void Stop();
-    }
 }

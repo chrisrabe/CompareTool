@@ -4,15 +4,15 @@ using RightCrowd.CompareTool.Models.Comparison.Data;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
-using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparators;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 {
     /// <summary>
-    /// This is a worker for the task manager. It is assigned a task
-    /// and executes the comparison logic in the background.
+    /// This is a worker for the task manager. This worker is responsible
+    /// for creating a background worker for the comparison logic.
     /// </summary>
     public class CompareTaskWorker : ICompareTaskWorker
     {
@@ -23,8 +23,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 
         private BackgroundWorker _worker;
         private ICompareTaskManager _manager;
-        private IObjectFinder _objectFinder;
-        private IDataHandler _dataHandler;
+        private IDataComparator _comparator;
 
         #endregion // Fields
 
@@ -34,8 +33,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         {
             _assignedDataType = assignedDataType;
             _manager = manager;
-            _worker = new BackgroundWorker();
-            _objectFinder = new ObjectFinder();
+            _comparator = new DataComparator();
         }
 
         #endregion // Constructors
@@ -61,19 +59,10 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         public void DoTask()
         {
             // Initialise properties of the background worker
-            _worker.WorkerSupportsCancellation = true;
-            _worker.DoWork += (obj, e) => Compare(_task.Databases, e);
+            _worker.DoWork += (obj, e) => Compare(_task.Databases);
             _worker.RunWorkerCompleted += (obj, e) => ReportCompleted();
             // run the background worker
             _worker.RunWorkerAsync();
-        }
-
-        /// <summary>
-        /// Stops the worker from comparing.
-        /// </summary>
-        public void Stop()
-        {
-            _worker.CancelAsync();
         }
 
         #endregion // Methods
@@ -85,10 +74,14 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         /// </summary>
         /// <param name="databases"></param>
         /// <param name="e"></param>
-        private void Compare(IDatabase[] databases, DoWorkEventArgs e)
+        private void Compare(IDatabase[] databases)
         {
-            _dataHandler = new DataHandler(databases); // Create data handler
-            // Do Compare Logic Here...
+            int db1 = 0, db2 = 1;
+            _comparator.Handler = new DataHandler(databases);
+            // First compare database one against database two
+            _comparator.Compare(db1, db2, databases);
+            // Next compare database two against database one
+            _comparator.Compare(db2, db1, databases);
         }
 
         /// <summary>
@@ -98,8 +91,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         public void ReportCompleted()
         {
             IComparisonData data = new ComparisonData(_assignedDataType);
-            data.Difference = (IListDatabaseStorage) _dataHandler.Differences.Storage;
-            data.Similarities = (IListDatabaseStorage)_dataHandler.Similarities.Storage;
+            data.Difference = (IListDatabaseStorage)_comparator.Handler.Differences.Storage;
+            data.Similarities = (IListDatabaseStorage)_comparator.Handler.Similarities.Storage;
             _manager.SubmitData(data);
         }
 
