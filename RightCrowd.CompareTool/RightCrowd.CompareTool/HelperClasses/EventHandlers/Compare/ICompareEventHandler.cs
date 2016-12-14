@@ -23,6 +23,6 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
         /// <summary>
         /// Reports its comparison progress to the view model.
         /// </summary>
-        void ReportProgress();
+        void ReportProgress(int progress);
     }
 }

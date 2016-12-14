@@ -145,7 +145,7 @@ namespace RightCrowd.CompareTool
         public int CompareProgress
         {
             get { return _compareProgress; }
-            private set
+            set
             {
                 if(this._compareProgress != value)
                 {

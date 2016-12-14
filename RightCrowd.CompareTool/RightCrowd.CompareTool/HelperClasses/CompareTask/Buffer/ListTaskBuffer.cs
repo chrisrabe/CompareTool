@@ -1,4 +1,5 @@
-﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
+﻿using System;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer
 {
@@ -60,12 +61,29 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer
             }
         }
 
+        /// <summary>
+        /// Sets the tasks for this buffer
+        /// </summary>
         public ICompareTask[] Tasks
         {
             set
             {
                 if (_tasks != value)
                     _tasks = value;
+            }
+        }
+
+        /// <summary>
+        /// Returns the total number of tasks in this buffer.
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                if (_tasks == null)
+                    return 0;
+                else
+                    return _tasks.Length;
             }
         }
 

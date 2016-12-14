@@ -20,6 +20,11 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer
         bool Done { get; }
 
         /// <summary>
+        /// Returns the number of tasks in the buffer.
+        /// </summary>
+        int Count { get; }
+
+        /// <summary>
         /// Retrieves the next task available in the
         /// buffer.
         /// </summary>

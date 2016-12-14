@@ -23,7 +23,10 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
         // Worker constraints -- avoids memory problems
         private const int MAX_WORKERS = 4;
         private int _curWorkers = 0;
-
+        // Fields to keep track of progress
+        private int _totalTasks = 0;
+        private int _completeTasks = 0;
+        // Fields needed for the comparison
         private IComparisonDataStorage _storage;
         private ICompareEventHandler _handler;
         private ICompareTaskBuffer _buffer;
@@ -51,6 +54,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
         public IComparisonDataStorage Compare(params IMapDatabaseStorage[] partitions)
         {
             _buffer = CreateBuffer(partitions);
+            _totalTasks = _buffer.Count;
+
             while (!_buffer.Done)
             {
                 if (_curWorkers < MAX_WORKERS) // only build workers if max not reached
@@ -79,7 +84,11 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
         {
             _curWorkers--; // decrease worker count
             _storage.ComparisonData.Add(data);
-            _handler.ReportProgress();
+            _completeTasks++;
+            int progress = (_completeTasks / _totalTasks) * 100;
+            if (_buffer.Done)
+                progress = 100;
+            _handler.ReportProgress(progress);
         }
 
         #endregion // Methods
