@@ -1,6 +1,6 @@
-﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer;
+﻿using System.Collections.Generic;
+using RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
-using System.Collections.Generic;
 
 namespace RightCrowd.CompareTool.HelperClasses.Builders.TaskBuffer
 {

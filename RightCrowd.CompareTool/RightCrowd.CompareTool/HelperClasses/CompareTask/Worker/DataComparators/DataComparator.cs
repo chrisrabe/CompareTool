@@ -29,26 +29,34 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
 
         /// <summary>
         /// This method compares the nodes of the database at index 1 to the nodes
-        /// of the database at index2.
+        /// of the database at index2. The database at index 1 must not be null.
         /// </summary>
         /// <param name="index1"></param>
         /// <param name="index2"></param>
         /// <param name="databases"></param>
         public void Compare(int index1, int index2, params IDatabase[] databases)
         {
+            if (databases[index1] == null)
+                return;
+
             foreach(IDataNode node in databases[index1].Data)
             {
                 if (node.Different)
                     continue; // avoids duplicate comparisons
-                _diffCount1 = _diffCount2 = 0; // Reset field counters to zero
-                IDataNode other = _objectFinder.GetOther(node, databases[index2]);
-                // Mark as different or compare fields
-                if (other == null)
-                    _handler.RecordAsDifferent(index1, node, true);
+                if(databases[index2] == null)
+                {
+                    _diffCount1 = _diffCount2 = 0; // Reset field counters to zero
+                    IDataNode other = _objectFinder.GetOther(node, databases[index2]);
+                    // Mark as different or compare fields
+                    if (other == null)
+                        _handler.RecordAsDifferent(index1, node, true);
+                    else
+                        Compare(index1, index2, node, other);
+                    RecordNode(_diffCount1, index1, node);
+                    RecordNode(_diffCount2, index2, node);
+                }
                 else
-                    Compare(index1, index2, node, other);
-                RecordNode(_diffCount1, index1, node);
-                RecordNode(_diffCount2, index2, node);
+                    _handler.RecordAsDifferent(index1, node, true);
             }
         }
 

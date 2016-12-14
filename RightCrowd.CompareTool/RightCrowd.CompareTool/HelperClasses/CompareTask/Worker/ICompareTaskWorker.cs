@@ -1,5 +1,4 @@
-﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
-using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
+﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 {
@@ -21,4 +20,5 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         /// Reports to the manager that it has completed its task.
         /// </summary>
         void ReportCompleted();
+    }
 }

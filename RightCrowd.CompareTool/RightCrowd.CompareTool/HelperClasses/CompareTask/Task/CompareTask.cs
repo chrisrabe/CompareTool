@@ -10,13 +10,20 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Task
         #region Fields
 
         private IDatabase[] _databases;
+        private string _type;
 
         #endregion // Fields
 
         #region Contructor
 
-        public CompareTask(params IDatabase[] databases)
+        /// <summary>
+        /// Creates an instance of the compare task.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="databases"></param>
+        public CompareTask(string type, params IDatabase[] databases)
         {
+            _type = type;
             Databases = databases;
         }
 
@@ -24,6 +31,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Task
 
         #region Properties
 
+        /// <summary>
+        /// Databases to be compared
+        /// </summary>
         public IDatabase[] Databases
         {
             get
@@ -35,6 +45,17 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Task
             {
                 if (_databases != value)
                     _databases = value;
+            }
+        }
+
+        /// <summary>
+        /// The type of nodes which this task stores.
+        /// </summary>
+        public string Type
+        {
+            get
+            {
+                return _type;
             }
         }
 

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using RightCrowd.CompareTool.Models.DataModels.Database;
-using System.Linq;
 
 namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.Map
 {
@@ -62,6 +62,17 @@ namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.Map
             get
             {
                 return _subDatabases.Values.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Returns a list of keys in this map database.
+        /// </summary>
+        public List<string> Keys
+        {
+            get
+            {
+                return _subDatabases.Keys.ToList();
             }
         }
 

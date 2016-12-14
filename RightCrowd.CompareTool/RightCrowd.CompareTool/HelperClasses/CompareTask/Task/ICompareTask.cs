@@ -13,5 +13,10 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Task
         /// Gets or sets the database inside this compare task.
         /// </summary>
         IDatabase[] Databases { get; set; }
+
+        /// <summary>
+        /// This represents the data node type this task is related to.
+        /// </summary>
+        string Type { get; }
     }
 }
