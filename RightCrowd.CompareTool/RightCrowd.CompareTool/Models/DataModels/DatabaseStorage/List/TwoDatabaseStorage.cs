@@ -40,5 +40,14 @@ namespace RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List
         }
 
         #endregion // IDatabase Members
+
+        #region Object methods
+
+        public override string ToString()
+        {
+            return string.Format("{0} - {1}", Databases[0].DirectoryName, Databases[1].DirectoryName);
+        }
+
+        #endregion
     }
 }

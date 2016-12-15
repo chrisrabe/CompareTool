@@ -52,11 +52,11 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
             if (databases[index1] == null)
                 return;
 
-            foreach(IDataNode node in databases[index1].Data)
+            foreach (IDataNode node in databases[index1].Data)
             {
                 if (node.Different)
                     continue; // avoids duplicate comparisons
-                if(databases[index2] != null)
+                if (databases[index2] != null)
                 {
                     _diffCount1 = _diffCount2 = 0; // Reset field counters to zero
                     IDataNode other = _objectFinder.GetOther(node, databases[index2]);
@@ -64,7 +64,10 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
                     if (other == null)
                         _handler.RecordAsDifferent(index1, node, true);
                     else
+                    {
+                        other.Visited = true;
                         Compare(index1, index2, node, other);
+                    }
                     RecordNode(_diffCount1, index1, node);
                     RecordNode(_diffCount2, index2, node);
                 }
@@ -87,7 +90,10 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         private void RecordNode(int count, int index, IDataNode node)
         {
             if (count == 0)
-                _handler.RecordAsSimilar(index, node);
+            {
+                if (!node.Visited)
+                    _handler.RecordAsSimilar(index, node);
+            }
             else
                 _handler.RecordAsDifferent(index, node, false);
         }
@@ -101,7 +107,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         /// <param name="nodes"></param>
         private void Compare(int index1, int index2, params IDataNode[] nodes)
         {
-            foreach(IField field in nodes[index1].Fields)
+            foreach (IField field in nodes[index1].Fields)
             {
                 IField other = _objectFinder.GetOther(field, nodes[index2]);
                 if (other == null)
@@ -125,12 +131,12 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         {
             bool isComposite1 = field1 is CompositeField;
             bool isComposite2 = field2 is CompositeField;
-            if(isComposite1 && isComposite2)
+            if (isComposite1 && isComposite2)
             {
                 Compare((CompositeField)field1, (CompositeField)field2);
                 return; // comparing passed on to another method
             }
-            else if(!isComposite2 && !isComposite2)
+            else if (!isComposite2 && !isComposite2)
             {
                 RawField rawField1 = (RawField)field1;
                 RawField rawField2 = (RawField)field2;
@@ -152,7 +158,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         /// <param name="field2"></param>
         private void Compare(CompositeField field1, CompositeField field2)
         {
-            foreach(IField field in field1.Fields)
+            foreach (IField field in field1.Fields)
             {
                 IField other = _objectFinder.GetOther(field, field2);
                 if (other == null)

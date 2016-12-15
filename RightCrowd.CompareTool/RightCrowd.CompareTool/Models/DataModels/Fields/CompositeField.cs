@@ -1,5 +1,6 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
 using System.Collections.ObjectModel;
+using System;
 
 namespace RightCrowd.CompareTool.Models.DataModels.Fields
 {
@@ -40,7 +41,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
             set
             {
-                if(_name != value)
+                if (_name != value)
                 {
                     _name = value;
                     OnPropertyChanged("Name");
@@ -61,7 +62,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
             }
             set
             {
-                if(_fields != value)
+                if (_fields != value)
                 {
                     _fields = value;
                     OnPropertyChanged("Fields");
@@ -84,7 +85,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
             set
             {
-                if(_different != value)
+                if (_different != value)
                 {
                     _different = value;
                     OnPropertyChanged("Different");
@@ -105,7 +106,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
         /// <returns></returns>
         private bool HasDifferentFields()
         {
-            foreach(IField field in Fields)
+            foreach (IField field in Fields)
             {
                 if (field.Different)
                     return true;

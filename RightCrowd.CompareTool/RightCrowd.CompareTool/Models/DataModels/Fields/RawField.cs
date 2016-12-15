@@ -1,4 +1,5 @@
-﻿using RightCrowd.CompareTool.HelperClasses;
+﻿using System;
+using RightCrowd.CompareTool.HelperClasses;
 
 namespace RightCrowd.CompareTool.Models.DataModels.Fields
 {
@@ -42,7 +43,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
             set
             {
-                if(_different != value)
+                if (_different != value)
                 {
                     _different = value;
                     OnPropertyChanged("Different");
@@ -62,7 +63,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
             set
             {
-                if(_name != value)
+                if (_name != value)
                 {
                     _name = value;
                     OnPropertyChanged("Name");
@@ -85,7 +86,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
             set
             {
                 // Use look up table to convert the value.
-                if(_value != value)
+                if (_value != value)
                 {
                     _value = value;
                     OnPropertyChanged("Value");

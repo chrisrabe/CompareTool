@@ -21,5 +21,10 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
         /// is mainly used in comparison logic.
         /// </summary>
         bool Different { get; set; }
+
+        /// <summary>
+        /// This marks whether it has been compared or not.
+        /// </summary>
+        bool Visited { get; set; }
     }
 }

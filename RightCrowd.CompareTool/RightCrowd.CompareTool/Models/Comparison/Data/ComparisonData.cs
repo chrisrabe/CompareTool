@@ -101,5 +101,14 @@ namespace RightCrowd.CompareTool.Models.Comparison.Data
         }
 
         #endregion // IComparisonData Properties
+
+        #region Object methods
+
+        public override string ToString()
+        {
+            return _type;
+        }
+
+        #endregion
     }
 }

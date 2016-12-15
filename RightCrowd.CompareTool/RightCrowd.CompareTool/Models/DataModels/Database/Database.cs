@@ -52,5 +52,10 @@ namespace RightCrowd.CompareTool.Models.DataModels.Database
                 }
             }
         }
+
+        public override string ToString()
+        {
+            return _directoryName;
+        }
     }
 }

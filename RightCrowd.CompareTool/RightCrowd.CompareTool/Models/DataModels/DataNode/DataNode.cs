@@ -1,7 +1,6 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 using System.Collections.ObjectModel;
-using System;
 
 namespace RightCrowd.CompareTool.Models.DataModels.DataNode
 {
@@ -14,6 +13,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
 
         private string _filename;
         private bool _different;
+        private bool _visited;
         private ObservableCollection<IField> _fields;
 
         #endregion // Fields
@@ -94,6 +94,13 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
                     OnPropertyChanged("Different");
                 }
             }
+        }
+
+        public bool Visited
+        {
+            get { return _visited; }
+
+            set { _visited = value; }
         }
 
         #endregion // Properties

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Linq;
+using System.ComponentModel;
 
 using RightCrowd.CompareTool.Models.Comparison.Data;
 using RightCrowd.CompareTool.Models.DataModels.Database;
@@ -79,6 +80,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         {
             int db1 = 0, db2 = 1;
             _comparator.Handler = new DataHandler(databases);
+            SetNodesNotVisited(databases[db1]);
+            SetNodesNotVisited(databases[db2]);
             // First compare database one against database two
             _comparator.Compare(db1, db2, databases[db1], databases[db2]);
             // Next compare database two against database one
@@ -98,5 +101,19 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         }
 
         #endregion // BackgroundWorker Methods
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Sets the Visited property of all the nodes property to false. This is important in case
+        /// the user wants to compare a database twice.
+        /// </summary>
+        /// <param name="database"></param>
+        private void SetNodesNotVisited(IDatabase database)
+        {
+            database.Data.ToList().ForEach(node => { node.Visited = false; });
+        }
+
+        #endregion // Helper Methods
     }
 }
