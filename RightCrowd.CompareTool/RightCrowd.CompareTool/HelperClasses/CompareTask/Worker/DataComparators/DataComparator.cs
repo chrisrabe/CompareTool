@@ -62,14 +62,17 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
                     IDataNode other = _objectFinder.GetOther(node, databases[index2]);
                     // Mark as different or compare fields
                     if (other == null)
+                    {
+                        node.Visited = true;
                         _handler.RecordAsDifferent(index1, node, true);
+                        continue;
+                    }
                     else
                     {
-                        other.Visited = true;
                         Compare(index1, index2, node, other);
                     }
                     RecordNode(_diffCount1, index1, node);
-                    RecordNode(_diffCount2, index2, node);
+                    RecordNode(_diffCount2, index2, other);
                 }
                 else
                     _handler.RecordAsDifferent(index1, node, true);
@@ -89,6 +92,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         /// <param name="node"></param>
         private void RecordNode(int count, int index, IDataNode node)
         {
+            if (node == null) 
+                return; // don't record if null
+
             if (count == 0)
             {
                 if (!node.Visited)
@@ -96,6 +102,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
             }
             else
                 _handler.RecordAsDifferent(index, node, false);
+            node.Visited = true;
         }
 
         /// <summary>
