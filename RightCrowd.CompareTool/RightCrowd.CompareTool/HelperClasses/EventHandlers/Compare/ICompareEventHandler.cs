@@ -18,11 +18,17 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
         /// </summary>
         /// <param name="storage"></param>
         /// <returns></returns>
-        IComparisonDataStorage Compare(IListDatabaseStorage storage);
+        void Compare(IListDatabaseStorage storage);
 
         /// <summary>
         /// Reports its comparison progress to the view model.
         /// </summary>
         void ReportProgress(int progress);
+
+        /// <summary>
+        /// Submits the database storage to the application.
+        /// </summary>
+        /// <param name="storage"></param>
+        void SubmitStorage(IComparisonDataStorage storage);
     }
 }

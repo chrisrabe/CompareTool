@@ -33,6 +33,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         {
             _assignedDataType = assignedDataType;
             _manager = manager;
+            _worker = new BackgroundWorker();
             _comparator = new DataComparator();
         }
 
@@ -79,9 +80,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             int db1 = 0, db2 = 1;
             _comparator.Handler = new DataHandler(databases);
             // First compare database one against database two
-            _comparator.Compare(db1, db2, databases);
+            _comparator.Compare(db1, db2, databases[db1], databases[db2]);
             // Next compare database two against database one
-            _comparator.Compare(db2, db1, databases);
+            _comparator.Compare(db2, db1, databases[db1], databases[db2]);
         }
 
         /// <summary>

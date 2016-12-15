@@ -1,4 +1,5 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
+using RightCrowd.CompareTool.Models.Comparison.DataStorage;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace RightCrowd.CompareTool
         private static ApplicationViewModel _instance;
 
         private IListDatabaseStorage _databaseStorage;
+        private IComparisonDataStorage _comparisonStorage;
 
         private ICommand _changePageCommand;
 
@@ -66,6 +68,19 @@ namespace RightCrowd.CompareTool
                     _databaseStorage = new TwoDatabaseStorage();
 
                 return _databaseStorage;
+            }
+        }
+
+        public IComparisonDataStorage ComparisonStorage
+        {
+            get { return _comparisonStorage; }
+            set
+            {
+                if (_comparisonStorage != value)
+                {
+                    _comparisonStorage = value;
+                    OnPropertyChanged("ComparisonStorage");
+                }
             }
         }
 

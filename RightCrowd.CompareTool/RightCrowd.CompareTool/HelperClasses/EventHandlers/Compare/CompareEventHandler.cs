@@ -5,6 +5,8 @@ using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.Map;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
+using System;
+using System.Windows;
 
 namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
 {
@@ -43,17 +45,23 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
         /// </summary>
         /// <param name="storage"></param>
         /// <returns></returns>
-        public IComparisonDataStorage Compare(IListDatabaseStorage storage)
+        public void Compare(IListDatabaseStorage storage)
         {
             int db1 = 0, db2 = 1;
             IMapDatabaseStorage partition1 = PartitionDatabase(storage.Databases[db1]);
             IMapDatabaseStorage partition2 = PartitionDatabase(storage.Databases[db2]);
-            return _manager.Compare(partition1, partition2);
+            _manager.Compare(partition1, partition2);
         }
 
         public void ReportProgress(int progress)
         {
             _viewModel.CompareProgress = progress;
+        }
+
+        public void SubmitStorage(IComparisonDataStorage storage)
+        {
+            ApplicationViewModel.Instance.ComparisonStorage = storage;
+            MessageBox.Show("Databases Compared");
         }
 
         #endregion // Methods
@@ -75,7 +83,11 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
                 string type = GetType(data);
                 IDatabase tmp;
                 if (!partition.TryGetValue(type, out tmp))
-                    partition.Add(type, new Database(database.DirectoryName));
+                {
+                    tmp = new Database(database.DirectoryName);
+                    partition.Add(type, tmp);
+                }
+
                 tmp.Data.Add(data);
             }
             foreach (KeyValuePair<string, IDatabase> entry in partition)

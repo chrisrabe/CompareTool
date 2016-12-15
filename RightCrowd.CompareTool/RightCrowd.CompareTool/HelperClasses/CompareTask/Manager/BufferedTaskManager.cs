@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using RightCrowd.CompareTool.HelperClasses.Builders.TaskBuffer;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Buffer;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
@@ -19,10 +18,6 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
     public class BufferedTaskManager : ICompareTaskManager
     {
         #region Fields
-
-        // Worker constraints -- avoids memory problems
-        private const int MAX_WORKERS = 4;
-        private int _curWorkers = 0;
         // Fields to keep track of progress
         private int _totalTasks = 0;
         private int _completeTasks = 0;
@@ -51,26 +46,21 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
         /// </summary>
         /// <param name="partitions"></param>
         /// <returns></returns>
-        public IComparisonDataStorage Compare(params IMapDatabaseStorage[] partitions)
+        public void Compare(params IMapDatabaseStorage[] partitions)
         {
             _buffer = CreateBuffer(partitions);
             _totalTasks = _buffer.Count;
 
             while (!_buffer.Done)
             {
-                if (_curWorkers < MAX_WORKERS) // only build workers if max not reached
+                ICompareTask task = _buffer.Next;
+                if (task != null) // buffer.Next could return null
                 {
-                    ICompareTask task = _buffer.Next;
-                    if (task != null) // buffer.Next could return null
-                    {
-                        ICompareTaskWorker worker = new CompareTaskWorker(task.Type, this);
-                        worker.Task = task;
-                        worker.DoTask();
-                        _curWorkers++;
-                    }
+                    ICompareTaskWorker worker = new CompareTaskWorker(task.Type, this);
+                    worker.Task = task;
+                    worker.DoTask();
                 }
             }
-            return _storage;
         }
 
         /// <summary>
@@ -79,16 +69,14 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
         /// multiple threads submitting at the same time.
         /// </summary>
         /// <param name="data"></param>
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SubmitData(IComparisonData data)
         {
-            _curWorkers--; // decrease worker count
             _storage.ComparisonData.Add(data);
             _completeTasks++;
             int progress = (_completeTasks / _totalTasks) * 100;
-            if (_buffer.Done)
-                progress = 100;
             _handler.ReportProgress(progress);
+            if (progress == 100)
+                _handler.SubmitStorage(_storage);
         }
 
         #endregion // Methods

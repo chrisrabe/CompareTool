@@ -14,15 +14,15 @@
     </UserControl.Background>
     <Grid>
         <Button x:Name="btnLoad1" HorizontalAlignment="Left" Margin="200,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Load Database One"
-                Command="{Binding Path=LoadDatabaseOne}">
+                Command="{Binding Path=LoadDatabaseOne}" IsEnabled="{Binding Path=NotComparing}">
             <Image Source="/RightCrowd.CompareTool;component/Resources/db1_load.png"></Image>
         </Button>
         <Button x:Name="btnCompare" HorizontalAlignment="Left" Margin="450,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Compare Databases"
-                IsEnabled="{Binding Path=DatabasesLoaded}">
+                IsEnabled="{Binding Path=DatabasesLoaded}" Command="{Binding Path=CompareDatabase}">
             <Image Source="/RightCrowd.CompareTool;component/Resources/compare-btn.png"></Image>
         </Button>
         <Button x:Name="btnLoad2" HorizontalAlignment="Left" Margin="700,220,0,0" VerticalAlignment="Top" Width="200" Height="200" Cursor="Hand" ToolTip="Load Database Two"
-                Command="{Binding Path=LoadDatabaseTwo}">
+                Command="{Binding Path=LoadDatabaseTwo}" IsEnabled="{Binding Path=NotComparing}">
             <Image Source="/RightCrowd.CompareTool;component/Resources/db2_load.png"></Image>
         </Button>
 

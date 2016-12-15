@@ -15,8 +15,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
         /// Compares all the data partitions and returns comparison data.
         /// </summary>
         /// <param name="partitions"></param>
-        /// <returns></returns>
-        IComparisonDataStorage Compare(params IMapDatabaseStorage[] partitions);
+        void Compare(params IMapDatabaseStorage[] partitions);
 
         /// <summary>
         /// Reports to the event handler that it has completed its task.

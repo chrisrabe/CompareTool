@@ -1,4 +1,5 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
+using RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare;
 using RightCrowd.CompareTool.HelperClasses.EventHandlers.Load;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace RightCrowd.CompareTool
 
         // Validation Checks
         private bool _databasesLoaded; // True if database storage has two databases
+        private bool _notComparing = true;
 
         #endregion // Fields
 
@@ -66,6 +68,16 @@ namespace RightCrowd.CompareTool
             }
         }
 
+        public ICommand CompareDatabase
+        {
+            get
+            {
+                if (_compareDatabaseCommand == null)
+                    _compareDatabaseCommand = new RelayCommand(i => CompareDatabases());
+                return _compareDatabaseCommand;
+            }
+        }
+
         #endregion // ICommands
 
         #region Database Related Properties
@@ -75,10 +87,23 @@ namespace RightCrowd.CompareTool
             get { return _databasesLoaded; }
             set
             {
-                if(_databasesLoaded != value)
+                if (_databasesLoaded != value)
                 {
                     _databasesLoaded = value;
                     OnPropertyChanged("DatabasesLoaded");
+                }
+            }
+        }
+
+        public bool NotComparing
+        {
+            get { return _notComparing; }
+            set
+            {
+                if (_notComparing != value)
+                {
+                    _notComparing = value;
+                    OnPropertyChanged("NotComparing");
                 }
             }
         }
@@ -88,7 +113,7 @@ namespace RightCrowd.CompareTool
             get { return _directoryOne; }
             set
             {
-                if(_directoryOne != value)
+                if (_directoryOne != value)
                 {
                     _directoryOne = value;
                     OnPropertyChanged("DirectoryOne");
@@ -101,7 +126,7 @@ namespace RightCrowd.CompareTool
             get { return _directoryTwo; }
             set
             {
-                if(_directoryTwo != value)
+                if (_directoryTwo != value)
                 {
                     _directoryTwo = value;
                     OnPropertyChanged("DirectoryTwo");
@@ -121,7 +146,7 @@ namespace RightCrowd.CompareTool
             get { return _loadDB1Progress; }
             set
             {
-                if(this._loadDB1Progress != value)
+                if (this._loadDB1Progress != value)
                 {
                     this._loadDB1Progress = value;
                     OnPropertyChanged("LoadDB1Progress");
@@ -147,7 +172,7 @@ namespace RightCrowd.CompareTool
             get { return _compareProgress; }
             set
             {
-                if(this._compareProgress != value)
+                if (this._compareProgress != value)
                 {
                     this._compareProgress = value;
                     OnPropertyChanged("CompareProgress");
@@ -183,9 +208,9 @@ namespace RightCrowd.CompareTool
         public void CheckIfDatabaseLoaded()
         {
             IDatabase[] databases = ApplicationViewModel.Instance.DatabaseStorage.Databases;
-            for(int i = 0; i < databases.Length; i++)
+            for (int i = 0; i < databases.Length; i++)
             {
-                if(databases[i] == null)
+                if (databases[i] == null)
                 {
                     DatabasesLoaded = false;
                     return; // at least one database is empty...
@@ -197,11 +222,11 @@ namespace RightCrowd.CompareTool
         private void LoadDatabase(int databaseIndex)
         {
             FolderBrowserDialog browser = new FolderBrowserDialog();
-            if(browser.ShowDialog() == DialogResult.OK)
+            if (browser.ShowDialog() == DialogResult.OK)
             {
                 // Stop any event handlers at that particular database
                 LoadEventHandler handler;
-                if(_loadEvents.TryGetValue(databaseIndex, out handler))
+                if (_loadEvents.TryGetValue(databaseIndex, out handler))
                 {
                     // Handler detected. Stop the old handler..
                     handler.StopLoading();
@@ -213,8 +238,18 @@ namespace RightCrowd.CompareTool
                 // Start the handler...
                 handler.LoadDirectory(browser.SelectedPath, databaseIndex);
                 // Keep a reference to the handler
-                _loadEvents.Add(databaseIndex, handler); 
+                _loadEvents.Add(databaseIndex, handler);
             }
+        }
+
+        private void CompareDatabases()
+        {
+            if (!NotComparing)
+                return;
+
+            NotComparing = false;
+            new CompareEventHandler(this).Compare(ApplicationViewModel.Instance.DatabaseStorage);
+            NotComparing = true;
         }
 
         #endregion // Methods

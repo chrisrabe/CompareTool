@@ -11,10 +11,23 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
     /// </summary>
     public class DataComparator : IDataComparator
     {
+        #region Fields
+
         private IDataHandler _handler;
-        private ObjectFinder _objectFinder;
+        private IObjectFinder _objectFinder;
         private int _diffCount1;
         private int _diffCount2;
+
+        #endregion // Fields
+
+        #region Constructor
+
+        public DataComparator()
+        {
+            _objectFinder = new ObjectFinder();
+        }
+
+        #endregion
 
         #region IDataComparator Members
 
@@ -43,7 +56,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
             {
                 if (node.Different)
                     continue; // avoids duplicate comparisons
-                if(databases[index2] == null)
+                if(databases[index2] != null)
                 {
                     _diffCount1 = _diffCount2 = 0; // Reset field counters to zero
                     IDataNode other = _objectFinder.GetOther(node, databases[index2]);
