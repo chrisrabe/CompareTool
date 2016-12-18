@@ -1,10 +1,11 @@
-﻿using RightCrowd.CompareTool.HelperClasses.Readers.XML;
+﻿using System;
+using System.IO;
+using System.Windows;
+using RightCrowd.CompareTool.HelperClasses.Readers.XML;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using System.ComponentModel;
-using System.IO;
-using System.Windows;
-using System;
+using RightCrowd.CompareTool.HelperClasses.Providers.Database;
 
 namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
 {
@@ -20,10 +21,11 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
     {
         #region Fields
 
-        private IDatabase _database;
         private int _databaseIndex;
+        private IDatabase _database;
         private BackgroundWorker _worker;
         private LoadViewModel _viewModel;
+        private IDatabaseStorageProvider _databaseProvider;
 
         #endregion // Fields
 
@@ -33,6 +35,11 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
         {
             _worker = new BackgroundWorker();
             _viewModel = viewModel;
+        }
+
+        public LoadEventHandler(LoadViewModel viewModel, IDatabaseStorageProvider _databaseProvider) : this(viewModel)
+        {
+            this._databaseProvider = _databaseProvider;
         }
 
         #endregion // Constructors
@@ -69,19 +76,18 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
         #endregion // Methods
 
         #region Worker Methods
-
         private void AddDatabaseToStorage(object sender, RunWorkerCompletedEventArgs e)
         {
             if (_database != null)
             {
-                ApplicationViewModel.Instance.DatabaseStorage[_databaseIndex] = _database;
+                _databaseProvider.DatabaseStorage[_databaseIndex] = _database;
                 SetDirectory(_database.DirectoryName);
                 UpdateProgress(100);
                 MessageBox.Show(String.Format("Database {0} has been loaded.", (_databaseIndex + 1)));
                 _viewModel.CheckIfDatabaseLoaded();
             }
             else
-                MessageBox.Show(String.Format("Database cannot be loaded because no xml files with at least one child element detected."));
+                MessageBox.Show("Database cannot be loading because no xml files detected");
         }
 
         private void LoadDirectory(string directoryPath, DoWorkEventArgs e)

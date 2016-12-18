@@ -12,7 +12,7 @@ namespace RightCrowd.CompareTool
             base.OnStartup(e);
 
             ApplicationView app = new ApplicationView();
-            ApplicationViewModel context = ApplicationViewModel.Instance;
+            ApplicationViewModel context = new ApplicationViewModel();
             app.DataContext = context;
             app.Show();
         }

@@ -105,6 +105,10 @@
     <Compile Include="HelperClasses\EventHandlers\Compare\ICompareEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
+    <Compile Include="HelperClasses\Providers\CompareData\CompareDataProvider.cs" />
+    <Compile Include="HelperClasses\Providers\CompareData\ICompareDataProvider.cs" />
+    <Compile Include="HelperClasses\Providers\Database\DatabaseStorageProvider.cs" />
+    <Compile Include="HelperClasses\Providers\Database\IDatabaseStorageProvider.cs" />
     <Compile Include="Models\Comparison\DataStorage\ComparisonDataStorage.cs" />
     <Compile Include="Models\Comparison\DataStorage\IComparisonDataStorage.cs" />
     <Compile Include="Models\Comparison\Data\ComparisonData.cs" />

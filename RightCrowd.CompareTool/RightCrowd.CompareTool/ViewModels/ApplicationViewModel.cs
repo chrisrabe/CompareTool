@@ -1,9 +1,11 @@
-﻿using RightCrowd.CompareTool.HelperClasses;
+﻿using System.Linq;
+using System.Windows.Input;
+using System.Collections.Generic;
+using RightCrowd.CompareTool.HelperClasses;
 using RightCrowd.CompareTool.Models.Comparison.DataStorage;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
+using RightCrowd.CompareTool.HelperClasses.Providers.Database;
+using RightCrowd.CompareTool.HelperClasses.Providers.CompareData;
 
 namespace RightCrowd.CompareTool
 {
@@ -15,10 +17,8 @@ namespace RightCrowd.CompareTool
 
         #region Fields
 
-        private static ApplicationViewModel _instance;
-
-        private IListDatabaseStorage _databaseStorage;
-        private IComparisonDataStorage _comparisonStorage;
+        private IDatabaseStorageProvider _databaseProvider; 
+        private ICompareDataProvider _compareDataProvider;
 
         private ICommand _changePageCommand;
 
@@ -29,25 +29,14 @@ namespace RightCrowd.CompareTool
 
         #region Constructors
 
-        /// <summary>
-        /// Creates a new instance of the 
-        /// application view model if an instance is not yet created.
-        /// </summary>
-        public static ApplicationViewModel Instance
+        public ApplicationViewModel()
         {
-            get
-            {
-                if (_instance == null)
-                    _instance = new ApplicationViewModel();
+            // Initialise Fields
+            _databaseProvider = new DatabaseStorageProvider();
+            _compareDataProvider = new CompareDataProvider();
 
-                return _instance;
-            }
-        }
-
-        private ApplicationViewModel()
-        {
             // Add available pages
-            PageViewModels.Add(new LoadViewModel());
+            PageViewModels.Add(new LoadViewModel(this, _databaseProvider, _compareDataProvider));
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
@@ -64,23 +53,16 @@ namespace RightCrowd.CompareTool
         {
             get
             {
-                if (_databaseStorage == null)
-                    _databaseStorage = new TwoDatabaseStorage();
-
-                return _databaseStorage;
+                return _databaseProvider.DatabaseStorage;
             }
         }
 
         public IComparisonDataStorage ComparisonStorage
         {
-            get { return _comparisonStorage; }
+            get { return _compareDataProvider.ComparisonStorage; }
             set
             {
-                if (_comparisonStorage != value)
-                {
-                    _comparisonStorage = value;
-                    OnPropertyChanged("ComparisonStorage");
-                }
+                _compareDataProvider.ComparisonStorage = value;
             }
         }
 

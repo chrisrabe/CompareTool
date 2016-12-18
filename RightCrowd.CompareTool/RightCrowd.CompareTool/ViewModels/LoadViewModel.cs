@@ -1,16 +1,23 @@
-﻿using RightCrowd.CompareTool.HelperClasses;
+﻿using System.Windows.Forms;
+using System.Windows.Input;
+using System.Collections.Generic;
+using RightCrowd.CompareTool.HelperClasses;
 using RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare;
 using RightCrowd.CompareTool.HelperClasses.EventHandlers.Load;
 using RightCrowd.CompareTool.Models.DataModels.Database;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Windows.Input;
+using RightCrowd.CompareTool.HelperClasses.Providers.CompareData;
+using RightCrowd.CompareTool.HelperClasses.Providers.Database;
 
 namespace RightCrowd.CompareTool
 {
     public class LoadViewModel : ObservableObject, IPageViewModel
     {
         #region Fields
+
+        // Application View Model Members
+        private ApplicationViewModel _applicationViewModel;
+        private IDatabaseStorageProvider _databaseProvider;
+        private ICompareDataProvider _compareDataProvider;
 
         // Processes
         private Dictionary<int, LoadEventHandler> _loadEvents;
@@ -37,9 +44,12 @@ namespace RightCrowd.CompareTool
 
         #region Constructors
 
-        public LoadViewModel()
+        public LoadViewModel(ApplicationViewModel applicationViewModel, IDatabaseStorageProvider databaseProvider, ICompareDataProvider compareDataProvider)
         {
             _loadEvents = new Dictionary<int, LoadEventHandler>();
+            _applicationViewModel = applicationViewModel;
+            _databaseProvider = databaseProvider;
+            _compareDataProvider = compareDataProvider;
         }
 
         #endregion // Constructors
@@ -207,7 +217,7 @@ namespace RightCrowd.CompareTool
         /// </summary>
         public void CheckIfDatabaseLoaded()
         {
-            IDatabase[] databases = ApplicationViewModel.Instance.DatabaseStorage.Databases;
+            IDatabase[] databases = _databaseProvider.DatabaseStorage.Databases;
             for (int i = 0; i < databases.Length; i++)
             {
                 if (databases[i] == null)
@@ -234,7 +244,7 @@ namespace RightCrowd.CompareTool
                     _loadEvents.Remove(databaseIndex);
                 }
                 // Create a new handler
-                handler = new LoadEventHandler(this);
+                handler = new LoadEventHandler(this, _databaseProvider);
                 // Start the handler...
                 handler.LoadDirectory(browser.SelectedPath, databaseIndex);
                 // Keep a reference to the handler
@@ -248,7 +258,7 @@ namespace RightCrowd.CompareTool
                 return;
 
             NotComparing = false;
-            new CompareEventHandler(this).Compare(ApplicationViewModel.Instance.DatabaseStorage);
+            new CompareEventHandler(this, _compareDataProvider).Compare(_databaseProvider.DatabaseStorage);
             NotComparing = true;
         }
 

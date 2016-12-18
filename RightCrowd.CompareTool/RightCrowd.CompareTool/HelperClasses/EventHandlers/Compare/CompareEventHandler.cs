@@ -7,6 +7,7 @@ using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using System;
 using System.Windows;
+using RightCrowd.CompareTool.HelperClasses.Providers.CompareData;
 
 namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
 {
@@ -20,6 +21,7 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
 
         private LoadViewModel _viewModel;
         private ICompareTaskManager _manager;
+        private ICompareDataProvider _compareDataProvider;
 
         #endregion // Fields
 
@@ -33,6 +35,11 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
         {
             _viewModel = viewModel;
             _manager = new BufferedTaskManager(this);
+        }
+
+        public CompareEventHandler(LoadViewModel viewModel, ICompareDataProvider compareDataProvider) : this(viewModel)
+        {
+            _compareDataProvider = compareDataProvider;
         }
 
         #endregion // Constructor
@@ -60,7 +67,7 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
 
         public void SubmitStorage(IComparisonDataStorage storage)
         {
-            ApplicationViewModel.Instance.ComparisonStorage = storage;
+            _compareDataProvider.ComparisonStorage = storage;
             MessageBox.Show("Databases Compared");
         }
 
