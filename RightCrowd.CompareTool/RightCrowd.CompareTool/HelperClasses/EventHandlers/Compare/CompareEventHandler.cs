@@ -62,7 +62,8 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
 
         public void ReportProgress(int progress)
         {
-            _viewModel.CompareProgress = progress;
+            if(_viewModel != null)
+                _viewModel.CompareProgress = progress;
         }
 
         public void SubmitStorage(IComparisonDataStorage storage)
