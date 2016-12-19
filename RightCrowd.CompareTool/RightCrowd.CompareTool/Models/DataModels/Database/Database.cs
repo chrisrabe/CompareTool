@@ -7,7 +7,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Database
     /// <summary>
     /// This class is responsible for caching all the configuration data of a database.
     /// </summary>
-    internal class Database : ObservableObject, IDatabase
+    public class Database : ObservableObject, IDatabase
     {
         private ObservableCollection<IDataNode> _data;
         private string _directoryName;

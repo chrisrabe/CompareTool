@@ -7,7 +7,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
     /// <summary>
     /// Represents the data inside a configuration file.
     /// </summary>
-    internal class DataNode : ObservableObject, IDataNode
+    public class DataNode : ObservableObject, IDataNode
     {
         #region Fields
 
