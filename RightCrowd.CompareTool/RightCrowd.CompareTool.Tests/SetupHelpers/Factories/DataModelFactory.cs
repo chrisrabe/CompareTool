@@ -3,12 +3,12 @@ using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 using System.Collections.ObjectModel;
 
-namespace RightCrowd.CompareTool.Tests.TestSetupProviders
+namespace RightCrowd.CompareTool.Tests.SetupHelpers.Factories
 {
     /// <summary>
-    /// This class is responsible for setting up the compare tests.
+    /// This class is responsible for creating the data models.
     /// </summary>
-    internal class CompareTestSetup
+    internal class DataModelFactory
     {
         /// <summary>
         /// Constructs a database given the name and the data nodes.
