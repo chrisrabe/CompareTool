@@ -44,10 +44,7 @@ namespace RightCrowd.CompareTool.Tests.SetupHelpers.Factories
         internal IField CreateCompositeField(string fieldname, params IField[] children)
         {
             CompositeField composite = new CompositeField(fieldname);
-            foreach(IField field in children)
-            {
-                composite.Fields.Add(field);
-            }
+            children.ToList().ForEach(child => composite.Fields.Add(child));
             return composite;
         }
 
@@ -60,19 +57,6 @@ namespace RightCrowd.CompareTool.Tests.SetupHelpers.Factories
         internal IField CreateRawField(string fieldname, string value)
         {
             return new RawField(fieldname, value);
-        }
-
-        /// <summary>
-        /// Creates a child node for the composite field.
-        /// </summary>
-        /// <param name="childname"></param>
-        /// <param name="fields"></param>
-        /// <returns></returns>
-        internal IField CreateCompositeChild(string childname, params RawField[] fields)
-        {
-            CompositeField field = new CompositeField(childname);
-            fields.ToList().ForEach(child => field.Fields.Add(child));
-            return field;
         }
     }
 }

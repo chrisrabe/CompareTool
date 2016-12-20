@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using RightCrowd.CompareTool.Models.DataModels.Database;
+﻿using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
-using RightCrowd.CompareTool.Tests.SetupHelpers.Factories;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
+using RightCrowd.CompareTool.Tests.SetupHelpers.Factories;
+using System.Collections.ObjectModel;
+using System;
 using System.Linq;
-using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 
 namespace RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup
 {
@@ -13,124 +13,243 @@ namespace RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup
     /// </summary>
     internal class CompareTestSetup
     {
+        #region Fields
+
         private DataModelFactory _factory;
+
+        private int _DB1expectedDifferences;
+        private int _DB1expectedSimilarities;
+        private int _DB1expectedFieldDifference;
+        private int _DB1NumberOfFields;
+
+        private int _DB2expectedDifferences;
+        private int _DB2expectedSimilarities;
+        private int _DB2expectedFieldDifference;
+        private int _DB2NumberOfFields;
+
+        private int _numCompositeFields; // number of composite fields in each node
+        private int _numCompositeChild; // number of nested fields in each composite field
+
+        #endregion // Fields
+
+        #region Constructors
 
         public CompareTestSetup()
         {
             _factory = new DataModelFactory();
         }
 
-        /// <summary>
-        /// Creates a database storage containing two databases with similar fields.
-        /// </summary>
-        /// <param name="nestedComposite"></param>
-        /// <param name="putComposite"></param>
-        /// <returns></returns>
-        public IListDatabaseStorage CreateSimilarDatabases(bool putComposite, bool nestedComposite)
+        #endregion // Constructors
+
+        #region Database One Properties
+
+
+        public int DB1NumberOfFields
         {
-            IListDatabaseStorage storage = new TwoDatabaseStorage();
-            storage[0] = CreateMockDatabase(1, putComposite, nestedComposite);
-            storage[1] = CreateMockDatabase(1, putComposite, nestedComposite);
-            return storage;
+            get { return _DB1NumberOfFields; }
+            set
+            {
+                if (_DB1NumberOfFields != value)
+                    _DB1NumberOfFields = value;
+            }
         }
 
-        /// <summary>
-        /// Creates a database storage containing two different databases.
-        /// </summary>
-        /// <param name="putComposite"></param>
-        /// <param name="nestedComposite"></param>
-        /// <returns></returns>
-        public IListDatabaseStorage CreateDifferentDatabases(bool putComposite, bool nestedComposite)
+        public int DB1ExpectedFieldDifference
         {
-            IListDatabaseStorage storage = new TwoDatabaseStorage();
-            storage[0] = CreateMockDatabase(1, putComposite, nestedComposite);
-            storage[1] = CreateMockDatabase(2, putComposite, nestedComposite);
-            return storage;
+            get { return _DB1expectedFieldDifference; }
+            set
+            {
+                if (_DB1expectedFieldDifference != value)
+                    _DB1expectedFieldDifference = value;
+            }
         }
 
+        public int DB1ExpectedDifferences
+        {
+            get { return _DB1expectedDifferences; }
+            set
+            {
+                if (_DB1expectedDifferences != value)
+                    _DB1expectedDifferences = value;
+            }
+        }
+
+        public int DB1ExpectedSimilarities
+        {
+            get { return _DB1expectedSimilarities; }
+            set
+            {
+                if (_DB1expectedSimilarities != value)
+                    _DB1expectedSimilarities = value;
+            }
+        }
+
+        #endregion // Database One Properties
+
+        #region Database Two Properties
+
+        public int DB2NumberOfFields
+        {
+            get { return _DB2NumberOfFields; }
+            set
+            {
+                if (_DB2NumberOfFields != value)
+                    _DB2NumberOfFields = value;
+            }
+        }
+
+        public int DB2ExpectedFieldDifference
+        {
+            get { return _DB2expectedFieldDifference; }
+            set
+            {
+                if (_DB2expectedFieldDifference != value)
+                    _DB2expectedFieldDifference = value;
+            }
+        }
+        
+        public int DB2ExpectedDifferences
+        {
+            get { return _DB2expectedDifferences; }
+            set
+            {
+                if (_DB2expectedDifferences != value)
+                    _DB2expectedDifferences = value;
+            }
+        }
+
+        public int DB2ExpectedSimilarities
+        {
+            get { return _DB2expectedSimilarities; }
+            set
+            {
+                if (_DB2expectedSimilarities != value)
+                    _DB2expectedSimilarities = value;
+            }
+        }
+
+        #endregion // Database Two Properties
+
+        #region Properties
+
+        public int NumberOfCompositeFields
+        {
+            get { return _numCompositeFields; }
+            set
+            {
+                if (_numCompositeFields != value)
+                    _numCompositeFields = value;
+            }
+        }
+
+        public int NumberOfCompositeChild
+        {
+            get { return _numCompositeChild; }
+            set
+            {
+                if (_numCompositeChild != value)
+                    _numCompositeChild = value;
+            }
+        }
+
+        #endregion // Properties
+
+        #region Methods
+
+        // Create a list database storage which contains similar nodes - can be an arbitrary number of nodes in EACH database. Both databases doesn't need to have equal number of nodes.
+        // Create a list database storage which contains different nodes - can be an arbitrary number of nodes in EACH database. Both databases doesn't need to have equal number of nodes.
+
         /// <summary>
-        /// Creates a mock database one. It takes in a boolean parameter which
-        /// indicates whether or not you would put composite fields into the 
-        /// data node. It takes a database of 1 or 2.
+        /// Creates a single database with the specified number of nodes. The database index can either be 1 or 2.
+        /// It returns nothing if an invalid database index is passed.
         /// </summary>
-        /// <param name="putComposite"></param>
         /// <param name="databaseIndex"></param>
+        /// <param name="totalNodes"></param>
         /// <returns></returns>
-        private IDatabase CreateMockDatabase(int databaseIndex, bool putComposite, bool nestedComposite)
+        public IDatabase CreateDatabase(int databaseIndex, int totalNodes)
         {
             if (databaseIndex < 1 || databaseIndex > 2)
-                return null; // exit out the method if invalid database index
-            ObservableCollection<IDataNode> nodes = createMockDataNode(databaseIndex, putComposite, nestedComposite);
-            return _factory.CreateDatabase(databaseIndex == 1 ? "Mock DB1" : "Mock DB2", nodes);
-        }
+                return null;
 
-        private ObservableCollection<IDataNode> createMockDataNode(int databaseIndex, bool putComposite, bool nestedComposite)
-        {
-            ObservableCollection<IField> fields = createFields(databaseIndex, putComposite, nestedComposite, CreateRawFields(databaseIndex));
-            ObservableCollection<IDataNode> tmp = new ObservableCollection<IDataNode>();
-            tmp.Add(_factory.CreateNode("MockNode", fields));
-            return tmp;
-        }
-
-        /// <summary>
-        /// Creates fields. Raw fields are first added into the collection and
-        /// if the putComposite parameter is true, it inserts a composite field.
-        /// </summary>
-        /// <param name="databaseIndex"></param>
-        /// <param name="putComposite"></param>
-        /// <param name="rawFields"></param>
-        /// <returns></returns>
-        private ObservableCollection<IField> createFields(int databaseIndex, bool putComposite, bool nestedComposite, params RawField[] rawFields)
-        {
-            ObservableCollection<IField> tmp = new ObservableCollection<IField>();
-            rawFields.ToList().ForEach(rawField => tmp.Add(rawField));
-            if (putComposite)
-                tmp.Add(CreateCompositeFields(databaseIndex, nestedComposite));
-            return tmp;
-        }
-
-        /// <summary>
-        /// Creates raw fields depending on the database index. The database index
-        /// must be either 1 or 2. This method creates an array containing six elements.
-        /// It creates four fields which are independent (which means that they will be
-        /// similar regardless of the database index) and two fields which is different.
-        /// </summary>
-        /// <param name="databaseIndex"></param>
-        /// <returns></returns>
-        private RawField[] CreateRawFields(int databaseIndex)
-        {
-            RawField[] fields = new RawField[6];
-            fields[0] = (RawField)_factory.CreateRawField("RawField1", databaseIndex == 1 ? "Value1" : "Value2");
-            fields[1] = (RawField)_factory.CreateRawField("RawField2", databaseIndex == 1 ? "SomeName1" : "SomeName2");
-            for (int i = 2; i < fields.Length; i++)
+            ObservableCollection<IDataNode> nodes = new ObservableCollection<IDataNode>();
+            int numberOfDifferentNodes = 0;
+            for(int i = 0; i < totalNodes; i++)
             {
-                fields[i] = (RawField)_factory.CreateRawField(string.Format("RawField{0}", (i + 1)), "FieldValue");
+                nodes.Add(CreateDataNode(databaseIndex, string.Format("Node{0}", i), numberOfDifferentNodes < (databaseIndex==1 ? _DB1expectedDifferences : _DB2expectedDifferences)));
+                numberOfDifferentNodes++;
             }
-            return fields;
+            return _factory.CreateDatabase(databaseIndex == 1 ? "Database 1" : "Database 2", nodes);
         }
 
         /// <summary>
-        /// Creates a composite field depending on the database index.
-        /// The database index must be either 1 or 2. 
-        /// If the nestedComposite parameter is set to true, it creates
-        /// a root composite field with two child nodes.
+        /// Creates a data node which has the given name. The boolean 
+        /// parameter indicates whether the fields should be different or not.
         /// </summary>
         /// <param name="databaseIndex"></param>
+        /// <param name="nodeName"></param>
+        /// <param name="different"></param>
         /// <returns></returns>
-        private IField CreateCompositeFields(int databaseIndex, bool nestedComposite)
+        private IDataNode CreateDataNode(int databaseIndex, string nodeName, bool different)
         {
-            CompositeField root = new CompositeField(nestedComposite ? "CompositeFields" : "CompositeField");
-            if (!nestedComposite)
-                CreateRawFields(databaseIndex).ToList().ForEach(rawField => root.Fields.Add(rawField));
+            ObservableCollection<IField> fields = new ObservableCollection<IField>();
+            int numDifferent = 0;
+            // Create Raw Fields
+            for (int i = 0; i < (databaseIndex == 1 ? _DB1NumberOfFields : _DB2NumberOfFields); i++)
+            {
+                fields.Add(CreateRawField(databaseIndex, string.Format("RawField{0}", i), numDifferent < (databaseIndex == 1 ? _DB1expectedFieldDifference : _DB2expectedFieldDifference)));
+                numDifferent++;
+            }
+            // Create Composite Fields
+            for(int i = 0; i < _numCompositeFields; i++)
+            {
+                fields.Add(CreateCompositeField(databaseIndex, string.Format("Composite{0}", i), numDifferent < (databaseIndex == 1 ? _DB1expectedDifferences : _DB2expectedDifferences));
+                numDifferent++;
+            }
+            return _factory.CreateNode(nodeName, fields);
+        }
+
+        /// <summary>
+        /// Creates a raw field.
+        /// </summary>
+        /// <param name="databaseIndex"></param>
+        /// <param name="fieldname"></param>
+        /// <param name="different"></param>
+        /// <returns></returns>
+        private IField CreateRawField(int databaseIndex, string fieldname, bool different)
+        {
+            return _factory.CreateRawField(fieldname, databaseIndex == 1 && different ? "Value 1" : "Value2");
+        }
+
+        /// <summary>
+        /// Creates a composite field.
+        /// </summary>
+        /// <param name="databaseIndex"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="different"></param>
+        /// <returns></returns>
+        private IField CreateCompositeField(int databaseIndex, string fieldName, bool different)
+        {
+            CompositeField root = (CompositeField)_factory.CreateCompositeField(fieldName);
+            IField[] fields = new IField[5];
+            // Create raw fields
+            for(int i = 0; i < fields.Length; i++)
+            {
+                fields[i] = CreateRawField(databaseIndex, String.Format("RawField{0}", i), different);
+            }
+            if (_numCompositeChild == 0)
+            {
+                fields.ToList().ForEach(field => root.Fields.Add(field));
+            }
             else
             {
-                for(int i = 0; i < 2; i++)
+                for(int i = 0; i < _numCompositeChild; i++)
                 {
-                    IField child = _factory.CreateCompositeChild(string.Format("Composite-{0}", i), CreateRawFields(databaseIndex));
-                    root.Fields.Add(child);
+                    root.Fields.Add(_factory.CreateCompositeField(String.Format("Child{0}", i), fields));
                 }
             }
             return root;
         }
+
+        #endregion // Methods
     }
 }
