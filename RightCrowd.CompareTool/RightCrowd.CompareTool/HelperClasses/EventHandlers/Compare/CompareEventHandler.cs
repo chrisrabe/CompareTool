@@ -27,18 +27,10 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
 
         #region Constructor
 
-        /// <summary>
-        /// Creates and instance of a compare event handler
-        /// </summary>
-        /// <param name="viewModel"></param>
-        public CompareEventHandler(LoadViewModel viewModel)
+        public CompareEventHandler(LoadViewModel viewModel, ICompareDataProvider compareDataProvider)
         {
             _viewModel = viewModel;
             _manager = new BufferedTaskManager(this);
-        }
-
-        public CompareEventHandler(LoadViewModel viewModel, ICompareDataProvider compareDataProvider) : this(viewModel)
-        {
             _compareDataProvider = compareDataProvider;
         }
 

@@ -4,6 +4,7 @@ using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Tests.SetupHelpers.Factories;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 using System.Linq;
+using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 
 namespace RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup
 {
@@ -20,6 +21,34 @@ namespace RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup
         }
 
         /// <summary>
+        /// Creates a database storage containing two databases with similar fields.
+        /// </summary>
+        /// <param name="nestedComposite"></param>
+        /// <param name="putComposite"></param>
+        /// <returns></returns>
+        public IListDatabaseStorage CreateSimilarDatabases(bool putComposite, bool nestedComposite)
+        {
+            IListDatabaseStorage storage = new TwoDatabaseStorage();
+            storage[0] = CreateMockDatabase(1, putComposite, nestedComposite);
+            storage[1] = CreateMockDatabase(1, putComposite, nestedComposite);
+            return storage;
+        }
+
+        /// <summary>
+        /// Creates a database storage containing two different databases.
+        /// </summary>
+        /// <param name="putComposite"></param>
+        /// <param name="nestedComposite"></param>
+        /// <returns></returns>
+        public IListDatabaseStorage CreateDifferentDatabases(bool putComposite, bool nestedComposite)
+        {
+            IListDatabaseStorage storage = new TwoDatabaseStorage();
+            storage[0] = CreateMockDatabase(1, putComposite, nestedComposite);
+            storage[1] = CreateMockDatabase(2, putComposite, nestedComposite);
+            return storage;
+        }
+
+        /// <summary>
         /// Creates a mock database one. It takes in a boolean parameter which
         /// indicates whether or not you would put composite fields into the 
         /// data node. It takes a database of 1 or 2.
@@ -27,7 +56,7 @@ namespace RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup
         /// <param name="putComposite"></param>
         /// <param name="databaseIndex"></param>
         /// <returns></returns>
-        public IDatabase CreateMockDatabase(int databaseIndex, bool putComposite, bool nestedComposite)
+        private IDatabase CreateMockDatabase(int databaseIndex, bool putComposite, bool nestedComposite)
         {
             if (databaseIndex < 1 || databaseIndex > 2)
                 return null; // exit out the method if invalid database index
@@ -97,7 +126,7 @@ namespace RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup
             {
                 for(int i = 0; i < 2; i++)
                 {
-                    IField child = _factory.CreateCompositeChild("Composite", CreateRawFields(databaseIndex));
+                    IField child = _factory.CreateCompositeChild(string.Format("Composite-{0}", i), CreateRawFields(databaseIndex));
                     root.Fields.Add(child);
                 }
             }
