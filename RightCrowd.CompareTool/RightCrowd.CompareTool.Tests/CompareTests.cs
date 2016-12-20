@@ -236,6 +236,7 @@ namespace RightCrowd.CompareTool.Tests
                 Assert.AreEqual(expectedSimilarities, data.Similarities.Databases[1].Data.Count, "Database two shouldn't have similarities");
             }
         }
+
         #endregion // Tests
     }
 }
