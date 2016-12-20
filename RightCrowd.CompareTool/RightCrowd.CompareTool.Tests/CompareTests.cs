@@ -49,7 +49,7 @@ namespace RightCrowd.CompareTool.Tests
         /// raw fields as their values. The two databases contain the same fields.
         /// </summary>
         [TestMethod]
-        public void Test01_CompareSimilarDatabase_NoComposite()
+        public void Test01_CompareSimilarDatabase_NoComposite_SingleNode()
         {
             ICompareDataProvider provider = new MockCompareDataProvider();
             ICompareEventHandler handler = CreateEventHandler(provider);
@@ -80,7 +80,7 @@ namespace RightCrowd.CompareTool.Tests
         /// field containing raw values only. The two databases are the same.
         /// </summary>
         [TestMethod]
-        public void Test02_CompareSimilarDatabase_Composite_NoNested()
+        public void Test02_CompareSimilarDatabase_Composite_NoNested_SingleNode()
         {
             ICompareDataProvider provider = new MockCompareDataProvider();
             ICompareEventHandler handler = CreateEventHandler(provider);
@@ -113,7 +113,7 @@ namespace RightCrowd.CompareTool.Tests
         /// fields, some modification are also made to the children of the composite field.
         /// </summary>
         [TestMethod]
-        public void Test03_CompareSimilarDatabase_Composite_Nested()
+        public void Test03_CompareSimilarDatabase_Composite_Nested_SingleNode()
         {
             ICompareDataProvider provider = new MockCompareDataProvider();
             ICompareEventHandler handler = CreateEventHandler(provider);
@@ -139,6 +139,103 @@ namespace RightCrowd.CompareTool.Tests
             }
         }
 
+        /// <summary>
+        /// Checks whether it can compare two databases which contain nodes with only
+        /// raw fields as their values. The two databases are different from each other
+        /// because both nodes contain two fields which are different. Each database contain
+        /// a single node.
+        /// </summary>
+        [TestMethod]
+        public void Test04_CompareDifferentDatabases_NoComposite_SingleNode()
+        {
+            ICompareDataProvider provider = new MockCompareDataProvider();
+            ICompareEventHandler handler = CreateEventHandler(provider);
+            handler.Compare(_setup.CreateDifferentDatabases(false, false));
+
+            while (provider.ComparisonStorage == null) // wait for handler to finish
+                Task.Delay(25);
+
+            Assert.IsNotNull(provider.ComparisonStorage, "Comparison data storage is null");
+
+            if(provider.ComparisonStorage != null)
+            {
+                int expectedDifferences = 1;
+                int expectedSimilarities = 0;
+
+                IComparisonData data = provider.ComparisonStorage.ComparisonData.First(); // Get the only compare data
+                // Check if all nodes are different in database one
+                Assert.AreEqual(expectedDifferences, data.Difference.Databases[0].Data.Count, "Database one should have differences");
+                Assert.AreEqual(expectedSimilarities, data.Similarities.Databases[0].Data.Count, "Database one shouldn't have similarities");
+                // Check if all nodes similar in database two
+                Assert.AreEqual(expectedDifferences, data.Difference.Databases[1].Data.Count, "Database two should have differences");
+                Assert.AreEqual(expectedSimilarities, data.Similarities.Databases[1].Data.Count, "Database two shouldn't have similarities");
+            }
+        }
+
+        /// <summary>
+        /// Checks whether it can compare two databases which contain nodes with raw fields
+        /// and a composite field containing only raw fields. The two databases are different
+        /// from each other. Each database contain a single node.
+        /// </summary>
+        [TestMethod]
+        public void Test05_CompareDifferentDatabases_Composite_NoNested_SingleNode()
+        {
+            ICompareDataProvider provider = new MockCompareDataProvider();
+            ICompareEventHandler handler = CreateEventHandler(provider);
+            handler.Compare(_setup.CreateDifferentDatabases(true, false));
+
+            while (provider.ComparisonStorage == null) // wait for handler to finish
+                Task.Delay(25);
+
+            Assert.IsNotNull(provider.ComparisonStorage, "Comparison data storage is null");
+
+            if (provider.ComparisonStorage != null)
+            {
+                int expectedDifferences = 1;
+                int expectedSimilarities = 0;
+
+                IComparisonData data = provider.ComparisonStorage.ComparisonData.First(); // Get the only compare data
+                // Check if all nodes are different in database one
+                Assert.AreEqual(expectedDifferences, data.Difference.Databases[0].Data.Count, "Database one should have differences");
+                Assert.AreEqual(expectedSimilarities, data.Similarities.Databases[0].Data.Count, "Database one shouldn't have similarities");
+                // Check if all nodes similar in database two
+                Assert.AreEqual(expectedDifferences, data.Difference.Databases[1].Data.Count, "Database two should have differences");
+                Assert.AreEqual(expectedSimilarities, data.Similarities.Databases[1].Data.Count, "Database two shouldn't have similarities");
+            }
+        }
+
+        /// <summary>
+        /// Checks whether it can compare two databases which contain nodes with
+        /// raw fields and a composite field containing a collection of composite
+        /// fields. The two databases are different from each other. Each database
+        /// contain a single node.
+        /// </summary>
+        [TestMethod]
+        public void Test06_CompareDifferentDatabases_Composite_Nested_SingleNode()
+        {
+            ICompareDataProvider provider = new MockCompareDataProvider();
+            ICompareEventHandler handler = CreateEventHandler(provider);
+            handler.Compare(_setup.CreateDifferentDatabases(true, false));
+
+            while (provider.ComparisonStorage == null) // wait for handler to finish
+                Task.Delay(25);
+
+            Assert.IsNotNull(provider.ComparisonStorage, "Comparison data storage is null");
+
+            if (provider.ComparisonStorage != null)
+            {
+                int expectedDifferences = 1;
+                int expectedSimilarities = 0;
+
+                IComparisonData data = provider.ComparisonStorage.ComparisonData.First(); // Get the only compare data
+                // Check if all nodes are different in database one
+                Assert.AreEqual(expectedDifferences, data.Difference.Databases[0].Data.Count, "Database one should have differences");
+                Assert.AreEqual(expectedSimilarities, data.Similarities.Databases[0].Data.Count, "Database one shouldn't have similarities");
+                // Check if all nodes similar in database two
+                Assert.AreEqual(expectedDifferences, data.Difference.Databases[1].Data.Count, "Database two should have differences");
+                Assert.AreEqual(expectedSimilarities, data.Similarities.Databases[1].Data.Count, "Database two shouldn't have similarities");
+            }
+        }
         #endregion // Tests
     }
 }
