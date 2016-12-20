@@ -6,5 +6,7 @@ This tool compares two folders containing XML files and then displays all the di
 
 ### Some Important Things...
 - XML files should have one root element and no attributes in any child elements
-- XML file name should follow a syntax of ```Type.FileName.xml```
-- The accuracy of this program is dependent upon how easy you can distinguish a field from one another. Bugs exist if two or more fields have the same name.
+- Bugs exist if two or more fields/nodes have the same name. The accuracy of this software depend upon how easily you can distinguish one element to another via their element name. To avoid this, make sure that:
+      * All your files follow the syntax ```Type.NodeName.xml```
+      * If more than one field is the same type, make sure the element name is parsed as ```Type.FieldIdentifier```
+      * The NodeName and FieldIdentifier makes it unique from the rest of the fields.
