@@ -161,7 +161,7 @@ namespace RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup
         public IListDatabaseStorage CreateSimilarDatabases(int totalNodesInDB1, int totalNodesInDB2)
         {
             // Set up validation checks
-            if (!validTotalNodes(totalNodesInDB1, totalNodesInDB2)) // check if difference is less than total nodes
+            if (!validTotalNodes(totalNodesInDB1, totalNodesInDB2))
                 throw new Exception("Expected difference is less than total number of nodes. Invalid set up.");
             if (DB1ExpectedDifferences != 0 || DB2ExpectedDifferences != 0)
                 throw new Exception("Difference should be set to zero when creating similar database");
@@ -178,7 +178,21 @@ namespace RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup
             return storage;
         }
 
-        // Create a list database storage which contains different nodes - can be an arbitrary number of nodes in EACH database. Both databases doesn't need to have equal number of nodes.
+        public IListDatabaseStorage CreateDifferentDatabases(int totalNodesInDB1, int totalNodesInDB2)
+        {
+            // Set up validation checks
+            if (!validTotalNodes(totalNodesInDB1, totalNodesInDB2))
+                throw new Exception("Expected difference is less than total number of nodes. Invalid set up.");
+            if (DB1ExpectedFieldDifference > (DB1NumberOfRawFields + NumberOfCompositeFields))
+                throw new Exception("Expected field difference is bigger than total fields inside each node in DB1.");
+            if (DB2ExpectedFieldDifference > (DB2NumberOfRawFields + NumberOfCompositeFields))
+                throw new Exception("Expected field difference is bigger than total fields inside each node in DB2.");
+
+            IListDatabaseStorage storage = new TwoDatabaseStorage();
+            storage[0] = CreateDatabase(1, totalNodesInDB1);
+            storage[1] = CreateDatabase(2, totalNodesInDB2);
+            return storage;
+        }
 
         /// <summary>
         /// Creates a single database with the specified number of nodes. The database index can either be 1 or 2.
