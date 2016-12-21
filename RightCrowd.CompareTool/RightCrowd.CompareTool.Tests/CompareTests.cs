@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RightCrowd.CompareTool.HelperClasses.Providers.CompareData;
-using RightCrowd.CompareTool.Models.Comparison.DataStorage;
-using RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup;
-using RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare;
-using System.Linq;
-using RightCrowd.CompareTool.Models.Comparison.Data;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RightCrowd.CompareTool.HelperClasses.Providers.CompareData;
+using RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare;
+using RightCrowd.CompareTool.Models.Comparison.Data;
+using RightCrowd.CompareTool.Models.Comparison.DataStorage;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
+using RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup;
 
 namespace RightCrowd.CompareTool.Tests
 {
@@ -41,7 +41,7 @@ namespace RightCrowd.CompareTool.Tests
 
         #endregion // Test Setup
 
-        #region Tests
+        #region Single Node Tests
 
         [TestMethod]
         public void Test01_CompareSimilarDatabase_NoComposite_SingleNode()
@@ -262,6 +262,61 @@ namespace RightCrowd.CompareTool.Tests
                 Assert.AreEqual(0, data.Similarities.Databases[1].Data.Count);
             }
         }
-        #endregion // Tests
+
+        #endregion // Single Node Tests
+
+        #region Multiple Nodes Tests
+
+        [TestMethod]
+        public void Test07_CompareSimilarDatabases_NoComposite_MultiNode()
+        {
+            int database1Size = 10;
+            int database2Size = 10;
+            // Set up the test
+            CompareTestSetup setup = new CompareTestSetup();
+            setup.DB1ExpectedDifferences = 0;
+            setup.DB1ExpectedFieldDifference = 0;
+            setup.DB1NumberOfRawFields = 5;
+            setup.DB2ExpectedDifferences = 0;
+            setup.DB2ExpectedFieldDifference = 0;
+            setup.DB2NumberOfRawFields = 5;
+            // Create the things needed for the test
+            IListDatabaseStorage storage = setup.CreateSimilarDatabases(database1Size, database2Size);
+            ICompareDataProvider provider = new MockCompareDataProvider();
+            ICompareEventHandler handler = CreateEventHandler(provider);
+            handler.Compare(storage);
+
+            // wait for handler to finish
+            while (provider.ComparisonStorage == null)
+                Task.Delay(25);
+
+            Assert.IsNotNull(provider.ComparisonStorage, "Compare Results must not be null");
+
+            if (provider.ComparisonStorage != null)
+            {
+                int numDifferenceDB1 = 0;
+                int numDifferenceDB2 = 0;
+                int numSimilaritiesDB1 = 0;
+                int numSimilaritiesDB2 = 0;
+                // Count how many nodes are different and similar for each data
+                foreach(IComparisonData data in provider.ComparisonStorage.ComparisonData)
+                {
+                    IListDatabaseStorage difference = data.Difference;
+                    IListDatabaseStorage similarities = data.Similarities;
+                    numDifferenceDB1 += difference.Databases[0].Data.Count;
+                    numSimilaritiesDB1 += similarities.Databases[0].Data.Count;
+                    numDifferenceDB2 += difference.Databases[1].Data.Count;
+                    numSimilaritiesDB2 += similarities.Databases[1].Data.Count;
+                }
+                // Check differences and similarities in DB1
+                Assert.AreEqual(setup.DB1ExpectedDifferences, numDifferenceDB1);
+                Assert.AreEqual(database1Size, numSimilaritiesDB1);
+                // Check differences and similarities in DB2
+                Assert.AreEqual(setup.DB2ExpectedDifferences, numDifferenceDB2);
+                Assert.AreEqual(database2Size, numSimilaritiesDB2);
+            }
+        }
+
+        #endregion // Multiple Nodes Test
     }
 }

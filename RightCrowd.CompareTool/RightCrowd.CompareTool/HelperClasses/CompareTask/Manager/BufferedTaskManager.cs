@@ -8,6 +8,7 @@ using RightCrowd.CompareTool.Models.Comparison.Data;
 using RightCrowd.CompareTool.Models.Comparison.DataStorage;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.Map;
+using System.Runtime.CompilerServices;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
 {
@@ -69,6 +70,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Manager
         /// multiple threads submitting at the same time.
         /// </summary>
         /// <param name="data"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SubmitData(IComparisonData data)
         {
             _storage.ComparisonData.Add(data);
