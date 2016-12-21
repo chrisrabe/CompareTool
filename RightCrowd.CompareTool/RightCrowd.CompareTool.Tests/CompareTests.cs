@@ -472,6 +472,110 @@ namespace RightCrowd.CompareTool.Tests
                 Assert.AreEqual(0, numSimilaritiesDB2);
             }
         }
+
+        [TestMethod]
+        public void Test11_CompareDifferentDatabases_Composite_NoNested_MultiNode()
+        {
+            int database1Size = 10;
+            int database2Size = 10;
+            // Set up the test
+            CompareTestSetup setup = new CompareTestSetup();
+            setup.DB1ExpectedDifferences = database1Size;
+            setup.DB1ExpectedFieldDifference = 2;
+            setup.DB1NumberOfRawFields = 5;
+            setup.DB2ExpectedDifferences = database2Size;
+            setup.DB2ExpectedFieldDifference = 2;
+            setup.DB2NumberOfRawFields = 5;
+            setup.NumberOfCompositeFields = 2;
+            setup.NumberOfCompositeChild = 0;
+            // Create the things needed for the test
+            IListDatabaseStorage storage = setup.CreateDifferentDatabases(database1Size, database2Size);
+            ICompareDataProvider provider = new MockCompareDataProvider();
+            ICompareEventHandler handler = CreateEventHandler(provider);
+            handler.Compare(storage);
+
+            // wait for handler to finish
+            while (provider.ComparisonStorage == null)
+                Task.Delay(25);
+
+            Assert.IsNotNull(provider.ComparisonStorage, "Compare Results must not be null");
+
+            if (provider.ComparisonStorage != null)
+            {
+                int numDifferenceDB1 = 0;
+                int numDifferenceDB2 = 0;
+                int numSimilaritiesDB1 = 0;
+                int numSimilaritiesDB2 = 0;
+                // Count how many nodes are different and similar for each data
+                foreach (IComparisonData data in provider.ComparisonStorage.ComparisonData)
+                {
+                    IListDatabaseStorage difference = data.Difference;
+                    IListDatabaseStorage similarities = data.Similarities;
+                    numDifferenceDB1 += difference.Databases[0].Data.Count;
+                    numSimilaritiesDB1 += similarities.Databases[0].Data.Count;
+                    numDifferenceDB2 += difference.Databases[1].Data.Count;
+                    numSimilaritiesDB2 += similarities.Databases[1].Data.Count;
+                }
+                // Check differences and similarities in DB1
+                Assert.AreEqual(setup.DB1ExpectedDifferences, numDifferenceDB1);
+                Assert.AreEqual(0, numSimilaritiesDB1);
+                // Check differences and similarities in DB2
+                Assert.AreEqual(setup.DB2ExpectedDifferences, numDifferenceDB2);
+                Assert.AreEqual(0, numSimilaritiesDB2);
+            }
+        }
+
+        [TestMethod]
+        public void Test12_CompareDifferentDatabases_Composite_Nested_MultiNode()
+        {
+            int database1Size = 10;
+            int database2Size = 10;
+            // Set up the test
+            CompareTestSetup setup = new CompareTestSetup();
+            setup.DB1ExpectedDifferences = database1Size;
+            setup.DB1ExpectedFieldDifference = 2;
+            setup.DB1NumberOfRawFields = 5;
+            setup.DB2ExpectedDifferences = database2Size;
+            setup.DB2ExpectedFieldDifference = 2;
+            setup.DB2NumberOfRawFields = 5;
+            setup.NumberOfCompositeFields = 2;
+            setup.NumberOfCompositeChild = 2;
+            // Create the things needed for the test
+            IListDatabaseStorage storage = setup.CreateDifferentDatabases(database1Size, database2Size);
+            ICompareDataProvider provider = new MockCompareDataProvider();
+            ICompareEventHandler handler = CreateEventHandler(provider);
+            handler.Compare(storage);
+
+            // wait for handler to finish
+            while (provider.ComparisonStorage == null)
+                Task.Delay(25);
+
+            Assert.IsNotNull(provider.ComparisonStorage, "Compare Results must not be null");
+
+            if (provider.ComparisonStorage != null)
+            {
+                int numDifferenceDB1 = 0;
+                int numDifferenceDB2 = 0;
+                int numSimilaritiesDB1 = 0;
+                int numSimilaritiesDB2 = 0;
+                // Count how many nodes are different and similar for each data
+                foreach (IComparisonData data in provider.ComparisonStorage.ComparisonData)
+                {
+                    IListDatabaseStorage difference = data.Difference;
+                    IListDatabaseStorage similarities = data.Similarities;
+                    numDifferenceDB1 += difference.Databases[0].Data.Count;
+                    numSimilaritiesDB1 += similarities.Databases[0].Data.Count;
+                    numDifferenceDB2 += difference.Databases[1].Data.Count;
+                    numSimilaritiesDB2 += similarities.Databases[1].Data.Count;
+                }
+                // Check differences and similarities in DB1
+                Assert.AreEqual(setup.DB1ExpectedDifferences, numDifferenceDB1);
+                Assert.AreEqual(0, numSimilaritiesDB1);
+                // Check differences and similarities in DB2
+                Assert.AreEqual(setup.DB2ExpectedDifferences, numDifferenceDB2);
+                Assert.AreEqual(0, numSimilaritiesDB2);
+            }
+        }
         #endregion // Multiple Nodes Test
     }
 }
