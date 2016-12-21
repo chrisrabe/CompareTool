@@ -7,6 +7,8 @@ using RightCrowd.CompareTool.Models.Comparison.Data;
 using RightCrowd.CompareTool.Models.Comparison.DataStorage;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 using RightCrowd.CompareTool.Tests.SetupHelpers.TestSetup;
+using RightCrowd.CompareTool.Models.DataModels.DataNode;
+using RightCrowd.CompareTool.Models.DataModels.Fields;
 
 namespace RightCrowd.CompareTool.Tests
 {
@@ -32,14 +34,33 @@ namespace RightCrowd.CompareTool.Tests
 
         #endregion // Mock Compare Data Provider
 
-        #region Test Setup
+        #region Test Helpers
+
+        /// <summary>
+        /// Counts the number of different fields inside a data node.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private int CountDifferent(IDataNode data)
+        {
+            if (data == null)
+                return 0;
+
+            int differentFields = 0;
+            foreach(IField field in data.Fields)
+            {
+                if (field.Different)
+                    differentFields++;
+            }
+            return differentFields;
+        }
 
         private ICompareEventHandler CreateEventHandler(ICompareDataProvider dataProvider)
         {
             return new CompareEventHandler(null, dataProvider);
         }
 
-        #endregion // Test Setup
+        #endregion // Test Helpers
 
         #region Single Node Tests
 
@@ -180,6 +201,11 @@ namespace RightCrowd.CompareTool.Tests
             if (provider.ComparisonStorage != null)
             {
                 IComparisonData data = provider.ComparisonStorage.ComparisonData.First();
+                // Count the field differences
+                int fieldDiff1 = CountDifferent(data.Difference.Databases[0].Data.First());
+                int fieldDiff2 = CountDifferent(data.Difference.Databases[1].Data.First());
+                Assert.AreEqual(setup.DB1ExpectedFieldDifference, fieldDiff1);
+                Assert.AreEqual(setup.DB2ExpectedFieldDifference, fieldDiff2);
                 // Test if there are no differences in DB1
                 Assert.AreEqual(setup.DB1ExpectedDifferences, data.Difference.Databases[0].Data.Count);
                 Assert.AreEqual(0, data.Similarities.Databases[0].Data.Count);
@@ -217,6 +243,11 @@ namespace RightCrowd.CompareTool.Tests
             if (provider.ComparisonStorage != null)
             {
                 IComparisonData data = provider.ComparisonStorage.ComparisonData.First();
+                // Count the field differences
+                int fieldDiff1 = CountDifferent(data.Difference.Databases[0].Data.First());
+                int fieldDiff2 = CountDifferent(data.Difference.Databases[1].Data.First());
+                Assert.AreEqual(setup.DB1ExpectedFieldDifference, fieldDiff1);
+                Assert.AreEqual(setup.DB2ExpectedFieldDifference, fieldDiff2);
                 // Test if there are no differences in DB1
                 Assert.AreEqual(setup.DB1ExpectedDifferences, data.Difference.Databases[0].Data.Count);
                 Assert.AreEqual(0, data.Similarities.Databases[0].Data.Count);
@@ -254,6 +285,11 @@ namespace RightCrowd.CompareTool.Tests
             if (provider.ComparisonStorage != null)
             {
                 IComparisonData data = provider.ComparisonStorage.ComparisonData.First();
+                // Count the field differences
+                int fieldDiff1 = CountDifferent(data.Difference.Databases[0].Data.First());
+                int fieldDiff2 = CountDifferent(data.Difference.Databases[1].Data.First());
+                Assert.AreEqual(setup.DB1ExpectedFieldDifference, fieldDiff1);
+                Assert.AreEqual(setup.DB2ExpectedFieldDifference, fieldDiff2);
                 // Test if there are no differences in DB1
                 Assert.AreEqual(setup.DB1ExpectedDifferences, data.Difference.Databases[0].Data.Count);
                 Assert.AreEqual(0, data.Similarities.Databases[0].Data.Count);
@@ -457,6 +493,11 @@ namespace RightCrowd.CompareTool.Tests
                 // Count how many nodes are different and similar for each data
                 foreach (IComparisonData data in provider.ComparisonStorage.ComparisonData)
                 {
+                    // Count the field differences
+                    int fieldDiff1 = CountDifferent(data.Difference.Databases[0].Data.First());
+                    int fieldDiff2 = CountDifferent(data.Difference.Databases[1].Data.First());
+                    Assert.AreEqual(setup.DB1ExpectedFieldDifference, fieldDiff1);
+                    Assert.AreEqual(setup.DB2ExpectedFieldDifference, fieldDiff2);
                     IListDatabaseStorage difference = data.Difference;
                     IListDatabaseStorage similarities = data.Similarities;
                     numDifferenceDB1 += difference.Databases[0].Data.Count;
@@ -509,6 +550,11 @@ namespace RightCrowd.CompareTool.Tests
                 // Count how many nodes are different and similar for each data
                 foreach (IComparisonData data in provider.ComparisonStorage.ComparisonData)
                 {
+                    // Count the field differences
+                    int fieldDiff1 = CountDifferent(data.Difference.Databases[0].Data.First());
+                    int fieldDiff2 = CountDifferent(data.Difference.Databases[1].Data.First());
+                    Assert.AreEqual(setup.DB1ExpectedFieldDifference, fieldDiff1);
+                    Assert.AreEqual(setup.DB2ExpectedFieldDifference, fieldDiff2);
                     IListDatabaseStorage difference = data.Difference;
                     IListDatabaseStorage similarities = data.Similarities;
                     numDifferenceDB1 += difference.Databases[0].Data.Count;
@@ -561,6 +607,11 @@ namespace RightCrowd.CompareTool.Tests
                 // Count how many nodes are different and similar for each data
                 foreach (IComparisonData data in provider.ComparisonStorage.ComparisonData)
                 {
+                    // Count the field differences
+                    int fieldDiff1 = CountDifferent(data.Difference.Databases[0].Data.First());
+                    int fieldDiff2 = CountDifferent(data.Difference.Databases[1].Data.First());
+                    Assert.AreEqual(setup.DB1ExpectedFieldDifference, fieldDiff1);
+                    Assert.AreEqual(setup.DB2ExpectedFieldDifference, fieldDiff2);
                     IListDatabaseStorage difference = data.Difference;
                     IListDatabaseStorage similarities = data.Similarities;
                     numDifferenceDB1 += difference.Databases[0].Data.Count;
