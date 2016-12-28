@@ -11,8 +11,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers
     {
         #region Fields
 
-        private IListDatabaseStorageBuilder _differences;
-        private IListDatabaseStorageBuilder _similarities;
+        private readonly IListDatabaseStorageBuilder _differences;
+        private readonly IListDatabaseStorageBuilder _similarities;
 
         #endregion // Fields
 

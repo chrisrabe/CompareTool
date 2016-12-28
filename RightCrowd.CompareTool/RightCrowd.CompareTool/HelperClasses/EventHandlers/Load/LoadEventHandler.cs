@@ -52,6 +52,8 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
         /// <returns></returns>
         public void LoadDirectory(string directoryPath, int databaseIndex)
         {
+            //Note: use Task.Run or Async/Await
+
             _databaseIndex = databaseIndex;
             // Initialise properties of the view model
             UpdateProgress(0);
@@ -103,11 +105,12 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
             {
                 if (file.EndsWith(".xml"))
                 {
-                    IDataNode node = xmlReader.ReadXMLFile(file);
-                    if (node != null)
+                    var nodes = xmlReader.ReadXMLFile(file);
+                    if (nodes != null)
                     {
                         xmlProcessed++;
-                        _database.Data.Add(node);
+                        foreach(var node in nodes)
+                            _database.Data.Add(node);
                     }
                 }
                 numProcessed++;

@@ -14,6 +14,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
     /// </summary>
     public class ObjectFinder : IObjectFinder
     {
+
         /// <summary>
         /// Gets the other field with the same name as the field parameter
         /// from the composite field. Returns null if no fields have the 

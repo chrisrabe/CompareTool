@@ -1,4 +1,5 @@
 ﻿using RightCrowd.CompareTool.Models.DataModels.DataNode;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
@@ -14,6 +15,6 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
         /// <param name="doc"></param>
         /// <param name="filename"></param>
         /// <returns></returns>
-        IDataNode ReadXMLFile(string filename);
+        IEnumerable<IDataNode> ReadXMLFile(string filename);
     }
 }
