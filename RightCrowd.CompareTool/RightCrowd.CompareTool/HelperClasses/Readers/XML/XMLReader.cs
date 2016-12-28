@@ -1,10 +1,10 @@
-﻿using System.Xml.Linq;
-using RightCrowd.CompareTool.Models.DataModels.DataNode;
+﻿using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
-using System.Linq;
-using System.IO;
-using System.Collections.Generic;
+using RightCrowd.CompareTool.Models.DataModels.DataNode;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {
@@ -37,20 +37,13 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             var mapping = _metaData.KeyFields.FirstOrDefault(x => x.DatabaseName.Equals(root.Name.ToString()));
             if (mapping != null)
             {
+                // Need to check if node has already been created
+                // Or change how the object finder works (use ToString())
                 return root.Elements().Select(x => new DataNode($"{x.Name}.{x.Element(mapping.KeyElementName).Value}", new ObservableCollection<IField>(x.Elements().Select(Parse))));
             }
             else
             {
-
-                // Iterate through the chilren of the root node.
-                foreach (XElement element in root.Elements())
-                {
-                    IField field = Parse(element);
-                    if (field != null) // discard invalid fields
-                        fields.Add(field);
-                }
-
-                return new List<IDataNode> { new DataNode(nodeName, fields) };
+                return root.Elements().Select(x => new DataNode(nodeName, new ObservableCollection<IField>(x.Elements().Select(Parse))));
             }
 
         }

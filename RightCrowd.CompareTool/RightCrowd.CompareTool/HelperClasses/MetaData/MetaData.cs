@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace RightCrowd.CompareTool.HelperClasses
 {
@@ -12,7 +8,7 @@ namespace RightCrowd.CompareTool.HelperClasses
         {
             KeyFields = new List<DatabaseKeyField>
             {
-                new DatabaseKeyField("AccessLevelPermissions", "AccessLevel")
+                new DatabaseKeyField("AccessLevelPermissions", "AccessLevel") // Need to read an XML file
             };
         }  
 
