@@ -106,7 +106,9 @@
     <Compile Include="HelperClasses\EventHandlers\Compare\ICompareEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
-    <Compile Include="HelperClasses\MetaData\MetaData.cs" />
+    <Compile Include="HelperClasses\MetaData\IMetaData.cs" />
+    <Compile Include="HelperClasses\MetaData\KeyField\IKeyField.cs" />
+    <Compile Include="HelperClasses\MetaData\NodeMetaData.cs" />
     <Compile Include="HelperClasses\Providers\CompareData\CompareDataProvider.cs" />
     <Compile Include="HelperClasses\Providers\CompareData\ICompareDataProvider.cs" />
     <Compile Include="HelperClasses\Providers\Database\DatabaseStorageProvider.cs" />

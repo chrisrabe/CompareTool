@@ -24,9 +24,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         /// <param name="field"></param>
         /// <param name="composite"></param>
         /// <returns></returns>
-        public IField GetOther(IField field, CompositeField composite)
+        public ICollection<IField> GetOther(IField field, CompositeField composite)
         {
-            return composite.Fields.FirstOrDefault(other => field.Name.Equals(other.Name));
+            return new List<IField>(composite.Fields.Where(other => field.Equals(other)));
         }
 
         /// <summary>
@@ -37,9 +37,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         /// <param name="field"></param>
         /// <param name="node"></param>
         /// <returns></returns>
-        public IField GetOther(IField field, IDataNode node)
+        public ICollection<IField> GetOther(IField field, IDataNode node)
         {
-            return node.Fields.FirstOrDefault(other => field.Name.Equals(other.Name));
+            return new List<IField>(node.Fields.Where(other => field.Equals(other)));
         }
 
         /// <summary>

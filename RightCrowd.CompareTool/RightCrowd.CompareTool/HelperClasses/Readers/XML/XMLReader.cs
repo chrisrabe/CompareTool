@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
+using RightCrowd.CompareTool.HelperClasses.MetaData;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {
@@ -13,11 +14,11 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
     /// </summary>
     public class XMLReader : IXMLReader
     {
-        private MetaData _metaData;
+        private IMetaData _metaData;
 
         public XMLReader()
         {
-            _metaData = new MetaData();
+            _metaData = new NodeMetaData();
         }
 
         public IEnumerable<IDataNode> ReadXMLFile(string filename)

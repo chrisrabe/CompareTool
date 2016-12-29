@@ -8,6 +8,7 @@ using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparators;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
+using RightCrowd.CompareTool.HelperClasses.MetaData;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 {
@@ -24,7 +25,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         private ICompareTaskManager _manager;
         private IDataComparator _comparator;
         private BackgroundWorker _worker;
-        private MetaData metaData;
+        private IMetaData _nodeMetaData;
 
         #endregion // Fields
 
@@ -35,9 +36,12 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _assignedDataType = assignedDataType;
             _manager = manager;
             _worker = new BackgroundWorker();
-            metaData = new MetaData();
-            var mapping = metaData.KeyFields.FirstOrDefault(x => x.DatabaseName.StartsWith(assignedDataType));
-            _comparator = mapping == null ? new DataComparator() : mapping.DataComparator;
+            _nodeMetaData = new NodeMetaData();
+            var mapping = _nodeMetaData.KeyFields.FirstOrDefault(x => x.DatabaseName.StartsWith(assignedDataType));
+            if (mapping == null || !(mapping is DatabaseKeyField))
+                _comparator = new DataComparator();
+            else
+                _comparator = ((DatabaseKeyField)mapping).DataComparator;
         }
 
         #endregion // Constructors

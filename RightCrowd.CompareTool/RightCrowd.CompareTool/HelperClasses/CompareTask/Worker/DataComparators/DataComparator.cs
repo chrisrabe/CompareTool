@@ -119,7 +119,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         {
             foreach (IField field in nodes[index1].Fields)
             {
-                IField other = _objectFinder.GetOther(field, nodes[index2]);
+                var otherFields = _objectFinder.GetOther(field, nodes[index2]);
+                IField other = null; // TODO Change this
                 if (other == null)
                 {
                     _diffCount1++;
@@ -170,7 +171,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         {
             foreach (IField field in field1.Fields)
             {
-                IField other = _objectFinder.GetOther(field, field2);
+                var otherFields = _objectFinder.GetOther(field, field2);
+                IField other = null;
                 if (other == null)
                 {
                     _diffCount1++;

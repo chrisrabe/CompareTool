@@ -31,7 +31,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         /// <param name="field"></param>
         /// <param name="node"></param>
         /// <returns></returns>
-        IField GetOther(IField field, IDataNode node);
+        ICollection<IField> GetOther(IField field, IDataNode node);
 
         /// <summary>
         /// Gets the other field with the same name property as
@@ -40,6 +40,6 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         /// <param name="field"></param>
         /// <param name="composite"></param>
         /// <returns></returns>
-        IField GetOther(IField field, CompositeField composite);
+        ICollection<IField> GetOther(IField field, CompositeField composite);
     }
 }

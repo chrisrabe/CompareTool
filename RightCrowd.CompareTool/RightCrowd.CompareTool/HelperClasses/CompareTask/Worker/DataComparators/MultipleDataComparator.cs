@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
-using System.Collections.Generic;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparators
 {
@@ -16,7 +16,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
             var db2 = databases[index2];
 
             var doesntExist = db1.Data.Where(data1 => !db2.Data.Any(data2 => data1.FileName.Equals(data2.FileName))).ToList();
-            var different = db1.Data.Where(data1 => db2.Data.Any(data2 => {
+            var different = db1.Data.Where(data1 => db2.Data.Any(data2 =>
+            {
                 if (!data1.FileName.Equals(data2.FileName))
                     return false;
 
@@ -29,11 +30,13 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
                 Handler.RecordAsDifferent(index1, x, true);
             });
 
+            different.ToList().ForEach(x => Handler.RecordAsDifferent(index1, x, false));
+
             //return all others as the same.
             db1.Data.Where(dataNode => !doesntExist.Any(usedDataNode => usedDataNode == dataNode) && !different.Any(usedDataNode => usedDataNode == dataNode))
                     .ToList()
                     .ForEach(dataNode => Handler.RecordAsSimilar(index1, dataNode));
-            
+
         }
 
         /// <summary>
@@ -45,7 +48,18 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         /// <returns></returns>
         private bool Compare(int index, IEnumerable<IField> fields1, IEnumerable<IField> fields2)
         {
-            return !fields1.All(field1 => fields2.Any(field2 => field2.Equals(field1)));
+            if (!fields1.All(field1 => fields2.Any(field2 => field2.Equals(field1))))
+            {
+                // Retrieve the fields which are inside fields1 and doesn't exist in fields2
+                var differentFields1 = fields1.Where(field1 => !fields2.Any(field2 => field2.Equals(field1)));
+                var differentFields2 = fields2.Where(field2 => !fields1.Any(field1 => field1.Equals(field2)));
+
+                differentFields1.ToList().ForEach(x => Handler.RecordAsDifferent(x, true));
+                differentFields2.ToList().ForEach(x => Handler.RecordAsDifferent(x, true));
+
+                return true;
+            }
+            return false;
         }
     }
 }

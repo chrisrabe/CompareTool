@@ -1,23 +1,26 @@
 ﻿using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparators;
+using RightCrowd.CompareTool.HelperClasses.MetaData.KeyField;
 using System.Collections.Generic;
 
-namespace RightCrowd.CompareTool.HelperClasses
+namespace RightCrowd.CompareTool.HelperClasses.MetaData
 {
-    public class MetaData
+    public class NodeMetaData : IMetaData
     {
-        public MetaData()
+        public NodeMetaData()
         {
-            KeyFields = new List<DatabaseKeyField>
+            KeyFields = new List<IKeyField>
             {
                 new DatabaseKeyField("AccessLevelPermissions", "AccessLevel", new MultipleDataComparator()) // Need to read an XML file
             };
-        }  
+        }
 
-        public ICollection<DatabaseKeyField> KeyFields { get; set; }
+        public ICollection<IKeyField> KeyFields { get; set; }
     }
 
-    public class DatabaseKeyField
+    public class DatabaseKeyField : IKeyField
     {
+        public DatabaseKeyField(IKeyField key) : this(key.DatabaseName, key.KeyElementName, new MultipleDataComparator()) { }
+
         public DatabaseKeyField(string databaseName, string keyElementName, IDataComparator dataComparator)
         {
             DatabaseName = databaseName;
