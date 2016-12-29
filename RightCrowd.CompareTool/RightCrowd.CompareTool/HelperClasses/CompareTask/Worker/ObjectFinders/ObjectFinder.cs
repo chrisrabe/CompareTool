@@ -2,6 +2,7 @@
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
+using System.Collections.Generic;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
 {
@@ -48,9 +49,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         /// <param name="node"></param>
         /// <param name="database"></param>
         /// <returns></returns>
-        public IDataNode GetOther(IDataNode node, IDatabase database)
+        public ICollection<IDataNode> GetOther(IDataNode node, IDatabase database)
         {
-            return database.Data.FirstOrDefault(other => node.FileName.Equals(other.FileName));
+            return new List<IDataNode>(database.Data.Where(other => node.FileName.Equals(other.FileName)));
         }
     }
 }

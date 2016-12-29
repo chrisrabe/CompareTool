@@ -3,6 +3,7 @@ using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
+using System.Collections.Generic;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparators
 {
@@ -59,7 +60,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
                 if (databases[index2] != null)
                 {
                     _diffCount1 = _diffCount2 = 0; // Reset field counters to zero
-                    IDataNode other = _objectFinder.GetOther(node, databases[index2]);
+                    var otherNodes = _objectFinder.GetOther(node, databases[index2]); // Gets all the nodes with the same name
+                    IDataNode other = null; // This should get the data node with the same value.
+
                     // Mark as different or compare fields
                     if (other == null)
                     {

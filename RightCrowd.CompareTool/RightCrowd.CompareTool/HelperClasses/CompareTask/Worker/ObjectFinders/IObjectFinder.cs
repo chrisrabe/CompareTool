@@ -1,6 +1,7 @@
 ﻿using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
+using System.Collections.Generic;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
 {
@@ -21,7 +22,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         /// <param name="first"></param>
         /// <param name="database"></param>
         /// <returns></returns>
-        IDataNode GetOther(IDataNode node, IDatabase database);
+        ICollection<IDataNode> GetOther(IDataNode node, IDatabase database);
 
         /// <summary>
         /// Gets the other field with the same name from the

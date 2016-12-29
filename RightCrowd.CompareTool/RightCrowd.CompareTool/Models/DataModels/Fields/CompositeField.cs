@@ -1,6 +1,7 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
 using System.Collections.ObjectModel;
 using System;
+using System.Linq;
 
 namespace RightCrowd.CompareTool.Models.DataModels.Fields
 {
@@ -121,6 +122,36 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
         public override string ToString()
         {
             return Name;
+        }
+
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            CompositeField other = (CompositeField)obj;
+
+            if (other.Name != this.Name)
+                return false;
+
+            // All fields must exist in the other's fields
+            return Fields.All(field => other.Fields.Any(x => x.Equals(field)));
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int result = (Name != null ? Name.GetHashCode() : 0);
+                Fields.ToList().ForEach(field =>
+                {
+                    result = (result * 397) ^ (field != null ? field.GetHashCode() : 0);
+                });
+                return result;
+            }
         }
 
         #endregion // Methods

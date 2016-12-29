@@ -37,8 +37,6 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             var mapping = _metaData.KeyFields.FirstOrDefault(x => x.DatabaseName.Equals(root.Name.ToString()));
             if (mapping != null)
             {
-                // Need to check if node has already been created
-                // Or change how the object finder works (use ToString())
                 return root.Elements().Select(x => new DataNode($"{x.Name}.{x.Element(mapping.KeyElementName).Value}", new ObservableCollection<IField>(x.Elements().Select(Parse))));
             }
             else

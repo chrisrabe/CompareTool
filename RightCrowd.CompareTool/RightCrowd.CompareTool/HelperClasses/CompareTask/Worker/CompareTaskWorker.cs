@@ -21,10 +21,10 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 
         private string _assignedDataType;
         private ICompareTask _task;
-
-        private BackgroundWorker _worker;
         private ICompareTaskManager _manager;
         private IDataComparator _comparator;
+        private BackgroundWorker _worker;
+        private MetaData metaData;
 
         #endregion // Fields
 
@@ -35,7 +35,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _assignedDataType = assignedDataType;
             _manager = manager;
             _worker = new BackgroundWorker();
-            _comparator = new DataComparator();
+            metaData = new MetaData();
+            var mapping = metaData.KeyFields.FirstOrDefault(x => x.DatabaseName.Equals(assignedDataType));
+            _comparator = mapping == null ? new DataComparator() : mapping.DataComparator;
         }
 
         #endregion // Constructors

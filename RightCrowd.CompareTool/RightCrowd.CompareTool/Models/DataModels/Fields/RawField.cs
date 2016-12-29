@@ -1,5 +1,4 @@
-﻿using System;
-using RightCrowd.CompareTool.HelperClasses;
+﻿using RightCrowd.CompareTool.HelperClasses;
 
 namespace RightCrowd.CompareTool.Models.DataModels.Fields
 {
@@ -96,10 +95,41 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
         #endregion // Properties
 
+        #region Methods
+
         public override string ToString()
         {
             return string.Format("{0} : {1}", Name, Value);
         }
 
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            RawField other = (RawField)obj;
+            if (other.Name != this.Name)
+                return false;
+
+            if (other.Value != this.Value)
+                return false;
+
+            return true;
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int result = (Name != null ? Name.GetHashCode() : 0);
+                result = (result * 397) ^ (Value != null ? Value.GetHashCode() : 0);
+                return result;
+            }
+        }
+
+        #endregion // Methods
     }
 }
