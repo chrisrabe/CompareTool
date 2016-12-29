@@ -105,18 +105,12 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
         // override object.Equals
         public override bool Equals(object obj)
         {
-
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
             RawField other = (RawField)obj;
-            if (other.Name != this.Name)
-                return false;
-
-            if (other.Value != this.Value)
-                return false;
-
-            return true;
+            
+            return other.Name == Name && other.Value == Value;
         }
 
         // override object.GetHashCode

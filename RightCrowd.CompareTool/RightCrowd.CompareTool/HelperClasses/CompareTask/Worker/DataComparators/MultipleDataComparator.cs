@@ -33,15 +33,19 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
             db1.Data.Where(dataNode => !doesntExist.Any(usedDataNode => usedDataNode == dataNode) && !different.Any(usedDataNode => usedDataNode == dataNode))
                     .ToList()
                     .ForEach(dataNode => Handler.RecordAsSimilar(index1, dataNode));
-
-
+            
         }
 
+        /// <summary>
+        /// Returns true if at least one field is different, returns false if none are different
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="fields1"></param>
+        /// <param name="fields2"></param>
+        /// <returns></returns>
         private bool Compare(int index, IEnumerable<IField> fields1, IEnumerable<IField> fields2)
         {
-            //to do comparison of fields here, return true one at least one field is different, return false if none are different
-            
-            return false;
+            return !fields1.All(field1 => fields2.Any(field2 => field2.Equals(field1)));
         }
     }
 }

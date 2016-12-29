@@ -133,7 +133,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
             CompositeField other = (CompositeField)obj;
 
-            if (other.Name != this.Name)
+            if (other.Name != Name)
                 return false;
 
             // All fields must exist in the other's fields
