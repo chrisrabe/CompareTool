@@ -90,9 +90,9 @@
     <Compile Include="HelperClasses\CompareTask\Buffer\ICompareTaskBuffer.cs" />
     <Compile Include="HelperClasses\CompareTask\Buffer\ListTaskBuffer.cs" />
     <Compile Include="HelperClasses\CompareTask\Manager\BufferedTaskManager.cs" />
-    <Compile Include="HelperClasses\CompareTask\Worker\DataComparators\DataComparator.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\DataComparators\IDataComparator.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\DataComparators\MultipleDataComparator.cs" />
+    <Compile Include="HelperClasses\CompareTask\Worker\DataComparators\DataComparator.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\DataHandlers\DataHandler.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\DataHandlers\IDataHandler.cs" />
     <Compile Include="HelperClasses\CompareTask\Worker\ObjectFinders\ObjectFinder.cs" />

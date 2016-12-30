@@ -42,7 +42,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             }
             else
             {
-                return root.Elements().Select(x => new DataNode(nodeName, new ObservableCollection<IField>(x.Elements().Select(Parse))));
+                return new List<IDataNode>() { new DataNode(nodeName, new ObservableCollection<IField>(root.Elements().Select(Parse))) };
             }
 
         }

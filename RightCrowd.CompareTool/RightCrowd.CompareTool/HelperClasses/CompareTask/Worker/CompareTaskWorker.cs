@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.ComponentModel;
-
 using RightCrowd.CompareTool.Models.Comparison.Data;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Task;
@@ -38,10 +37,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _worker = new BackgroundWorker();
             _nodeMetaData = new NodeMetaData();
             var mapping = _nodeMetaData.KeyFields.FirstOrDefault(x => x.DatabaseName.StartsWith(assignedDataType));
-            if (mapping == null || !(mapping is DatabaseKeyField))
-                _comparator = new DataComparator();
-            else
-                _comparator = ((DatabaseKeyField)mapping).DataComparator;
+            _comparator = (mapping == null || !(mapping is DatabaseKeyField)) ? new DataComparator() : ((DatabaseKeyField)mapping).DataComparator;
         }
 
         #endregion // Constructors

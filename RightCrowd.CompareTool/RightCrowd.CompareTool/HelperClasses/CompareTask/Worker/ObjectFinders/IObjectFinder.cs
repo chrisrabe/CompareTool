@@ -16,8 +16,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
     public interface IObjectFinder
     {
         /// <summary>
-        /// Gets the other node with the same name property as
-        /// the node passed from the given database.
+        /// Retrieves the collection of nodes from the given database. The
+        /// returned nodes have the same name as the given node.
         /// </summary>
         /// <param name="first"></param>
         /// <param name="database"></param>
@@ -25,8 +25,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         ICollection<IDataNode> GetOther(IDataNode node, IDatabase database);
 
         /// <summary>
-        /// Gets the other field with the same name from the
-        /// data node passed.
+        /// Retrieves the collection of fields from the data node's fields.
+        /// The returned fields have the same name as the given field.
         /// </summary>
         /// <param name="field"></param>
         /// <param name="node"></param>
@@ -34,8 +34,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         ICollection<IField> GetOther(IField field, IDataNode node);
 
         /// <summary>
-        /// Gets the other field with the same name property as
-        /// the field passed from the composite field.
+        /// Retrieves the collection of fields from the composite field's children.
+        /// The returned fields have the same name as the given field.
         /// </summary>
         /// <param name="field"></param>
         /// <param name="composite"></param>

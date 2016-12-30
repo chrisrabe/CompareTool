@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
-using System.Collections.Generic;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
 {
@@ -17,8 +17,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
     {
 
         /// <summary>
-        /// Gets the other field with the same name as the field parameter
-        /// from the composite field. Returns null if no fields have the 
+        /// Retrieves the collection of nodes from the given database. The
+        /// returned nodes have the same name as the given node.
         /// same name.
         /// </summary>
         /// <param name="field"></param>
@@ -26,12 +26,12 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         /// <returns></returns>
         public ICollection<IField> GetOther(IField field, CompositeField composite)
         {
-            return new List<IField>(composite.Fields.Where(other => field.Equals(other)));
+            return new List<IField>(composite.Fields.Where(other => field.Name.Equals(other.Name)));
         }
 
         /// <summary>
-        /// Gets the other field with the same name as the field parameter
-        /// from the data node. Returns null if no fields have the same
+        /// Retrieves the collection of fields from the data node's fields.
+        /// The returned fields have the same name as the given field.
         /// name.
         /// </summary>
         /// <param name="field"></param>
@@ -39,7 +39,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.ObjectFinders
         /// <returns></returns>
         public ICollection<IField> GetOther(IField field, IDataNode node)
         {
-            return new List<IField>(node.Fields.Where(other => field.Equals(other)));
+            return new List<IField>(node.Fields.Where(other => field.Name.Equals(other.Name)));
         }
 
         /// <summary>
