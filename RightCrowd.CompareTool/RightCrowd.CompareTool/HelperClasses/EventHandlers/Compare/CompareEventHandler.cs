@@ -71,7 +71,7 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Compare
         /// <summary>
         /// Separates each node inside the given database into their types and returns
         /// a map database storage.
-        /// </summary>
+        /// </summary>1
         /// <param name="database"></param>
         /// <returns></returns>
         private IMapDatabaseStorage PartitionDatabase(IDatabase database)

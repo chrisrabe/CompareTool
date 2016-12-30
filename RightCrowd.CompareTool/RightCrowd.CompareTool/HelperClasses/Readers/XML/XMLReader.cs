@@ -44,7 +44,6 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             {
                 return new List<IDataNode>() { new DataNode(nodeName, new ObservableCollection<IField>(root.Elements().Select(Parse))) };
             }
-
         }
 
         /// <summary>

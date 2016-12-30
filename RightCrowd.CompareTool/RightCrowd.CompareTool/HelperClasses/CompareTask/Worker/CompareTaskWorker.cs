@@ -113,6 +113,9 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         /// <param name="database"></param>
         private void SetNodesNotVisited(IDatabase database)
         {
+            if (database == null)
+                return;
+
             database.Data.ToList().ForEach(node => { node.Visited = false; });
         }
 

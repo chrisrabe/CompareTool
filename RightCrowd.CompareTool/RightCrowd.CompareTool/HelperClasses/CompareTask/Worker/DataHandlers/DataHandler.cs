@@ -113,7 +113,13 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers
         private IListDatabaseStorageBuilder CreateBuilder(IDatabase[] databases)
         {
             IListDatabaseStorageBuilder builder = new ListDatabaseStorageBuilder();
-            databases.ToList().ForEach(database => builder.Add(new Database(database.DirectoryName)));
+            databases.ToList().ForEach(database => 
+            {
+                if(database == null)
+                    builder.Add(null);
+                else
+                    builder.Add(new Database(database.DirectoryName));
+            });
             return builder;
         }
 
