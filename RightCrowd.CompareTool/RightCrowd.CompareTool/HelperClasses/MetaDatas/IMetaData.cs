@@ -1,7 +1,7 @@
-﻿using RightCrowd.CompareTool.HelperClasses.MetaData.KeyField;
+﻿using RightCrowd.CompareTool.HelperClasses.MetaDatas.KeyFields;
 using System.Collections.Generic;
 
-namespace RightCrowd.CompareTool.HelperClasses.MetaData
+namespace RightCrowd.CompareTool.HelperClasses.MetaDatas
 {
     public interface IMetaData
     {
