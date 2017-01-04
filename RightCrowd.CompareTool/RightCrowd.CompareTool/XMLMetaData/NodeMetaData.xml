@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+This XML file contains the meta data for files containing multiple data nodes.
+It contains information about what field is used as a unique identifier for the
+data node. This is used to increase the accuracy of the comparison logic of this
+tool. Each element needs to follow the syntax of 
+
+<node_name>key1,key2,key3,...</node_name>
+
+Usage:
+
+Imagine that you have an XML file that looks like this:
+
+<storage>
+  <food>
+    <name>apple</name>
+    <amount>12</amount>
+  </food>
+  <food>
+    <name>steak</name>
+    <amount>10</amount>
+  </food>
+  <food>
+    <name>banana</name>
+    <amount>5</amount>
+  </food>
+</storage>
+
+Your intentions with this file is to create three data nodes of type 'food'. However,
+without stating the element -> key pair in this file, the XML reader would interpret
+this file as a single node of type 'storage' with three composite fields.
+
+In order to create the three nodes of type 'food', you must declare "<food>name</food>"
+under the 'nodes' element. This XML file should now look like this:
+
+<nodes>
+  <food>name</food>
+</nodes>
+
+Doing this will create three data nodes with these names :
+
+- food.apple
+- food.steak
+- food.banana
+
+Note: 
+If multiple key exists inside a data node, it would use the first key found. 
+"<food>name,amount</food>" would still give the same result because 'name'
+would always be used as an identifier since it came before amount.
+-->
+<nodes>
+  <AccessLevelPermissions>AccessLevel</AccessLevelPermissions>
+</nodes>

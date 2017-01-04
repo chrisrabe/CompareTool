@@ -36,7 +36,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _manager = manager;
             _worker = new BackgroundWorker();
             _nodeMetaData = new MetaData();
-            var mapping = _nodeMetaData.KeyFields.FirstOrDefault(x => x.DatabaseName.StartsWith(assignedDataType));
+            var mapping = _nodeMetaData.KeyFields.FirstOrDefault(x => x.Name.StartsWith(assignedDataType));
             if (mapping == null)
                 _comparator = new DataComparator();
             else

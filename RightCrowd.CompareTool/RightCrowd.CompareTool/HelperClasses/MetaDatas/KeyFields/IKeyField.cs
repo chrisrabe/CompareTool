@@ -2,7 +2,7 @@
 {
     public interface IKeyField
     {
-        string DatabaseName { get; set; }
-        string KeyElementName { get; set; }
+        string Name { get; set; }
+        string Key { get; set; }
     }
 }
