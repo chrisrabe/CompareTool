@@ -212,7 +212,9 @@
     <Resource Include="Resources\load_view-logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="XMLMetaData\NodeMetaData.xml" />
+    <Content Include="XMLMetaData\NodeMetaData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
