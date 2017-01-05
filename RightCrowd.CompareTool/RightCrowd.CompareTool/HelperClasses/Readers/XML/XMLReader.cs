@@ -38,7 +38,10 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             var mapping = _metaData.KeyFields.FirstOrDefault(x => x.Name.Equals(root.Name.ToString()));
             if (mapping != null)
             {
-                return root.Elements().Select(x => new DataNode($"{x.Name}.{x.Element(mapping.Key).Value}", new ObservableCollection<IField>(x.Elements().Select(Parse))));
+                return root.Elements().Select(x =>
+                    new DataNode($"{x.Name}.{x.Element(mapping.Keys.FirstOrDefault(key => x.Elements().Any(child => key.Equals(child.Name)))).Value}", 
+                    new ObservableCollection<IField>(x.Elements().Select(Parse)))
+                );
             }
             else
             {

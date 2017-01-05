@@ -1,8 +1,10 @@
-﻿namespace RightCrowd.CompareTool.HelperClasses.MetaDataFiles.KeyFields
+﻿using System.Collections.Generic;
+
+namespace RightCrowd.CompareTool.HelperClasses.MetaDataFiles.KeyFields
 {
     public interface IKeyField
     {
         string Name { get; set; }
-        string Key { get; set; }
+        ICollection<string> Keys { get; set; }
     }
 }

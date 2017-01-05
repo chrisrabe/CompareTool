@@ -36,14 +36,29 @@ namespace RightCrowd.CompareTool.HelperClasses.MetaDataFiles
 
     public class KeyField : IKeyField
     {
-        public KeyField(string name, string key)
+        private ICollection<string> _keys;
+
+        public KeyField(string name, string key) : this(name)
+        {
+            Keys.Add(key);
+        }
+
+        public KeyField(string name)
         {
             Name = name;
-            Key = key;
         }
 
         public string Name { get; set; }
 
-        public string Key { get; set; }
+        public ICollection<string> Keys
+        {
+            get
+            {
+                if (_keys == null)
+                    _keys = new List<string>();
+                return _keys;
+            }
+            set { _keys = value; }
+        }
     }
 }
