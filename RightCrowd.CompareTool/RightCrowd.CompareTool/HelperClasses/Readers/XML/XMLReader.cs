@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
-using RightCrowd.CompareTool.HelperClasses.MetaDatas;
+using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {

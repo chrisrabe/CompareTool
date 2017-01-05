@@ -1,4 +1,4 @@
-﻿namespace RightCrowd.CompareTool.HelperClasses.MetaDatas.KeyFields
+﻿namespace RightCrowd.CompareTool.HelperClasses.MetaDataFiles.KeyFields
 {
     public interface IKeyField
     {

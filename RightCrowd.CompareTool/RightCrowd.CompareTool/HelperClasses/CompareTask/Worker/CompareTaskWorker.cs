@@ -7,7 +7,7 @@ using RightCrowd.CompareTool.HelperClasses.CompareTask.Manager;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparators;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
-using RightCrowd.CompareTool.HelperClasses.MetaDatas;
+using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 {

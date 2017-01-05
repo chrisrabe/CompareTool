@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using RightCrowd.CompareTool.HelperClasses.MetaDatas.KeyFields;
+using RightCrowd.CompareTool.HelperClasses.MetaDataFiles.KeyFields;
 
-namespace RightCrowd.CompareTool.HelperClasses.MetaDatas
+namespace RightCrowd.CompareTool.HelperClasses.MetaDataFiles
 {
     /// <summary>
     /// This class determines the element -> key pairs. It is used to alter how the
