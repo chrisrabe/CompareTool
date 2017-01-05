@@ -11,7 +11,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReader
         public IMetaData ReadMetaDataFile(string file)
         {
             IMetaData meta = new MetaData();
-            XDocument doc = XDocument.Load(file);
+            XDocument doc = XDocument.Load(GetType().Assembly.GetManifestResourceStream(file));
             XElement root = doc.Elements().First();
             meta.KeyFields = new List<IKeyField>(root.Elements().Select(Parse));
             return meta;
