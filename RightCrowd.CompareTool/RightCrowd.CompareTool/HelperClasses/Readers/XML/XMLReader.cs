@@ -38,6 +38,10 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             var mapping = _metaData.KeyFields.FirstOrDefault(x => x.Name.Equals(root.Name.ToString()));
             if (mapping != null)
             {
+                // - convert all children (x) of the root node into data nodes
+                // - get the first key string which exists in x's children
+                // - attach the name of the node and the key together
+                // - parse each children of x as a field
                 return root.Elements().Select(x => 
                     new DataNode($"{x.Name}.{x.Element(mapping.Keys.FirstOrDefault(key => x.Elements().Any(child => child.Name.ToString().Equals(key)))).Value}", 
                     new ObservableCollection<IField>(x.Elements().Select(Parse))));
