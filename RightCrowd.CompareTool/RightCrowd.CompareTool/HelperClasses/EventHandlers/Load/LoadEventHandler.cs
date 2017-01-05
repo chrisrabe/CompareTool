@@ -85,7 +85,7 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
                 _databaseProvider.DatabaseStorage[_databaseIndex] = _database;
                 SetDirectory(_database.DirectoryName);
                 UpdateProgress(100);
-                MessageBox.Show(String.Format("Database {0} has been loaded.", (_databaseIndex + 1)));
+                MessageBox.Show(string.Format("Database {0} has been loaded.", (_databaseIndex + 1)));
                 _viewModel.CheckIfDatabaseLoaded();
             }
             else

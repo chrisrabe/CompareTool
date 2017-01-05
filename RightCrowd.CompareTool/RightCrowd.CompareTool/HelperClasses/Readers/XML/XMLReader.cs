@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
+using RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {
@@ -18,7 +19,9 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 
         public XMLReader()
         {
-            _metaData = new MetaData();
+            _metaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml");
+            if (_metaData == null)
+                _metaData = new MetaData(); // Default meta data - no key fields
         }
 
         public IEnumerable<IDataNode> ReadXMLFile(string filename)

@@ -1,6 +1,6 @@
 ﻿using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
 
-namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReader
+namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders
 {
     /// <summary>
     /// This class reads the meta data xml files.

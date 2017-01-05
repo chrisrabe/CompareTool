@@ -8,6 +8,7 @@ using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparators;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
+using RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 {
@@ -35,7 +36,10 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _assignedDataType = assignedDataType;
             _manager = manager;
             _worker = new BackgroundWorker();
-            _nodeMetaData = new MetaData();
+            _nodeMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml");
+            if (_nodeMetaData == null)
+                _nodeMetaData = new MetaData(); // Use default meta
+
             var mapping = _nodeMetaData.KeyFields.FirstOrDefault(x => x.Name.StartsWith(assignedDataType));
             if (mapping == null)
                 _comparator = new DataComparator();

@@ -1,20 +1,29 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
+using System.Reflection;
 using System.Collections.Generic;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles.KeyFields;
+using System;
 
-namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReader
+namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders
 {
     public class MetaDataReader : IMetaDataReader
     {
         public IMetaData ReadMetaDataFile(string file)
         {
             IMetaData meta = new MetaData();
-            XDocument doc = XDocument.Load(GetType().Assembly.GetManifestResourceStream(file));
-            XElement root = doc.Elements().First();
-            meta.KeyFields = new List<IKeyField>(root.Elements().Select(Parse));
-            return meta;
+            try
+            {
+                XDocument doc = XDocument.Load(Assembly.GetExecutingAssembly().GetManifestResourceStream(file));
+                XElement root = doc.Elements().First();
+                meta.KeyFields = new List<IKeyField>(root.Elements().Select(Parse));
+                return meta;
+            }
+            catch (ArgumentNullException)
+            {
+                return null; // given file doesn't exist, return null.
+            }
         }
 
         /// <summary>

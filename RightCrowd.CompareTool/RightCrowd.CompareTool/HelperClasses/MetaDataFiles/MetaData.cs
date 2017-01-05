@@ -11,14 +11,6 @@ namespace RightCrowd.CompareTool.HelperClasses.MetaDataFiles
     {
         private ICollection<IKeyField> _keyFields;
 
-        public MetaData()
-        {
-            KeyFields = new List<IKeyField>
-            {
-                new KeyField("AccessLevelPermissions", "AccessLevel")
-            };
-        }
-
         /// <summary>
         /// Gets or sets the key fields of this metadata.
         /// </summary>
