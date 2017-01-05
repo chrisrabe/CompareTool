@@ -58,10 +58,6 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
                     nodes.Add(new DataNode($"{x.Name}.{x.Element(nodeKey).Value}", new ObservableCollection<IField>(x.Elements().Select(Parse))));
                 }
                 return nodes;
-//                return root.Elements().Select(x =>
-//                    new DataNode($"{x.Name}.{x.Element(mapping.Keys.FirstOrDefault(key => x.Elements().Any(child => key.Equals(child.Name)))).Value}", 
-//                    new ObservableCollection<IField>(x.Elements().Select(Parse)))
-//                );
             }
             else
             {
