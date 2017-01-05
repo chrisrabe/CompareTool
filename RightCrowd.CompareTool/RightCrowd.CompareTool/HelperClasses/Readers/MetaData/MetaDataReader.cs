@@ -26,7 +26,11 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReader
         /// <returns></returns>
         private IKeyField Parse(XElement element)
         {
-            return null;
+            string name = element.Name.ToString();
+            IKeyField keyField = new KeyField(name);
+            string[] values = element.Value.Split(',');
+            keyField.Keys = new List<string>(values.Select(x => x.Trim()));
+            return keyField;
         }
     }
 }
