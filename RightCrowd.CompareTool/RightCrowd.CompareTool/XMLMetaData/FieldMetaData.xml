@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+This XML file contains the meta data for files containing multiple
+composite fields with the same element name. It contains information
+about what field is used as a unique identifier for the composite
+field. This XML file is used to increase the speed and performance
+of this tool. Each element needs to follow the syntax of
+
+<field_name>key1,key2,key3,...</field_name>
+
+Usage:
+
+Imagine that you have two XML files that looks like this:
+
+File 1:
+
+<storage>
+  <food>
+    <name>apple</name>
+    <amount>12</amount>
+  </food>
+  <food>
+    <name>steak</name>
+    <amount>10</amount>
+  </food>
+  <food>
+    <name>banana</name>
+    <amount>5</amount>
+  </food>
+</storage>
+
+========================
+File 2:
+
+<storage>
+  <food>
+    <name>apple</name>
+    <amount>50</amount>
+  </food>
+  <food>
+    <name>steak</name>
+    <amount>10</amount>
+  </food>
+  <food>
+    <name>banana</name>
+    <amount>5</amount>
+  </food>
+</storage>
+
+=======================
+
+The load event handler would interpret each file as one data node
+with three composite fields. Each composite field will be of type
+'food' and will all have the same name.
+
+When comparing, the compare event handler would compare each field
+with the name of 'food' against all the 'food' fields in the other
+file. The comparison would be successful, however the performance
+is poor because it would be comparing it n^2 times where n is the
+number of fields with the name 'food'.
+
+This file is used to attach the unique identifier to the composite
+field. That way, fields are faster to find and compare.
+
+If the XML file looks like this:
+
+<fields>
+  <food>name</food>
+</fields>
+
+Each file would create a storage data node with fields with these names:
+
+- food.apple
+- food.steak
+- food.banana
+
+This increases the performance because only a few composite fields
+will be compared against each other.
+-->
+<fields>
+  <!-- Add Fields Here -->
+</fields>
