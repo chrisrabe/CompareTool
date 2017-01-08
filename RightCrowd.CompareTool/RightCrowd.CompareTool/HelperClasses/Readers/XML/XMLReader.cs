@@ -75,7 +75,8 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
         }
 
         /// <summary>
-        /// Parses the composite field. If the key exists 
+        /// Parses the composite field. If the key exists inside the mapping, then it attaches the value of
+        /// the field key onto the field name, otherwise it uses the default field name.
         /// </summary>
         /// <param name="field"></param>
         /// <param name="fieldName"></param>
@@ -85,7 +86,8 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             var mapping = _fieldMetaData.KeyFields.FirstOrDefault(x => x.Name.Equals(fieldName));
             if (mapping != null)
             {
-                return new CompositeField($"{fieldName}.{field.Element(mapping.Keys.FirstOrDefault(key => field.Elements().Any(child => child.Name.ToString().Equals(key)))).Value}", 
+                string fieldKey = mapping.Keys.FirstOrDefault(key => field.Elements().Any(child => child.Name.ToString().Equals(key)));
+                return new CompositeField((fieldKey == null) ? $"{fieldName}.{field.Element(fieldKey).Value}" : fieldName,
                        new ObservableCollection<IField>(field.Elements().Select(Parse)));
             }
             else
