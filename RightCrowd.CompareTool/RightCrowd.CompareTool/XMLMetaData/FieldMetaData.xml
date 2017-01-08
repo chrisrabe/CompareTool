@@ -78,5 +78,5 @@ This increases the performance because only a few composite fields
 will be compared against each other.
 -->
 <fields>
-  <!-- Add Fields Here -->
+  <AccessLevel>Name</AccessLevel>
 </fields>

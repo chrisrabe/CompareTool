@@ -87,7 +87,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             if (mapping != null)
             {
                 string fieldKey = mapping.Keys.FirstOrDefault(key => field.Elements().Any(child => child.Name.ToString().Equals(key)));
-                return new CompositeField((fieldKey == null) ? $"{fieldName}.{field.Element(fieldKey).Value}" : fieldName,
+                return new CompositeField((fieldKey != null) ? $"{fieldName}.{field.Element(fieldKey).Value}" : fieldName,
                        new ObservableCollection<IField>(field.Elements().Select(Parse)));
             }
             else
