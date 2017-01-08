@@ -10,6 +10,13 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders
 {
     public class MetaDataReader : IMetaDataReader
     {
+
+        /// <summary>
+        /// Reads the XML file indicated by the string parameter. If the file doesn't exist,
+        /// then it returns an empty meta data object.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public IMetaData ReadMetaDataFile(string file)
         {
             IMetaData meta = new MetaData();
@@ -22,7 +29,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders
             }
             catch (ArgumentNullException)
             {
-                return null; // given file doesn't exist, return null.
+                return new MetaData(); // given file doesn't exist, return empty meta data
             }
         }
 

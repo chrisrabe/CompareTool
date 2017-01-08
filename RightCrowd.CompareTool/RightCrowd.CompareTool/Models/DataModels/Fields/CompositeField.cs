@@ -20,6 +20,11 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
 
         #region Constructors
 
+        public CompositeField(string name, ObservableCollection<IField> fields) : this(name)
+        {
+            Fields = fields;
+        }
+
         public CompositeField(string name)
         {
             Name = name;

@@ -7,6 +7,7 @@ using RightCrowd.CompareTool.Models.DataModels.Fields;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
 using RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders;
+using System;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {
@@ -15,14 +16,16 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
     /// </summary>
     public class XMLReader : IXMLReader
     {
-        private IMetaData _metaData;
+        private IMetaData _nodeMetaData;
+        private IMetaData _fieldMetaData;
 
         public XMLReader()
         {
-            _metaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml");
-            if (_metaData == null)
-                _metaData = new MetaData(); // Default meta data - no key fields
+            _nodeMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml");
+            _fieldMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.FieldMetaData.xml");
         }
+
+        #region Methods
 
         public IEnumerable<IDataNode> ReadXMLFile(string filename)
         {
@@ -38,15 +41,15 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
             if (root.Elements().Count() == 1)
                 root = root.Elements().First();
 
-            var mapping = _metaData.KeyFields.FirstOrDefault(x => x.Name.Equals(root.Name.ToString()));
+            var mapping = _nodeMetaData.KeyFields.FirstOrDefault(x => x.Name.Equals(root.Name.ToString()));
             if (mapping != null)
             {
                 // - convert all children (x) of the root node into data nodes
                 // - get the first key string which exists in x's children
                 // - attach the name of the node and the key together
                 // - parse each children of x as a field
-                return root.Elements().Select(x => 
-                    new DataNode($"{x.Name}.{x.Element(mapping.Keys.FirstOrDefault(key => x.Elements().Any(child => child.Name.ToString().Equals(key)))).Value}", 
+                return root.Elements().Select(x =>
+                    new DataNode($"{x.Name}.{x.Element(mapping.Keys.FirstOrDefault(key => x.Elements().Any(child => child.Name.ToString().Equals(key)))).Value}",
                     new ObservableCollection<IField>(x.Elements().Select(Parse))));
             }
             else
@@ -54,6 +57,10 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
                 return new List<IDataNode>() { new DataNode(nodeName, new ObservableCollection<IField>(root.Elements().Select(Parse))) };
             }
         }
+
+        #endregion // Methods
+
+        #region Helper Methods
 
         /// <summary>
         /// Parses through through the element. If the element has at least one child, 
@@ -63,25 +70,28 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
         /// <returns></returns>
         private IField Parse(XElement element)
         {
-            IField field = null;
             string fieldName = element.Name.ToString();
+            return element.Elements().Count() > 0 ? Parse(element, fieldName) : new RawField(fieldName, element.Value == null ? "" : element.Value);
+        }
 
-            if (element.Elements().Count() > 0)
+        /// <summary>
+        /// Parses the composite field. If the key exists 
+        /// </summary>
+        /// <param name="field"></param>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        private IField Parse(XElement field, string fieldName)
+        {
+            var mapping = _fieldMetaData.KeyFields.FirstOrDefault(x => x.Name.Equals(fieldName));
+            if (mapping != null)
             {
-                field = new CompositeField(fieldName);
-                // Parse each children and add them to the fields collection
-                foreach (XElement child in element.Elements())
-                {
-                    IField childField = Parse(child);
-                    ((CompositeField)field).Fields.Add(childField);
-                }
+                return new CompositeField($"{fieldName}.{field.Element(mapping.Keys.FirstOrDefault(key => field.Elements().Any(child => child.Name.ToString().Equals(key)))).Value}", 
+                       new ObservableCollection<IField>(field.Elements().Select(Parse)));
             }
             else
-            {
-                var value = element.Value == null ? "" : element.Value;
-                field = new RawField(fieldName, value);
-            }
-            return field;
+                return new CompositeField(fieldName, new ObservableCollection<IField>(field.Elements().Select(Parse)));
         }
     }
+
+    #endregion // Helper Methods
 }

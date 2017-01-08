@@ -37,9 +37,6 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
             _manager = manager;
             _worker = new BackgroundWorker();
             _nodeMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml");
-            if (_nodeMetaData == null)
-                _nodeMetaData = new MetaData(); // Use default meta
-
             var mapping = _nodeMetaData.KeyFields.FirstOrDefault(x => x.Name.StartsWith(assignedDataType));
             if (mapping == null)
                 _comparator = new DataComparator();
