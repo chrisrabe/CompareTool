@@ -79,4 +79,5 @@ will be compared against each other.
 -->
 <fields>
   <AccessLevel>Name</AccessLevel>
+  <Note>Event</Note>
 </fields>

@@ -7,7 +7,6 @@ using RightCrowd.CompareTool.Models.DataModels.Fields;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
 using RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders;
-using System;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {
