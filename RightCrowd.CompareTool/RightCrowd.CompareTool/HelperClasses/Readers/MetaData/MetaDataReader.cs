@@ -29,7 +29,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders
             }
             catch (ArgumentNullException)
             {
-                return new MetaData(); // given file doesn't exist, return empty meta data
+                return meta; // given file doesn't exist, return empty meta data
             }
         }
 
