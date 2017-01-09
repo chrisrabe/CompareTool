@@ -75,7 +75,8 @@ Each file would create a storage data node with fields with these names:
 - food.banana
 
 This increases the performance because only a few composite fields
-will be compared against each other.
+will be compared against each other. Please note that the field name
+and keys are CASE SENSITIVE. The items entered are the items evaluated.
 -->
 <fields>
   <AccessLevel>Name</AccessLevel>

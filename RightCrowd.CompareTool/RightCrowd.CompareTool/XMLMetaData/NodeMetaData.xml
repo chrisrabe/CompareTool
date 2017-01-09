@@ -46,7 +46,9 @@ Doing this will create three data nodes with these names :
 Note: 
 If multiple key exists inside a data node, it would use the first key found. 
 "<food>name,amount</food>" would still give the same result because 'name'
-would always be used as an identifier since it came before amount.
+would always be used as an identifier since it came before amount. Please note
+that the node name and the keys are CASE SENSITIVE. The items entered are the
+items evaluated.
 -->
 <nodes>
   <AccessLevelPermissions>AccessLevel</AccessLevelPermissions>
