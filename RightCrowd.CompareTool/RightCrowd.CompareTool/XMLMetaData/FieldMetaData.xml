@@ -83,6 +83,12 @@ and keys are CASE SENSITIVE. The items entered are the items evaluated.
   <Note>Event</Note>
   <Option>Order</Option>
   <CardholderMappings>TypeName</CardholderMappings>
-  <Usage>Utilise</Usage>
+  <Usage>Activity</Usage>
   <Settings>CardholderType</Settings>
+  <Setting>SettingKey</Setting>
+  <DisplayNameField>FieldNumber</DisplayNameField>
+  <CDF>CDFName</CDF>
+  <Competency>Name</Competency>
+  <S>Name</S>
+  <Field>Name</Field>
 </fields>
