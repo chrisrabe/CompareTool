@@ -1,4 +1,48 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+This XML file contains information about how values of a raw field
+should be converted. It tansforms ambiguous values into something
+which users can understand. Each element needs to follow the syntax of
+
+<field_name>value1~conversion1, value2~conversion2, value3~conversion3...</field_name>
+
+Usage:
+
+Imagine that you have an XML file which looks like this:
+
+<storage>
+  <food>
+    <name>1</name>
+    <amount>12</amount>
+  </food>
+  <food>
+    <name>2</name>
+    <amount>10</amount>
+  </food>
+  <food>
+    <name>3</name>
+    <amount>5</amount>
+  </food>
+</storage>
+
+Without this Conversion Table, the name would have a value of 1,2,or 3. However,
+if you have a converstion table xml file which looks like this:
+
 <fields>
-  
+  <name>1~apple,2~steak,3~banana</name>
+</fields>
+
+Then it would convert the fields of the first food node to 'apple' since the value of 'name' is 1,
+the second node to 'steak' since the value of 'name' is 2, and the third node to 'banana' since
+the value of 'name' is 3. The value is assumed to be unique.
+-->
+<fields>
+  <AutoApprove>0~false,1~true</AutoApprove>
+  <AccessLevelOrder>0~false,1~true</AccessLevelOrder>
+  <Custom>0~false,1~true</Custom>
+  <SelfService>1~None,2~View,3~Update</SelfService>
+  <MandatoryActivationDate>0~false,1~true</MandatoryActivationDate>
+  <MandatoryExpiryDate>0~false,1~true</MandatoryExpiryDate>
+  <IsCardholderType>0~false,1~true</IsCardholderType>
+  <RestrictApproval>0~false,1~true</RestrictApproval>
 </fields>

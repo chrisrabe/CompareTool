@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.ConversionTableReaders
 {
@@ -35,10 +36,10 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.ConversionTableReaders
         private IConversionValue Parse(string value)
         {
             // parse the dash (-) and then assign the value
-            string[] values = value.Split('-');
+            string[] values = Regex.Split(value, "~");
             if (values.Length != 2)
                 throw new Exception("Error parsing value conversion table!");
-            return new ConversionValue(values[0], values[1]);
+            return new ConversionValue(values[0].Replace('\\',' ').Trim(), values[1].Replace('\\', ' ').Trim());
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles.KeyFields;
 using System;
+using System.Text.RegularExpressions;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders
 {
@@ -44,8 +45,8 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders
         {
             string name = element.Name.ToString();
             IKeyField keyField = new KeyField(name);
-            string[] values = element.Value.Split(',');
-            keyField.Keys = new List<string>(values.Select(x => x.Trim()));
+            string[] values = Regex.Split(element.Value, "\\{0},"); 
+            keyField.Keys = new List<string>(values.Select(x => x.Replace('\\',' ').Trim()));
             return keyField;
         }
     }
