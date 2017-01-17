@@ -23,13 +23,13 @@ namespace RightCrowd.CompareTool.HelperClasses.ValueConversion
     {
         private ICollection<IConversionValue> _values;
 
-        public ConversionField(string field, ICollection<IConversionValue> values)
+        public ConversionField(string name, ICollection<IConversionValue> values)
         {
-            Field = field;
+            Name = name;
             Values = values;
         }
 
-        public string Field { get; set; }
+        public string Name { get; set; }
 
         public ICollection<IConversionValue> Values
         {

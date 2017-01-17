@@ -7,7 +7,7 @@ namespace RightCrowd.CompareTool.HelperClasses.ValueConversion
     /// </summary>
     public interface IConversionField
     {
-        string Field { get; set; }
+        string Name { get; set; }
 
         ICollection<IConversionValue> Values { get; set; }
     }

@@ -7,6 +7,8 @@ using RightCrowd.CompareTool.Models.DataModels.Fields;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.HelperClasses.MetaDataFiles;
 using RightCrowd.CompareTool.HelperClasses.Readers.MetaDataReaders;
+using RightCrowd.CompareTool.HelperClasses.ValueConversion;
+using RightCrowd.CompareTool.HelperClasses.Readers.ConversionTableReaders;
 
 namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
 {
@@ -17,11 +19,13 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
     {
         private IMetaData _nodeMetaData;
         private IMetaData _fieldMetaData;
+        private IConversionTable _conversionTable;
 
         public XMLReader()
         {
             _nodeMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml");
             _fieldMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.FieldMetaData.xml");
+            _conversionTable = new ConversionTableReader().ReadConversionTableFile("RightCrowd.CompareTool.XMLMetaData.ConversionTable.xml");
         }
 
         #region Methods
@@ -70,7 +74,31 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
         private IField Parse(XElement element)
         {
             string fieldName = element.Name.ToString();
-            return element.Elements().Count() > 0 ? Parse(element, fieldName) : new RawField(fieldName, element.Value == null ? "" : element.Value);
+            return element.Elements().Count() > 0 ? Parse(element, fieldName) : Parse(fieldName, element.Value == null ? "" : element.Value);
+        }
+
+        /// <summary>
+        /// Parses the raw field. 
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private IField Parse(string fieldName, string value)
+        {
+            IConversionField conversionField = _conversionTable.Fields.FirstOrDefault(field => field.Name.Equals(fieldName));
+            // if the field name is inside the conversion table,
+            if (conversionField != null)
+            {
+                // modify the value by finding the value which it converts to
+                IConversionValue conversionValue = conversionField.Values.FirstOrDefault(conversion => conversion.Value.Equals(value));
+                // if there's no conversion found, leave it as it is
+                string newValue = conversionValue == null ? conversionValue.Conversion : value;
+                return new RawField(fieldName, newValue);
+            }
+            else // return a raw field with no modifications
+            {
+                return new RawField(fieldName, value);
+            }
         }
 
         /// <summary>
