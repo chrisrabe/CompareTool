@@ -113,8 +113,14 @@
     <Compile Include="HelperClasses\Providers\CompareData\ICompareDataProvider.cs" />
     <Compile Include="HelperClasses\Providers\Database\DatabaseStorageProvider.cs" />
     <Compile Include="HelperClasses\Providers\Database\IDatabaseStorageProvider.cs" />
+    <Compile Include="HelperClasses\Readers\ConversionTable\ConversionTableReader.cs" />
+    <Compile Include="HelperClasses\Readers\ConversionTable\IConversionTableReader.cs" />
     <Compile Include="HelperClasses\Readers\MetaData\IMetaDataReader.cs" />
     <Compile Include="HelperClasses\Readers\MetaData\MetaDataReader.cs" />
+    <Compile Include="HelperClasses\ValueConversion\ConversionTable.cs" />
+    <Compile Include="HelperClasses\ValueConversion\IConversionField.cs" />
+    <Compile Include="HelperClasses\ValueConversion\IConversionTable.cs" />
+    <Compile Include="HelperClasses\ValueConversion\IConversionValue.cs" />
     <Compile Include="Models\Comparison\DataStorage\ComparisonDataStorage.cs" />
     <Compile Include="Models\Comparison\DataStorage\IComparisonDataStorage.cs" />
     <Compile Include="Models\Comparison\Data\ComparisonData.cs" />
@@ -223,6 +229,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
