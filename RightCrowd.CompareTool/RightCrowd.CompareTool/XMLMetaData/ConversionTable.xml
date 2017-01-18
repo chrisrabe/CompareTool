@@ -45,4 +45,32 @@ the value of 'name' is 3. The value is assumed to be unique.
   <MandatoryExpiryDate>0~false,1~true</MandatoryExpiryDate>
   <IsCardholderType>0~false,1~true</IsCardholderType>
   <RestrictApproval>0~false,1~true</RestrictApproval>
+  <Selected>0~false,1~true</Selected>
+  <AutoEnable>0~false,1~true</AutoEnable>
+  <DefaultAccessMethod>0~false,1~true</DefaultAccessMethod>
+  <SwapCard>0~false,1~true</SwapCard>
+  <EnableBiometrics>0~false,1~true</EnableBiometrics>
+  <SelfServiceView>0~false,1~true</SelfServiceView>
+  <SelfServiceUpdate>0~false,1~true</SelfServiceUpdate>
+  <Create>0~false,1~true</Create>
+  <Event>1~Add,2~Update,3~Delete</Event>
+  <TimeZoneBehaviour>2~Fixed,3~User-Based,4~System Default</TimeZoneBehaviour>
+  <MusterArea>0~false,1~true</MusterArea>
+  <useDefaultTimeout>0~false,1~true</useDefaultTimeout>
+  <Customized>0~false,1~true</Customized>
+  <ManageLocation>0~false,1~true</ManageLocation>
+  <Offsite>0~false,1~true</Offsite>
+  <ApplyGracePeriod>0~No,1~Yes,2~Use Default</ApplyGracePeriod>
+  <Mandatory>0~false,1~true</Mandatory>
+  <Privacy>0~false,1~true</Privacy>
+  <IncludeTime>0~false,1~true</IncludeTime>
+  <Password>0~false,1~true</Password>
+  <KeepOptionsListSorted>0~false,1~true</KeepOptionsListSorted>
+  <EditDivision>0~false,1~true</EditDivision>
+  <ReadOnly>0~false,1~true</ReadOnly>
+  <MaintainHistory>0~false,1~true</MaintainHistory>
+  <QuickSearch>0~false,1~true</QuickSearch>
+  <Activity>1~CardholderSearchField,2~Search Result,3~OrderBy</Activity>
+  <Utilise>0~false,1~true</Utilise>
+  <AutoApprove>0~false,1~true</AutoApprove>
 </fields>
