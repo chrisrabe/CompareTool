@@ -21,11 +21,32 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
         private IMetaData _fieldMetaData;
         private IConversionTable _conversionTable;
 
-        public XMLReader()
+        /// <summary>
+        /// Creates an XMLReader which uses the internal resources in this tool.
+        /// 
+        /// The three resources are:
+        /// - NodeMetaData.xml
+        /// - FieldMetaData.xml
+        /// - ConversionTable.xml
+        /// 
+        /// All of these resources are located in the XMLMetaData folder.
+        /// 
+        /// </summary>
+        public XMLReader() : this(new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml"),
+                                  new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.FieldMetaData.xml"),
+                                  new ConversionTableReader().ReadConversionTableFile("RightCrowd.CompareTool.XMLMetaData.ConversionTable.xml")){ }
+
+        /// <summary>
+        /// Creates an XMLReader with a custom meta data for fields and nodes and a custom converstion table
+        /// </summary>
+        /// <param name="nodeMetaData"></param>
+        /// <param name="fieldMetaData"></param>
+        /// <param name="conversionTable"></param>
+        public XMLReader(IMetaData nodeMetaData, IMetaData fieldMetaData, IConversionTable conversionTable)
         {
-            _nodeMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml");
-            _fieldMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.FieldMetaData.xml");
-            _conversionTable = new ConversionTableReader().ReadConversionTableFile("RightCrowd.CompareTool.XMLMetaData.ConversionTable.xml");
+            _nodeMetaData = nodeMetaData;
+            _fieldMetaData = fieldMetaData;
+            _conversionTable = conversionTable;
         }
 
         #region Methods
@@ -92,7 +113,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
                 // modify the value by finding the value which it converts to
                 IConversionValue conversionValue = conversionField.Values.FirstOrDefault(conversion => conversion.Value.Equals(value));
                 // if there's no conversion found, leave it as it is
-                string newValue = conversionValue == null ? conversionValue.Conversion : value;
+                string newValue = conversionValue != null ? conversionValue.Conversion : value;
                 return new RawField(fieldName, newValue);
             }
             else // return a raw field with no modifications

@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using RightCrowd.CompareTool.HelperClasses.Readers.XML;
 using RightCrowd.CompareTool.Models.DataModels.Database;
-using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using System.ComponentModel;
 using RightCrowd.CompareTool.HelperClasses.Providers.Database;
 

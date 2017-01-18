@@ -37,6 +37,7 @@ the second node to 'steak' since the value of 'name' is 2, and the third node to
 the value of 'name' is 3. The value is assumed to be unique.
 -->
 <fields>
+  <name>1~apple,2~steak,3~banana</name>
   <AutoApprove>0~false,1~true</AutoApprove>
   <AccessLevelOrder>0~false,1~true</AccessLevelOrder>
   <Custom>0~false,1~true</Custom>
@@ -73,4 +74,7 @@ the value of 'name' is 3. The value is assumed to be unique.
   <Activity>1~CardholderSearchField,2~Search Result,3~OrderBy</Activity>
   <Utilise>0~false,1~true</Utilise>
   <AutoApprove>0~false,1~true</AutoApprove>
+  <IsSet>0~false,1~true</IsSet>
+  <SetVisible>0~false,1~true</SetVisible>
+  <SetRelation>1~AND,2~OR</SetRelation>
 </fields>
