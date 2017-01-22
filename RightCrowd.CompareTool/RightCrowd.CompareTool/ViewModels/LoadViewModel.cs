@@ -15,7 +15,6 @@ namespace RightCrowd.CompareTool
         #region Fields
 
         // Application View Model Members
-        private ApplicationViewModel _applicationViewModel;
         private IDatabaseStorageProvider _databaseProvider;
         private ICompareDataProvider _compareDataProvider;
 
@@ -44,10 +43,9 @@ namespace RightCrowd.CompareTool
 
         #region Constructors
 
-        public LoadViewModel(ApplicationViewModel applicationViewModel, IDatabaseStorageProvider databaseProvider, ICompareDataProvider compareDataProvider)
+        public LoadViewModel(IDatabaseStorageProvider databaseProvider, ICompareDataProvider compareDataProvider)
         {
             _loadEvents = new Dictionary<int, LoadEventHandler>();
-            _applicationViewModel = applicationViewModel;
             _databaseProvider = databaseProvider;
             _compareDataProvider = compareDataProvider;
         }

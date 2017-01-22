@@ -128,7 +128,11 @@
     <Compile Include="Models\DataModels\DatabaseStorage\List\IListDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\IMapDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\SubDatabaseStorage.cs" />
+    <Compile Include="ViewModels\CompareViewModel.cs" />
     <Compile Include="ViewModels\LoadViewModel.cs" />
+    <Compile Include="Views\PageViews\CompareView.xaml.cs">
+      <DependentUpon>CompareView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PageViews\LoadView.xaml.cs">
       <DependentUpon>LoadView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +161,10 @@
       <DependentUpon>ApplicationView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\PageViews\CompareView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PageViews\LoadView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
