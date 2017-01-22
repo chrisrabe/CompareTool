@@ -37,6 +37,8 @@ namespace RightCrowd.CompareTool
 
             // Add available pages
             PageViewModels.Add(new LoadViewModel(_databaseProvider, _compareDataProvider));
+            PageViewModels.Add(new CompareViewModel());
+            
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

@@ -21,6 +21,9 @@
         <DataTemplate DataType="{x:Type local:LoadViewModel}">
             <local:LoadView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:CompareViewModel}">
+            <local:CompareView />
+        </DataTemplate>
     </Window.Resources>
 
     <DockPanel>

@@ -1,7 +1,6 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
-using System;
 
-namespace RightCrowd.CompareTool.ViewModels
+namespace RightCrowd.CompareTool
 {
     public class CompareViewModel : ObservableObject, IPageViewModel
     {
@@ -11,7 +10,7 @@ namespace RightCrowd.CompareTool.ViewModels
         {
             get
             {
-                throw new NotImplementedException();
+                return "pack://application:,,,/Resources/compare-btn.png";
             }
         }
 
