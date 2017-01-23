@@ -6,7 +6,7 @@ namespace RightCrowd.CompareTool.Models.Display.Partition
     /// Stores the comparison result for one database. In the compare view,
     /// The data stored in this class is used in one of the panel partitions.
     /// </summary>
-    public interface IDisplayPartitions
+    public interface IDisplayPartition
     {
         /// <summary>
         /// Gets or sets the directory which this partition is refering to.

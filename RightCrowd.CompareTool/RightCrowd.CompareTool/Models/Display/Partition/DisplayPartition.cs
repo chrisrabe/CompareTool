@@ -3,7 +3,7 @@ using RightCrowd.CompareTool.HelperClasses;
 
 namespace RightCrowd.CompareTool.Models.Display.Partition
 {
-    public class DisplayPartition : ObservableObject, IDisplayPartitions
+    public class DisplayPartition : ObservableObject, IDisplayPartition
     {
         private string _directory;
         private IDisplayData _differences;
