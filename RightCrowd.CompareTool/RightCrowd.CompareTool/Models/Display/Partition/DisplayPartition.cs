@@ -5,32 +5,13 @@ namespace RightCrowd.CompareTool.Models.Display.Partition
 {
     public class DisplayPartition : ObservableObject, IDisplayPartition
     {
-        private string _directory;
         private IDisplayData _differences;
         private IDisplayData _similarities;
 
-        public DisplayPartition(string directory, IDisplayData differences, IDisplayData similarities)
+        public DisplayPartition(IDisplayData differences, IDisplayData similarities)
         {
-            Directory = directory;
             Differences = differences;
             Similarities = similarities;
-        }
-
-        public string Directory
-        {
-            get
-            {
-                return _directory;
-            }
-
-            set
-            {
-                if(_directory != value)
-                {
-                    _directory = value;
-                    OnPropertyChanged("Directory");
-                }
-            }
         }
 
         public IDisplayData Differences

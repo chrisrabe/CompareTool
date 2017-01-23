@@ -16,6 +16,6 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Filter
         /// <param name="parseDifference"></param>
         /// <param name="storage"></param>
         /// <returns></returns>
-        IDisplayPartition FilterStorage(int database, bool parseDifference, IComparisonDataStorage storage);
+        IDisplayPartition FilterStorage(int database, IComparisonDataStorage storage);
     }
 }

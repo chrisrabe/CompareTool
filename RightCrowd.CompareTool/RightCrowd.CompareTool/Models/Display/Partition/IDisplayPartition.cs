@@ -9,11 +9,6 @@ namespace RightCrowd.CompareTool.Models.Display.Partition
     public interface IDisplayPartition
     {
         /// <summary>
-        /// Gets or sets the directory which this partition is refering to.
-        /// </summary>
-        string Directory { get; set; }
-
-        /// <summary>
         /// Gets or sets the differences
         /// </summary>
         IDisplayData Differences { get; set; }
