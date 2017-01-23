@@ -59,5 +59,10 @@ namespace RightCrowd.CompareTool.Models.Display.Node
         }
 
         #endregion // Properties
+
+        public override string ToString()
+        {
+            return Type;
+        }
     }
 }

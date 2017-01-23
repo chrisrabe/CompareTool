@@ -128,8 +128,11 @@
     <Compile Include="Models\DataModels\DatabaseStorage\List\IListDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\IMapDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\SubDatabaseStorage.cs" />
+    <Compile Include="Models\Display\Data\DisplayData.cs" />
+    <Compile Include="Models\Display\Data\IDisplayData.cs" />
     <Compile Include="Models\Display\Node\DisplayNode.cs" />
     <Compile Include="Models\Display\Node\IDisplayNode.cs" />
+    <Compile Include="Models\Display\Partition\IDisplayPartition.cs" />
     <Compile Include="ViewModels\CompareViewModel.cs" />
     <Compile Include="ViewModels\LoadViewModel.cs" />
     <Compile Include="Views\PageViews\CompareView.xaml.cs">
@@ -244,6 +247,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
