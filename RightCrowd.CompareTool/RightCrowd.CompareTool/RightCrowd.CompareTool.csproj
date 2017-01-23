@@ -132,6 +132,7 @@
     <Compile Include="Models\Display\Data\IDisplayData.cs" />
     <Compile Include="Models\Display\Node\DisplayNode.cs" />
     <Compile Include="Models\Display\Node\IDisplayNode.cs" />
+    <Compile Include="Models\Display\Partition\DisplayPartition.cs" />
     <Compile Include="Models\Display\Partition\IDisplayPartition.cs" />
     <Compile Include="ViewModels\CompareViewModel.cs" />
     <Compile Include="ViewModels\LoadViewModel.cs" />
