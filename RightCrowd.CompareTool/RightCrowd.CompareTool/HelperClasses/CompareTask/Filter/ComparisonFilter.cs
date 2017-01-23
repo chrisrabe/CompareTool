@@ -1,6 +1,11 @@
 ﻿using RightCrowd.CompareTool.Models.Comparison.DataStorage;
+using RightCrowd.CompareTool.Models.DataModels.Database;
+using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 using RightCrowd.CompareTool.Models.Display.Data;
+using RightCrowd.CompareTool.Models.Display.Node;
 using RightCrowd.CompareTool.Models.Display.Partition;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Filter
 {
@@ -15,7 +20,14 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Filter
 
         private IDisplayData FilterData(int database, bool parseDifference, IComparisonDataStorage storage)
         {
-            return null;
+            ObservableCollection<IDisplayNode> nodes = new ObservableCollection<IDisplayNode>();
+            storage.ComparisonData.ToList().ForEach(data =>
+            {
+                IListDatabaseStorage dbStorage = parseDifference ? data.Difference : data.Similarities;
+                IDatabase db = dbStorage[database];
+                nodes.Add(new DisplayNode(data.Type, db != null && db.Data.Count > 0 ? db.Data : null));
+            });
+            return new DisplayData(nodes);
         }
     }
 }
