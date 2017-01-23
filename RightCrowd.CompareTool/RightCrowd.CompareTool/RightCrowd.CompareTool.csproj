@@ -128,6 +128,8 @@
     <Compile Include="Models\DataModels\DatabaseStorage\List\IListDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\IMapDatabaseStorage.cs" />
     <Compile Include="Models\DataModels\DatabaseStorage\Map\SubDatabaseStorage.cs" />
+    <Compile Include="Models\Display\Node\DisplayNode.cs" />
+    <Compile Include="Models\Display\Node\IDisplayNode.cs" />
     <Compile Include="ViewModels\CompareViewModel.cs" />
     <Compile Include="ViewModels\LoadViewModel.cs" />
     <Compile Include="Views\PageViews\CompareView.xaml.cs">
