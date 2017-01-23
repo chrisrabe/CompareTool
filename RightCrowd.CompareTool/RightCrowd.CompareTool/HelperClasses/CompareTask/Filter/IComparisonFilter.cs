@@ -1,5 +1,5 @@
 ﻿using RightCrowd.CompareTool.Models.Comparison.DataStorage;
-using RightCrowd.CompareTool.Models.Display.Partition;
+using RightCrowd.CompareTool.Models.Display.Data;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Filter
 {
@@ -16,6 +16,6 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Filter
         /// <param name="parseDifference"></param>
         /// <param name="storage"></param>
         /// <returns></returns>
-        IDisplayPartition FilterStorage(int database, IComparisonDataStorage storage);
+        IDisplayData FilterStorage(int database, IComparisonDataStorage storage);
     }
 }

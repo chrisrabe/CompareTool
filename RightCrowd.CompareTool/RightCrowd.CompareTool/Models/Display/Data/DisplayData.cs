@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.Display.Node;
 using RightCrowd.CompareTool.HelperClasses;
 
@@ -7,29 +6,49 @@ namespace RightCrowd.CompareTool.Models.Display.Data
 {
     public class DisplayData : ObservableObject, IDisplayData
     {
-        private ObservableCollection<IDisplayNode> _displayNodes;
+        private ObservableCollection<IDisplayNode> _differences;
+        private ObservableCollection<IDisplayNode> _similarities;
 
-        public DisplayData(ObservableCollection<IDisplayNode> displayNodes)
+        public DisplayData(ObservableCollection<IDisplayNode> differences, ObservableCollection<IDisplayNode> similarities)
         {
-            DisplayNodes = displayNodes;
+            Differences = differences;
+            Similarities = similarities;
         }
 
-        public ObservableCollection<IDisplayNode> DisplayNodes
+        public ObservableCollection<IDisplayNode> Differences
         {
             get
             {
-                if (_displayNodes == null)
-                    _displayNodes = new ObservableCollection<IDisplayNode>();
+                if (_differences == null)
+                    Differences = new ObservableCollection<IDisplayNode>();
 
-                return _displayNodes;
+                return _differences;
             }
 
             set
             {
-                if(_displayNodes != value)
+                if(_differences != value)
                 {
-                    _displayNodes = value;
-                    OnPropertyChanged("DisplayNodes");
+                    _differences = value;
+                    OnPropertyChanged("Differences");
+                }
+            }
+        }
+
+        public ObservableCollection<IDisplayNode> Similarities
+        {
+            get
+            {
+                if (_similarities == null)
+                    Similarities = new ObservableCollection<IDisplayNode>();
+                return _similarities;
+            }
+            set
+            {
+                if(_similarities != value)
+                {
+                    _similarities = value;
+                    OnPropertyChanged("Similarities");
                 }
             }
         }

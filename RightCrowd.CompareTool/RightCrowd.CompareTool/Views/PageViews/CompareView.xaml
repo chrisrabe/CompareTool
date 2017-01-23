@@ -6,13 +6,11 @@
              xmlns:local="clr-namespace:RightCrowd.CompareTool"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1100">
+
     <UserControl.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFF2F6B0" Offset="0"/>
             <GradientStop Color="#FFDAB575" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
-    <ScrollViewer VerticalAlignment="Stretch">
-        
-    </ScrollViewer>
 </UserControl>

@@ -21,14 +21,8 @@ namespace RightCrowd.CompareTool
         #endregion // Constructors
 
         #region Properties
+        
 
-        public ICompareDataProvider CompareDataProvider
-        {
-            get
-            {
-                return _compareDataProvider;
-            }
-        }
 
         #endregion // Properties
 

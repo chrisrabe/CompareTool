@@ -1,5 +1,4 @@
 ﻿using RightCrowd.CompareTool.Models.Comparison.DataStorage;
-using RightCrowd.CompareTool.Models.Display.Partition;
 
 namespace RightCrowd.CompareTool.HelperClasses.Providers.CompareData
 {
@@ -8,10 +7,6 @@ namespace RightCrowd.CompareTool.HelperClasses.Providers.CompareData
     /// </summary>
     public interface ICompareDataProvider
     {
-        IDisplayPartition DatabaseOne { get; }
-
-        IDisplayPartition DatabaseTwo { get; }
-
         /// <summary>
         /// Gets or sets the comparison storage inside the data provider.
         /// </summary>
