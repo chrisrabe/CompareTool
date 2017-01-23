@@ -1,12 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.Comparison.Data;
+using RightCrowd.CompareTool.HelperClasses;
 
 namespace RightCrowd.CompareTool.Models.Comparison.DataStorage
 {
     /// <summary>
     /// Stores all the comparison data.
     /// </summary>
-    public class ComparisonDataStorage : IComparisonDataStorage
+    public class ComparisonDataStorage : ObservableObject, IComparisonDataStorage
     {
         #region Fields
         private ObservableCollection<IComparisonData> _comparisonData;
@@ -31,7 +32,11 @@ namespace RightCrowd.CompareTool.Models.Comparison.DataStorage
             set
             {
                 if (_comparisonData != value)
+                {
                     _comparisonData = value;
+                    OnPropertyChanged("ComparisonData");
+                }
+                
             }
         }
 

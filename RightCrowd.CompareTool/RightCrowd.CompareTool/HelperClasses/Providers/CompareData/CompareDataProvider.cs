@@ -5,7 +5,7 @@ namespace RightCrowd.CompareTool.HelperClasses.Providers.CompareData
     /// <summary>
     /// This class is responsible for caching the compare data.
     /// </summary>
-    internal class CompareDataProvider : ICompareDataProvider
+    internal class CompareDataProvider : ObservableObject, ICompareDataProvider
     {
         #region  Fields
 
@@ -22,13 +22,19 @@ namespace RightCrowd.CompareTool.HelperClasses.Providers.CompareData
         {
             get
             {
+                if (_storage == null)
+                    _storage = new ComparisonDataStorage();
+
                 return _storage;
             }
 
             set
             {
                 if (_storage != value)
+                {
                     _storage = value;
+                    OnPropertyChanged("ComparisonStorage");
+                }
             }
         }
 

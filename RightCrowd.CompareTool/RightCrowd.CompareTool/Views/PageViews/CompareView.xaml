@@ -12,4 +12,7 @@
             <GradientStop Color="#FFDAB575" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
+    <ScrollViewer VerticalAlignment="Stretch">
+        
+    </ScrollViewer>
 </UserControl>
