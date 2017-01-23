@@ -25,7 +25,8 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Filter
             {
                 IListDatabaseStorage dbStorage = parseDifference ? data.Difference : data.Similarities;
                 IDatabase db = dbStorage[database];
-                nodes.Add(new DisplayNode(data.Type, db != null && db.Data.Count > 0 ? db.Data : null));
+                if(db != null && db.Data.Count > 0)
+                    nodes.Add(new DisplayNode(data.Type, db.Data));
             });
             return new DisplayData(nodes);
         }

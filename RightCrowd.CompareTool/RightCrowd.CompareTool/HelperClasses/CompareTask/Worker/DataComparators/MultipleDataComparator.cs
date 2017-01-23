@@ -14,29 +14,40 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataComparator
         {
             var db1 = databases[index1];
             var db2 = databases[index2];
-
-            var doesntExist = db1.Data.Where(data1 => !db2.Data.Any(data2 => data1.FileName.Equals(data2.FileName))).ToList();
-            var different = db1.Data.Where(data1 => db2.Data.Any(data2 =>
+            // Exit out if db1 is null
+            if (db1 == null)
+                return;
+            if (db2 != null)
             {
-                if (!data1.FileName.Equals(data2.FileName))
-                    return false;
+                var doesntExist = db1.Data.Where(data1 => !db2.Data.Any(data2 => data1.FileName.Equals(data2.FileName))).ToList();
+                var different = db1.Data.Where(data1 => db2.Data.Any(data2 =>
+                {
+                    if (!data1.FileName.Equals(data2.FileName))
+                        return false;
 
-                return Compare(index1, data1.Fields, data2.Fields);
-            }));
+                    return Compare(index1, data1.Fields, data2.Fields);
+                }));
 
-            //first where the other doesn't exist
-            doesntExist.ForEach(x =>
+                //first where the other doesn't exist
+                doesntExist.ForEach(x =>
+                {
+                    Handler.RecordAsDifferent(index1, x, true);
+                });
+
+                different.ToList().ForEach(x => Handler.RecordAsDifferent(index1, x, false));
+
+                //return all others as the same.
+                db1.Data.Where(dataNode => !doesntExist.Any(usedDataNode => usedDataNode == dataNode) && !different.Any(usedDataNode => usedDataNode == dataNode))
+                        .ToList()
+                        .ForEach(dataNode => Handler.RecordAsSimilar(index1, dataNode));
+            }
+            else
             {
-                Handler.RecordAsDifferent(index1, x, true);
-            });
-
-            different.ToList().ForEach(x => Handler.RecordAsDifferent(index1, x, false));
-
-            //return all others as the same.
-            db1.Data.Where(dataNode => !doesntExist.Any(usedDataNode => usedDataNode == dataNode) && !different.Any(usedDataNode => usedDataNode == dataNode))
-                    .ToList()
-                    .ForEach(dataNode => Handler.RecordAsSimilar(index1, dataNode));
-
+                foreach(var node in db1.Data)
+                {
+                    Handler.RecordAsDifferent(index1, node, true);
+                }
+            }
         }
 
         /// <summary>
