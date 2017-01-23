@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
-using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.HelperClasses;
 
 namespace RightCrowd.CompareTool.Models.Display.Node
@@ -8,11 +7,15 @@ namespace RightCrowd.CompareTool.Models.Display.Node
     public class DisplayNode : ObservableObject, IDisplayNode
     {
         private ObservableCollection<IDataNode> _dataNodes;
+        private string _type;
 
-        public DisplayNode(IDatabase database)
+        public DisplayNode(string type, ObservableCollection<IDataNode> dataNodes)
         {
-            _dataNodes = database.Data;
+            Type = type;
+            DataNodes = dataNodes;
         }
+
+        #region Properties
 
         /// <summary>
         /// Gets or sets the data nodes of this display node.
@@ -39,6 +42,22 @@ namespace RightCrowd.CompareTool.Models.Display.Node
         /// <summary>
         /// Gets or sets the type of this display node.
         /// </summary>
-        public string Type { get; set; }
+        public string Type
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                if(_type != value)
+                {
+                    _type = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
+        #endregion // Properties
     }
 }
