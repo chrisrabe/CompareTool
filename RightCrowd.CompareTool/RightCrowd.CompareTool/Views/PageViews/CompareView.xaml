@@ -4,13 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RightCrowd.CompareTool"
+             xmlns:disNode="clr-namespace:RightCrowd.CompareTool.Models.Display.Node"
+             xmlns:datNode="clr-namespace:RightCrowd.CompareTool.Models.DataModels.DataNode"
+             xmlns:datField="clr-namespace:RightCrowd.CompareTool.Models.DataModels.Fields"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1100">
-
     <UserControl.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFF2F6B0" Offset="0"/>
             <GradientStop Color="#FFDAB575" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
+    <Grid RenderTransformOrigin="0.52,0.501">
+        <Label x:Name="db1Label" Content="Database One" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="550" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF188CCA" BorderBrush="White" BorderThickness="5"/>
+        <Label x:Name="db2Label" Content="Database Two" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="550" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF8CC63F" Margin="550,0,0,0" BorderBrush="White" BorderThickness="5"/>
+        <Label x:Name="difLabel" Content="Differences" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="#FF3C3C3C" Margin="0,50,0,0"/>
+        <Label x:Name="simLabel" Content="Similarities" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="#FF3C3C3C" Margin="0,425,0,0"/>
+    </Grid>
 </UserControl>
