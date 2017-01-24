@@ -1,5 +1,6 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
-using RightCrowd.CompareTool.HelperClasses.Providers.CompareData;
+using RightCrowd.CompareTool.Models.Display.Node;
+using System.Collections.ObjectModel;
 
 namespace RightCrowd.CompareTool
 {
@@ -7,22 +8,92 @@ namespace RightCrowd.CompareTool
     {
         #region Fields
 
-        private ICompareDataProvider _compareDataProvider;
+        private ObservableCollection<IDisplayNode> _db1Differences;
+        private ObservableCollection<IDisplayNode> _db1Similarities;
+
+
+        private ObservableCollection<IDisplayNode> _db2Differences;
+        private ObservableCollection<IDisplayNode> _db2Similarities;
 
         #endregion // Fields
 
-        #region Constructors
+        #region Properties
 
-        public CompareViewModel(ICompareDataProvider compareDataProvider)
+        public ObservableCollection<IDisplayNode> DB1Differences
         {
-            _compareDataProvider = compareDataProvider;
+            get
+            {
+                if (_db1Differences == null)
+                    _db1Differences = new ObservableCollection<IDisplayNode>();
+
+                return _db1Differences;
+            }
+            set
+            {
+                if (_db1Differences != value)
+                {
+                    _db1Differences = value;
+                    OnPropertyChanged("DB1Differences");
+                }
+            }
         }
 
-        #endregion // Constructors
+        public ObservableCollection<IDisplayNode> DB1Similarities
+        {
+            get
+            {
+                if (_db1Similarities == null)
+                    _db1Similarities = new ObservableCollection<IDisplayNode>();
 
-        #region Properties
-        
+                return _db1Similarities;
+            }
+            set
+            {
+                if (_db1Similarities != value)
+                {
+                    _db1Similarities = value;
+                    OnPropertyChanged("DB1Similarities");
+                }
+            }
+        }
+        public ObservableCollection<IDisplayNode> DB2Differences
+        {
+            get
+            {
+                if (_db2Differences == null)
+                    _db2Differences = new ObservableCollection<IDisplayNode>();
 
+                return _db2Differences;
+            }
+            set
+            {
+                if (_db2Differences != value)
+                {
+                    _db2Differences = value;
+                    OnPropertyChanged("DB2Differences");
+                }
+            }
+        }
+
+
+        public ObservableCollection<IDisplayNode> DB2Similarities
+        {
+            get
+            {
+                if (_db2Similarities == null)
+                    _db2Similarities = new ObservableCollection<IDisplayNode>();
+
+                return _db2Similarities;
+            }
+            set
+            {
+                if (_db2Similarities != value)
+                {
+                    _db2Similarities = value;
+                    OnPropertyChanged("DB2Similarities");
+                }
+            }
+        }
 
         #endregion // Properties
 

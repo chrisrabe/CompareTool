@@ -7,6 +7,7 @@ using RightCrowd.CompareTool.HelperClasses.EventHandlers.Load;
 using RightCrowd.CompareTool.Models.DataModels.Database;
 using RightCrowd.CompareTool.HelperClasses.Providers.CompareData;
 using RightCrowd.CompareTool.HelperClasses.Providers.Database;
+using RightCrowd.CompareTool.HelperClasses.Providers.DisplayData;
 
 namespace RightCrowd.CompareTool
 {
@@ -17,6 +18,7 @@ namespace RightCrowd.CompareTool
         // Application View Model Members
         private IDatabaseStorageProvider _databaseProvider;
         private ICompareDataProvider _compareDataProvider;
+        private IDisplayDataProvider _displayDataProvider;
 
         // Processes
         private Dictionary<int, LoadEventHandler> _loadEvents;
@@ -43,11 +45,12 @@ namespace RightCrowd.CompareTool
 
         #region Constructors
 
-        public LoadViewModel(IDatabaseStorageProvider databaseProvider, ICompareDataProvider compareDataProvider)
+        public LoadViewModel(IDatabaseStorageProvider databaseProvider, ICompareDataProvider compareDataProvider, IDisplayDataProvider displayDataProvider)
         {
             _loadEvents = new Dictionary<int, LoadEventHandler>();
             _databaseProvider = databaseProvider;
             _compareDataProvider = compareDataProvider;
+            _displayDataProvider = displayDataProvider;
         }
 
         #endregion // Constructors
@@ -256,7 +259,7 @@ namespace RightCrowd.CompareTool
                 return;
 
             NotComparing = false;
-            new CompareEventHandler(this, _compareDataProvider).Compare(_databaseProvider.DatabaseStorage);
+            new CompareEventHandler(this, _compareDataProvider, _displayDataProvider).Compare(_databaseProvider.DatabaseStorage);
             NotComparing = true;
         }
 

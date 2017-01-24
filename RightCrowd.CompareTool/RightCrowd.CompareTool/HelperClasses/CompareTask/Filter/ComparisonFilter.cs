@@ -8,8 +8,18 @@ using System.Linq;
 
 namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Filter
 {
+    /// <summary>
+    /// This class is responsible for filtering the comparison results.
+    /// </summary>
     internal class ComparisonFilter : IComparisonFilter
     {
+
+        /// <summary>
+        /// This method removes all the redundant data, such as arrays which contains zero elements.
+        /// </summary>
+        /// <param name="database"></param>
+        /// <param name="storage"></param>
+        /// <returns></returns>
         public IDisplayData FilterStorage(int database, IComparisonDataStorage storage)
         {
             return new DisplayData(FilterData(database, true, storage), FilterData(database, false, storage));

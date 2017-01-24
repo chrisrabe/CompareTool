@@ -57,7 +57,7 @@ namespace RightCrowd.CompareTool.Tests
 
         private ICompareEventHandler CreateEventHandler(ICompareDataProvider dataProvider)
         {
-            return new CompareEventHandler(null, dataProvider);
+            return new CompareEventHandler(null, dataProvider, null);
         }
 
         #endregion // Test Helpers

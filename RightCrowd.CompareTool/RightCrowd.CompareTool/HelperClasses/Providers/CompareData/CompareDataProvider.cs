@@ -1,7 +1,4 @@
-﻿using System;
-using RightCrowd.CompareTool.Models.Comparison.DataStorage;
-using RightCrowd.CompareTool.Models.Display.Partition;
-using RightCrowd.CompareTool.Models.Display.Data;
+﻿using RightCrowd.CompareTool.Models.Comparison.DataStorage;
 using RightCrowd.CompareTool.HelperClasses.CompareTask.Filter;
 
 namespace RightCrowd.CompareTool.HelperClasses.Providers.CompareData
@@ -13,8 +10,6 @@ namespace RightCrowd.CompareTool.HelperClasses.Providers.CompareData
     {
         #region  Fields
 
-        private IDisplayPartition _database1;
-        private IDisplayPartition _database2;
         private IComparisonDataStorage _storage;
 
         private IComparisonFilter _filter;

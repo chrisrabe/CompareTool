@@ -6,6 +6,7 @@ using RightCrowd.CompareTool.Models.Comparison.DataStorage;
 using RightCrowd.CompareTool.Models.DataModels.DatabaseStorage.List;
 using RightCrowd.CompareTool.HelperClasses.Providers.Database;
 using RightCrowd.CompareTool.HelperClasses.Providers.CompareData;
+using RightCrowd.CompareTool.HelperClasses.Providers.DisplayData;
 
 namespace RightCrowd.CompareTool
 {
@@ -19,6 +20,7 @@ namespace RightCrowd.CompareTool
 
         private IDatabaseStorageProvider _databaseProvider; 
         private ICompareDataProvider _compareDataProvider;
+        private IDisplayDataProvider _displayDataProvider;
 
         private ICommand _changePageCommand;
 
@@ -34,11 +36,14 @@ namespace RightCrowd.CompareTool
             // Initialise Fields
             _databaseProvider = new DatabaseStorageProvider();
             _compareDataProvider = new CompareDataProvider();
+            _displayDataProvider = new DisplayDataProvider();
+            var compareVM = new CompareViewModel();
+            _displayDataProvider.ViewModel = compareVM;
 
             // Add available pages
-            PageViewModels.Add(new LoadViewModel(_databaseProvider, _compareDataProvider));
-            PageViewModels.Add(new CompareViewModel(_compareDataProvider));
-            
+            PageViewModels.Add(new LoadViewModel(_databaseProvider, _compareDataProvider, _displayDataProvider));
+            PageViewModels.Add(compareVM);
+
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
