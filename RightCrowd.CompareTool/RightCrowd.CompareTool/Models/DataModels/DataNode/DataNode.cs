@@ -1,6 +1,7 @@
 ﻿using RightCrowd.CompareTool.HelperClasses;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace RightCrowd.CompareTool.Models.DataModels.DataNode
 {
@@ -91,6 +92,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
                 if(_different != value)
                 {
                     _different = value;
+                    Fields.ToList().ForEach(field => field.Different = value);
                     OnPropertyChanged("Different");
                 }
             }

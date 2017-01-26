@@ -21,7 +21,7 @@
         <Label x:Name="db2Label" Content="Database Two" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="550" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF8CC63F" Margin="550,0,0,0" BorderBrush="White" BorderThickness="5"/>
         <Label x:Name="difLabel" Content="Differences" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="#FF3C3C3C" Margin="0,50,0,0"/>
         <Label x:Name="simLabel" Content="Similarities" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="#FF3C3C3C" Margin="0,425,0,0"/>
-        <ScrollViewer  HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" Width="550" Height="345">
+        <ScrollViewer ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" Width="550" Height="345">
             <TreeView Background="{x:Null}" ItemsSource="{Binding Path=DB1Differences}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type disNode:DisplayNode}" ItemsSource="{Binding Path=DataNodes}">
@@ -46,7 +46,7 @@
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Orientation="Horizontal" >
+                        <StackPanel Background="#FF188CCA" Orientation="Horizontal" Margin="2" >
                             <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
@@ -58,7 +58,7 @@
                 </TreeView.Resources>
             </TreeView>
         </ScrollViewer>
-        <ScrollViewer  HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="550,80,0,0" VerticalAlignment="Top" Width="550" Height="345" Custom:ScrollBarHelper.VerticalScrollBarOnLeftSide="True">
+        <ScrollViewer ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="550,80,0,0" VerticalAlignment="Top" Width="550" Height="345" Custom:ScrollBarHelper.VerticalScrollBarOnLeftSide="True">
             <TreeView Background="{x:Null}" ItemsSource="{Binding Path=DB2Differences}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type disNode:DisplayNode}" ItemsSource="{Binding Path=DataNodes}">
@@ -83,7 +83,7 @@
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Orientation="Horizontal" >
+                        <StackPanel Background="#FF8CC63F" Orientation="Horizontal" Margin="2" >
                             <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
@@ -95,7 +95,7 @@
                 </TreeView.Resources>
             </TreeView>
         </ScrollViewer>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,455,0,0" VerticalAlignment="Top" Width="550" Height="345">
+        <ScrollViewer ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,455,0,0" VerticalAlignment="Top" Width="550" Height="345">
             <TreeView Background="{x:Null}" ItemsSource="{Binding Path=DB1Similarities}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type disNode:DisplayNode}" ItemsSource="{Binding Path=DataNodes}">
@@ -120,7 +120,7 @@
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Orientation="Horizontal" >
+                        <StackPanel Background="#FF188CCA" Orientation="Horizontal" Margin="2" >
                             <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
@@ -132,7 +132,7 @@
                 </TreeView.Resources>
             </TreeView>
         </ScrollViewer>
-        <ScrollViewer  HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="550,455,0,0" VerticalAlignment="Top" Width="550" Height="345" Custom:ScrollBarHelper.VerticalScrollBarOnLeftSide="True">
+        <ScrollViewer ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="550,455,0,0" VerticalAlignment="Top" Width="550" Height="345" Custom:ScrollBarHelper.VerticalScrollBarOnLeftSide="True">
             <TreeView Background="{x:Null}" ItemsSource="{Binding Path=DB2Similarities}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type disNode:DisplayNode}" ItemsSource="{Binding Path=DataNodes}">
@@ -157,7 +157,7 @@
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Orientation="Horizontal" >
+                        <StackPanel Background="#FF8CC63F" Orientation="Horizontal" Margin="2" >
                             <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>

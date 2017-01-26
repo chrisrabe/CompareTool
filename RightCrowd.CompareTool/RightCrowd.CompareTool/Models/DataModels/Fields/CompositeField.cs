@@ -94,6 +94,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.Fields
                 if (_different != value)
                 {
                     _different = value;
+                    Fields.ToList().ForEach(field => field.Different = value);
                     OnPropertyChanged("Different");
                 }
             }

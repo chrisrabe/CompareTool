@@ -119,8 +119,11 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
         {
             if (database == null)
                 return;
-
-            database.Data.ToList().ForEach(node => { node.Visited = false; });
+            foreach(var node in database.Data)
+            {
+                node.Visited = false;
+                node.Different = false;
+            }
         }
 
         #endregion // Helper Methods
