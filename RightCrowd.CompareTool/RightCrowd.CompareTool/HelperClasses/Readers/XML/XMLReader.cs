@@ -44,9 +44,9 @@ namespace RightCrowd.CompareTool.HelperClasses.Readers.XML
         /// <param name="conversionTable"></param>
         public XMLReader(IMetaData nodeMetaData, IMetaData fieldMetaData, IConversionTable conversionTable)
         {
-            _nodeMetaData = nodeMetaData;
-            _fieldMetaData = fieldMetaData;
-            _conversionTable = conversionTable;
+            _nodeMetaData = nodeMetaData == null ? new MetaData() : nodeMetaData;
+            _fieldMetaData = fieldMetaData == null ? new MetaData() : fieldMetaData;
+            _conversionTable = conversionTable == null ? new ConversionTable() : conversionTable;
         }
 
         #region Methods
