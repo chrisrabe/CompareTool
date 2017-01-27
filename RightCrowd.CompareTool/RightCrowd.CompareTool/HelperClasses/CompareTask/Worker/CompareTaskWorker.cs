@@ -31,12 +31,14 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker
 
         #region Constructors
 
-        public CompareTaskWorker(string assignedDataType, ICompareTaskManager manager)
+        public CompareTaskWorker(string assignedDataType, ICompareTaskManager manager) : this(assignedDataType, manager, new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml")) { }
+
+        public CompareTaskWorker(string assignedDataType, ICompareTaskManager manager, IMetaData nodeMetaData)
         {
             _assignedDataType = assignedDataType;
             _manager = manager;
             _worker = new BackgroundWorker();
-            _nodeMetaData = new MetaDataReader().ReadMetaDataFile("RightCrowd.CompareTool.XMLMetaData.NodeMetaData.xml");
+            _nodeMetaData = nodeMetaData == null ? new MetaData() : nodeMetaData;
             var mapping = _nodeMetaData.KeyFields.FirstOrDefault(x => x.Name.StartsWith(assignedDataType));
             if (mapping == null)
                 _comparator = new DataComparator();
