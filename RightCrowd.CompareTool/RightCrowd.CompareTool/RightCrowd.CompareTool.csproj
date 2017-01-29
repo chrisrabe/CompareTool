@@ -125,6 +125,7 @@
     <Compile Include="HelperClasses\ValueConversion\IConversionField.cs" />
     <Compile Include="HelperClasses\ValueConversion\IConversionTable.cs" />
     <Compile Include="HelperClasses\ValueConversion\IConversionValue.cs" />
+    <Compile Include="HelperClasses\WPFConverters\BoolToColorConverter.cs" />
     <Compile Include="Models\Comparison\DataStorage\ComparisonDataStorage.cs" />
     <Compile Include="Models\Comparison\DataStorage\IComparisonDataStorage.cs" />
     <Compile Include="Models\Comparison\Data\ComparisonData.cs" />
