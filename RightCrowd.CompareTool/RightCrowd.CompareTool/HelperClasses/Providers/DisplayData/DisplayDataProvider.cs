@@ -4,8 +4,10 @@ using RightCrowd.CompareTool.Models.Display.Data;
 
 namespace RightCrowd.CompareTool.HelperClasses.Providers.DisplayData
 {
-    public class DisplayDataProvider : IDisplayDataProvider
+    public class DisplayDataProvider : ObservableObject, IDisplayDataProvider
     {
+        private IDisplayData _db1Results;
+        private IDisplayData _db2Results;
         private IComparisonDataStorage _comparisonStorage;
         private IComparisonFilter _filter;
 
@@ -24,17 +26,43 @@ namespace RightCrowd.CompareTool.HelperClasses.Providers.DisplayData
                     _comparisonStorage = value;
                     if(ViewModel != null)
                     {
-                        IDisplayData db1Results = _filter.FilterStorage(0, value);
-                        IDisplayData db2Results = _filter.FilterStorage(1, value);
-                        ViewModel.DB1Differences = db1Results.Differences;
-                        ViewModel.DB1Similarities = db1Results.Similarities;
-                        ViewModel.DB2Differences = db2Results.Differences;
-                        ViewModel.DB2Similarities = db2Results.Similarities;
+                        DB1Results = _filter.FilterStorage(0, value);
+                        DB2Results = _filter.FilterStorage(1, value);
+                        ViewModel.DB1Differences = DB1Results.Differences;
+                        ViewModel.DB1Similarities = DB1Results.Similarities;
+                        ViewModel.DB2Differences = DB2Results.Differences;
+                        ViewModel.DB2Similarities = DB2Results.Similarities;
                     }
                 }
             }
         }
 
         public CompareViewModel ViewModel { get; set; }
+
+        public IDisplayData DB1Results
+        {
+            get { return _db1Results; }
+            set
+            {
+                if(_db1Results != value)
+                {
+                    _db1Results = value;
+                    OnPropertyChanged("DB1Results");
+                }
+            }
+        }
+
+        public IDisplayData DB2Results
+        {
+            get { return _db2Results; }
+            set
+            {
+                if(_db2Results != value)
+                {
+                    _db2Results = value;
+                    OnPropertyChanged("DB2Results");
+                }
+            }
+        }
     }
 }
