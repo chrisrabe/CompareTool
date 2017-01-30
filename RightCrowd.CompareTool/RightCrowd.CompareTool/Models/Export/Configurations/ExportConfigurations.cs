@@ -29,7 +29,7 @@ namespace RightCrowd.CompareTool.Models.Export.Configurations
             get { return _includeSimilarFields; }
             set
             {
-                if(_includeSimilarFields != value)
+                if (_includeSimilarFields != value)
                 {
                     _includeSimilarFields = value;
                     OnPropertyChanged("IncludeSimilarFields");
@@ -46,10 +46,12 @@ namespace RightCrowd.CompareTool.Models.Export.Configurations
             get { return _db1Only; }
             set
             {
-                if(_db1Only != value)
+                if (_db1Only != value)
                 {
                     _db1Only = value;
                     OnPropertyChanged("DB1Only");
+                    if (_db1Only)
+                        DB2Only = false; // only one flag can be set
                 }
             }
         }
@@ -63,10 +65,12 @@ namespace RightCrowd.CompareTool.Models.Export.Configurations
             get { return _db2Only; }
             set
             {
-                if(_db2Only != value)
+                if (_db2Only != value)
                 {
                     _db2Only = value;
                     OnPropertyChanged("DB2Only");
+                    if (_db2Only)
+                        DB1Only = false; // only one flag can be set
                 }
             }
         }
