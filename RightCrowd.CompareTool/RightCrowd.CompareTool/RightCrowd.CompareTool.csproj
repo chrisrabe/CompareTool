@@ -106,6 +106,7 @@
     <Compile Include="HelperClasses\CompareTask\Worker\ICompareTaskWorker.cs" />
     <Compile Include="HelperClasses\EventHandlers\Compare\CompareEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Compare\ICompareEventHandler.cs" />
+    <Compile Include="HelperClasses\EventHandlers\Export\IExportEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
     <Compile Include="HelperClasses\MetaDataFiles\IMetaData.cs" />
