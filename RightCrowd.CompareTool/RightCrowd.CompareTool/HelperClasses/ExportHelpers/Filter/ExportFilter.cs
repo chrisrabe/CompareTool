@@ -6,6 +6,7 @@ using RightCrowd.CompareTool.Models.Export.Node;
 using RightCrowd.CompareTool.Models.Display.Node;
 using RightCrowd.CompareTool.Models.DataModels.DataNode;
 using RightCrowd.CompareTool.Models.DataModels.Fields;
+using RightCrowd.CompareTool.Models.Export.Configurations;
 
 namespace RightCrowd.CompareTool.HelperClasses.ExportHelpers.Filter
 {
@@ -20,9 +21,9 @@ namespace RightCrowd.CompareTool.HelperClasses.ExportHelpers.Filter
         /// <param name="db1Results"></param>
         /// <param name="db2Results"></param>
         /// <returns></returns>
-        public IExportData Filter(bool includeSimilarFields, bool db1Only, bool db2Only, IDisplayData db1Results, IDisplayData db2Results)
+        public IExportData Filter(ExportConfiguration configuration, IDisplayData db1Results, IDisplayData db2Results)
         {
-            return new ExportData(db2Only ? null : Filter(db1Results, includeSimilarFields), db1Only ? null : Filter(db2Results, includeSimilarFields));
+            return new ExportData(configuration.DB2Only ? null : Filter(db1Results, configuration.IncludeSimilarFields), configuration.DB1Only ? null : Filter(db2Results, configuration.IncludeSimilarFields));
         }
 
         /// <summary>

@@ -106,8 +106,10 @@
     <Compile Include="HelperClasses\CompareTask\Worker\ICompareTaskWorker.cs" />
     <Compile Include="HelperClasses\EventHandlers\Compare\CompareEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Compare\ICompareEventHandler.cs" />
+    <Compile Include="HelperClasses\EventHandlers\Export\ExportEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
+    <Compile Include="HelperClasses\ExportHelpers\FileConverter\IFileConverter.cs" />
     <Compile Include="HelperClasses\ExportHelpers\Filter\ExportFilter.cs" />
     <Compile Include="HelperClasses\ExportHelpers\Filter\IExportFilter.cs" />
     <Compile Include="HelperClasses\MetaDataFiles\IMetaData.cs" />
@@ -139,7 +141,7 @@
     <Compile Include="Models\Display\Data\IDisplayData.cs" />
     <Compile Include="Models\Display\Node\DisplayNode.cs" />
     <Compile Include="Models\Display\Node\IDisplayNode.cs" />
-    <Compile Include="Models\Export\Configurations\ExportConfigurations.cs" />
+    <Compile Include="Models\Export\Configurations\ExportConfiguration.cs" />
     <Compile Include="Models\Export\Data\ExportData.cs" />
     <Compile Include="Models\Export\Data\IExportData.cs" />
     <Compile Include="Models\Export\Node\ExportNode.cs" />
@@ -258,9 +260,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="HelperClasses\EventHandlers\Export\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

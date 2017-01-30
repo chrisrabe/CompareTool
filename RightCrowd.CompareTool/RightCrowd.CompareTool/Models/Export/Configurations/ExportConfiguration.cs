@@ -6,7 +6,7 @@ namespace RightCrowd.CompareTool.Models.Export.Configurations
     /// This class contains properties which determines the output when
     /// exporting the results of the comparison data.
     /// </summary>
-    public class ExportConfigurations : ObservableObject
+    public class ExportConfiguration : ObservableObject
     {
         #region Fields
 
