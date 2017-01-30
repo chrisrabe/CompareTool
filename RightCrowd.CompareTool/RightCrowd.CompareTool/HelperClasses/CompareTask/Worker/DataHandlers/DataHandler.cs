@@ -85,6 +85,7 @@ namespace RightCrowd.CompareTool.HelperClasses.CompareTask.Worker.DataHandlers
             node.Different = true;
             if (allDifferent)
             {
+                node.New = true;
                 node.Fields.ToList().ForEach(field => RecordAsDifferent(field, allDifferent));
             }
             Differences.AddNode(node, databaseIndex);

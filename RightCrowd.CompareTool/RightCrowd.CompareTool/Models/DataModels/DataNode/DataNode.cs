@@ -45,7 +45,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
 
             private set
             {
-                if(_filename != value)
+                if (_filename != value)
                 {
                     _filename = value;
                     OnPropertyChanged("FileName");
@@ -65,7 +65,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
 
             private set
             {
-                if(_fields != value)
+                if (_fields != value)
                 {
                     _fields = value;
                     OnPropertyChanged("Fields");
@@ -90,10 +90,11 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
 
             set
             {
-                if(_different != value)
+                if (_different != value)
                 {
                     _different = value;
-                    Fields.ToList().ForEach(field => field.Different = value);
+                    if (!value) // only update fields if false -- helps with comparison logic
+                        Fields.ToList().ForEach(field => field.Different = value);
                     OnPropertyChanged("Different");
                 }
             }
@@ -118,7 +119,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
             }
             set
             {
-                if(_new != value)
+                if (_new != value)
                 {
                     _new = value;
                     OnPropertyChanged("New");

@@ -22,8 +22,9 @@
             <SolidColorBrush x:Key="db1Color" Color="#FF188CCA" />
             <SolidColorBrush x:Key="db2Color" Color="#FF8CC63F" />
             <SolidColorBrush x:Key="rcBlack" Color="#FF3C3C3C" />
-            <converters:BoolToColorConverter x:Key="db1Converter" TrueValue="{StaticResource db2Color}" FalseValue="{StaticResource db1Color}" />
-            <converters:BoolToColorConverter x:Key="db2Converter" TrueValue="{StaticResource db1Color}" FalseValue="{StaticResource db2Color}" />
+            <SolidColorBrush x:Key="difColor" Color="#FFD35900"/>
+            <converters:BoolToColorConverter x:Key="db1Converter" TrueValue="{StaticResource difColor}" FalseValue="{StaticResource db1Color}" />
+            <converters:BoolToColorConverter x:Key="db2Converter" TrueValue="{StaticResource difColor}" FalseValue="{StaticResource db2Color}" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -42,22 +43,22 @@
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datNode:DataNode}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{Binding New, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db1Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=FileName}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:CompositeField}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db1Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Background="{StaticResource db1Color}" Orientation="Horizontal" Margin="2" >
-                            <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <StackPanel Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db1Converter}}" Orientation="Horizontal" Margin="2" >
+                            <Border BorderBrush="{StaticResource db1Color}" Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db1Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
                             <Border BorderBrush="{StaticResource db1Color}" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
@@ -79,22 +80,22 @@
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datNode:DataNode}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{Binding New, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db2Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=FileName}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:CompositeField}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db2Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Background="{StaticResource db2Color}" Orientation="Horizontal" Margin="2" >
-                            <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <StackPanel Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db2Converter}}" Orientation="Horizontal" Margin="2" >
+                            <Border BorderBrush="{StaticResource db2Color}" Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db2Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
                             <Border BorderBrush="{StaticResource db2Color}" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
@@ -116,22 +117,22 @@
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datNode:DataNode}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{Binding New, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db1Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=FileName}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:CompositeField}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db1Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Background="{StaticResource db1Color}" Orientation="Horizontal" Margin="2" >
-                            <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <StackPanel Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db1Converter}}" Orientation="Horizontal" Margin="2" >
+                            <Border BorderBrush="{StaticResource db1Color}" Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db1Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
                             <Border BorderBrush="{StaticResource db1Color}" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
@@ -153,22 +154,22 @@
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datNode:DataNode}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{Binding New,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource db2Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=FileName}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:CompositeField}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db2Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Background="{StaticResource db2Color}" Orientation="Horizontal" Margin="2" >
-                            <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <StackPanel Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource db2Converter}}" Orientation="Horizontal" Margin="2" >
+                            <Border BorderBrush="{StaticResource db2Color}" Background="{Binding Different, Mode=OneWay, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource db2Converter}}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
                             <Border BorderBrush="{StaticResource db2Color}" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
