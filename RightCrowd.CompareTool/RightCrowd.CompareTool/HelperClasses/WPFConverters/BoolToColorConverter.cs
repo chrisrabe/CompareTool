@@ -9,28 +9,22 @@ namespace RightCrowd.CompareTool.HelperClasses.WPFConverters
     /// Converts a boolean to the specified colors. If the boolean is false, it returns the normal color, 
     /// if the boolean is true, it returns the error color.
     /// </summary>
-    public abstract class BoolToColorConverter : IValueConverter
+    public class BoolToColorConverter : IValueConverter
     {
-        private SolidColorBrush _normalColor;
-        private SolidColorBrush _errorColor;
-
-        public BoolToColorConverter(SolidColorBrush normalColor, SolidColorBrush errorColor)
-        {
-            _normalColor = normalColor;
-            _errorColor = errorColor;
-        }
+        public SolidColorBrush TrueValue { get; set; }
+        public SolidColorBrush FalseValue { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if ((bool)value)
-                return _errorColor;
+                return TrueValue;
             else
-                return _normalColor;
+                return FalseValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null ? value.Equals(_normalColor) : false;
+            return value != null ? value.Equals(TrueValue) : false;
         }
     }
 }

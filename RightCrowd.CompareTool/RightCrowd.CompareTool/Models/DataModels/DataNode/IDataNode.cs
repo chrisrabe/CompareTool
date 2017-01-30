@@ -26,5 +26,11 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
         /// This marks whether it has been compared or not.
         /// </summary>
         bool Visited { get; set; }
+
+        /// <summary>
+        /// This returns a boolean flag which indicates that this
+        /// node is a new node and doesn't exist in the other database.
+        /// </summary>
+        bool New { get; set; }
     }
 }

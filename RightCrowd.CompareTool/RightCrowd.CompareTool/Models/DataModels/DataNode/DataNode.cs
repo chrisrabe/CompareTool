@@ -15,6 +15,7 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
         private string _filename;
         private bool _different;
         private bool _visited;
+        private bool _new;
         private ObservableCollection<IField> _fields;
 
         #endregion // Fields
@@ -103,6 +104,26 @@ namespace RightCrowd.CompareTool.Models.DataModels.DataNode
             get { return _visited; }
 
             set { _visited = value; }
+        }
+
+        /// <summary>
+        /// Returns true if all the fields of this node is marked as different.
+        /// </summary>
+        public bool New
+        {
+            get
+            {
+                New = Fields.All(field => field.Different == true);
+                return _new;
+            }
+            set
+            {
+                if(_new != value)
+                {
+                    _new = value;
+                    OnPropertyChanged("New");
+                }
+            }
         }
 
         #endregion // Properties

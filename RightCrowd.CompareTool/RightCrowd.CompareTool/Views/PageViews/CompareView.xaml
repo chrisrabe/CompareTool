@@ -7,6 +7,7 @@
              xmlns:disNode="clr-namespace:RightCrowd.CompareTool.Models.Display.Node"
              xmlns:datNode="clr-namespace:RightCrowd.CompareTool.Models.DataModels.DataNode"
              xmlns:datField="clr-namespace:RightCrowd.CompareTool.Models.DataModels.Fields"
+             xmlns:converters="clr-namespace:RightCrowd.CompareTool.HelperClasses.WPFConverters"
              xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="RightCrowd.CompareTool.CompareView"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1100">
@@ -16,41 +17,50 @@
             <GradientStop Color="#FFDAB575" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="db1Color" Color="#FF188CCA" />
+            <SolidColorBrush x:Key="db2Color" Color="#FF8CC63F" />
+            <SolidColorBrush x:Key="rcBlack" Color="#FF3C3C3C" />
+            <converters:BoolToColorConverter x:Key="db1Converter" TrueValue="{StaticResource db2Color}" FalseValue="{StaticResource db1Color}" />
+            <converters:BoolToColorConverter x:Key="db2Converter" TrueValue="{StaticResource db1Color}" FalseValue="{StaticResource db2Color}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <Label x:Name="db1Label" Content="Database One" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="550" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF188CCA" BorderBrush="White" BorderThickness="5"/>
-        <Label x:Name="db2Label" Content="Database Two" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="550" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="#FF8CC63F" Margin="550,0,0,0" BorderBrush="White" BorderThickness="5"/>
-        <Label x:Name="difLabel" Content="Differences" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="#FF3C3C3C" Margin="0,50,0,0"/>
-        <Label x:Name="simLabel" Content="Similarities" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="#FF3C3C3C" Margin="0,425,0,0"/>
+        <Label x:Name="db1Label" Content="Database One" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="550" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="{StaticResource db1Color}" BorderBrush="White" BorderThickness="5"/>
+        <Label x:Name="db2Label" Content="Database Two" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="550" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="20" Foreground="White" Background="{StaticResource db2Color}"  Margin="550,0,0,0" BorderBrush="White" BorderThickness="5"/>
+        <Label x:Name="difLabel" Content="Differences" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="{StaticResource rcBlack}" Margin="0,50,0,0"/>
+        <Label x:Name="simLabel" Content="Similarities" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="{StaticResource rcBlack}" Margin="0,425,0,0"/>
         <ScrollViewer ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" Width="550" Height="345">
             <TreeView Background="{x:Null}" ItemsSource="{Binding Path=DB1Differences}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type disNode:DisplayNode}" ItemsSource="{Binding Path=DataNodes}">
-                        <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Type}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datNode:DataNode}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=FileName}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:CompositeField}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Background="#FF188CCA" Orientation="Horizontal" Margin="2" >
-                            <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <StackPanel Background="{StaticResource db1Color}" Orientation="Horizontal" Margin="2" >
+                            <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
-                            <Border BorderBrush="#FF188CCA" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                            <Border BorderBrush="{StaticResource db1Color}" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock Text="{Binding Path=Value}" FontWeight="Bold" Foreground="Black"/>
                             </Border>
                         </StackPanel>
@@ -62,32 +72,32 @@
             <TreeView Background="{x:Null}" ItemsSource="{Binding Path=DB2Differences}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type disNode:DisplayNode}" ItemsSource="{Binding Path=DataNodes}">
-                        <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Type}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datNode:DataNode}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=FileName}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:CompositeField}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Background="#FF8CC63F" Orientation="Horizontal" Margin="2" >
-                            <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <StackPanel Background="{StaticResource db2Color}" Orientation="Horizontal" Margin="2" >
+                            <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
-                            <Border BorderBrush="#FF8CC63F" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                            <Border BorderBrush="{StaticResource db2Color}" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock Text="{Binding Path=Value}" FontWeight="Bold" Foreground="Black"/>
                             </Border>
                         </StackPanel>
@@ -99,32 +109,32 @@
             <TreeView Background="{x:Null}" ItemsSource="{Binding Path=DB1Similarities}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type disNode:DisplayNode}" ItemsSource="{Binding Path=DataNodes}">
-                        <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Type}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datNode:DataNode}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=FileName}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:CompositeField}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Background="#FF188CCA" Orientation="Horizontal" Margin="2" >
-                            <Border BorderBrush="#FF188CCA" Background="#FF188CCA"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <StackPanel Background="{StaticResource db1Color}" Orientation="Horizontal" Margin="2" >
+                            <Border BorderBrush="{StaticResource db1Color}" Background="{StaticResource db1Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
-                            <Border BorderBrush="#FF188CCA" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                            <Border BorderBrush="{StaticResource db1Color}" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock Text="{Binding Path=Value}" FontWeight="Bold" Foreground="Black"/>
                             </Border>
                         </StackPanel>
@@ -136,32 +146,32 @@
             <TreeView Background="{x:Null}" ItemsSource="{Binding Path=DB2Similarities}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type disNode:DisplayNode}" ItemsSource="{Binding Path=DataNodes}">
-                        <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Type}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datNode:DataNode}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=FileName}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:CompositeField}" ItemsSource="{Binding Path=Fields}">
-                        <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"></TextBlock>
                             </StackPanel>
                         </Border>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type datField:RawField}">
-                        <StackPanel Background="#FF8CC63F" Orientation="Horizontal" Margin="2" >
-                            <Border BorderBrush="#FF8CC63F" Background="#FF8CC63F"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                        <StackPanel Background="{StaticResource db2Color}" Orientation="Horizontal" Margin="2" >
+                            <Border BorderBrush="{StaticResource db2Color}" Background="{StaticResource db2Color}"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock  Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
                             </Border>
-                            <Border BorderBrush="#FF8CC63F" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
+                            <Border BorderBrush="{StaticResource db2Color}" Background="AliceBlue"  BorderThickness="1" CornerRadius="2" Margin="2" Padding="2" >
                                 <TextBlock Text="{Binding Path=Value}" FontWeight="Bold" Foreground="Black"/>
                             </Border>
                         </StackPanel>
