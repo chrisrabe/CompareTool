@@ -1,10 +1,17 @@
-﻿
-using RightCrowd.CompareTool.HelperClasses;
+﻿using RightCrowd.CompareTool.HelperClasses;
+using RightCrowd.CompareTool.HelperClasses.Providers.DisplayData;
 
 namespace RightCrowd.CompareTool
 {
     public class ExportViewModel : ObservableObject, IPageViewModel
     {
+        private IDisplayDataProvider _displayDataProvider;
+
+        public ExportViewModel(IDisplayDataProvider displayDataProvider)
+        {
+            _displayDataProvider = displayDataProvider;
+        }
+
         #region IPageViewModel Members
 
         public string ImagePath

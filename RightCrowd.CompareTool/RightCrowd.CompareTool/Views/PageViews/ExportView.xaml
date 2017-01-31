@@ -12,4 +12,16 @@
             <GradientStop Color="#FFDAB575" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Background>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="db1Color" Color="#FF188CCA" />
+            <SolidColorBrush x:Key="db2Color" Color="#FF8CC63F" />
+            <SolidColorBrush x:Key="rcBlack" Color="#FF3C3C3C" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Label x:Name="settingsLbl" Content="Export Settings" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="{StaticResource rcBlack}" Margin="0,0,0,0"/>
+        
+        <Label x:Name="formatLbl" Content="Export File Format" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="{StaticResource rcBlack}" Margin="0,350,0,0"/>
+    </Grid>
 </UserControl>
