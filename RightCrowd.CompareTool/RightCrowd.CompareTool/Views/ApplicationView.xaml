@@ -24,6 +24,9 @@
         <DataTemplate DataType="{x:Type local:CompareViewModel}">
             <local:CompareView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ExportViewModel}">
+            <local:ExportView />
+        </DataTemplate>
     </Window.Resources>
 
     <DockPanel>

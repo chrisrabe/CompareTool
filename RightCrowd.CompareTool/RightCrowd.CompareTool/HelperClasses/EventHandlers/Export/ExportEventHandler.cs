@@ -3,6 +3,7 @@ using RightCrowd.CompareTool.HelperClasses.ExportHelpers.Filter;
 using RightCrowd.CompareTool.HelperClasses.Providers.DisplayData;
 using RightCrowd.CompareTool.Models.Export.Configurations;
 using RightCrowd.CompareTool.Models.Export.Data;
+using System.Windows;
 
 namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Export
 {
@@ -30,10 +31,12 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Export
         /// - The filter ensures that the conditions inside the export configuration is met by the output.
         /// - The file converter transforms the export data into a specific file format.
         /// </summary>
-        public void Export()
+        /// <param name="filepath"></param>
+        public void Export(string filePath)
         {
             IExportData data = _filter.Filter(_configuration, _provider.DB1Results, _provider.DB2Results);
-            _converter.ToFile(data);
+            _converter.ToFile(filePath, data);
+            MessageBox.Show("Exported to " + filePath);
         }
     }
 }

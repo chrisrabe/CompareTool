@@ -110,6 +110,7 @@
     <Compile Include="HelperClasses\EventHandlers\Load\ILoadEventHandler.cs" />
     <Compile Include="HelperClasses\EventHandlers\Load\LoadEventHandler.cs" />
     <Compile Include="HelperClasses\ExportHelpers\FileConverter\IFileConverter.cs" />
+    <Compile Include="HelperClasses\ExportHelpers\FileConverter\TextFileConverter.cs" />
     <Compile Include="HelperClasses\ExportHelpers\Filter\ExportFilter.cs" />
     <Compile Include="HelperClasses\ExportHelpers\Filter\IExportFilter.cs" />
     <Compile Include="HelperClasses\MetaDataFiles\IMetaData.cs" />
@@ -147,9 +148,13 @@
     <Compile Include="Models\Export\Node\ExportNode.cs" />
     <Compile Include="Models\Export\Node\IExportNode.cs" />
     <Compile Include="ViewModels\CompareViewModel.cs" />
+    <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="ViewModels\LoadViewModel.cs" />
     <Compile Include="Views\PageViews\CompareView.xaml.cs">
       <DependentUpon>CompareView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PageViews\ExportView.xaml.cs">
+      <DependentUpon>ExportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PageViews\LoadView.xaml.cs">
       <DependentUpon>LoadView.xaml</DependentUpon>
@@ -180,6 +185,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\PageViews\CompareView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PageViews\ExportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,7 +269,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\save_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

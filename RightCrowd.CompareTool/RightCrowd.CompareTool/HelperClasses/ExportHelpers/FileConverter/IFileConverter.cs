@@ -1,4 +1,5 @@
-﻿using RightCrowd.CompareTool.Models.Export.Data;
+﻿using RightCrowd.CompareTool.Models.Export.Configurations;
+using RightCrowd.CompareTool.Models.Export.Data;
 
 namespace RightCrowd.CompareTool.HelperClasses.ExportHelpers.FileConverter
 {
@@ -11,7 +12,8 @@ namespace RightCrowd.CompareTool.HelperClasses.ExportHelpers.FileConverter
         /// <summary>
         /// Writes the export data to another file.
         /// </summary>
+        /// <param name="filePath"></param>
         /// <param name="data"></param>
-        void ToFile(IExportData data);
+        void ToFile(string filePath, IExportData data);
     }
 }
