@@ -37,7 +37,6 @@ the second node to 'steak' since the value of 'name' is 2, and the third node to
 the value of 'name' is 3. The value is assumed to be unique.
 -->
 <fields>
-  <name>1~apple,2~steak,3~banana</name>
   <AutoApprove>0~false,1~true</AutoApprove>
   <AccessLevelOrder>0~false,1~true</AccessLevelOrder>
   <Custom>0~false,1~true</Custom>
