@@ -21,7 +21,14 @@
     </UserControl.Resources>
     <Grid>
         <Label x:Name="settingsLbl" Content="Export Settings" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="{StaticResource rcBlack}" Margin="0,0,0,0"/>
-        
         <Label x:Name="formatLbl" Content="Export File Format" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="15" Foreground="White" Background="{StaticResource rcBlack}" Margin="0,350,0,0"/>
+        
+        <CheckBox x:Name="includeSimilarFields" Content="Include Similar Fields" HorizontalAlignment="Left" Margin="20,50,0,0" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segeo UI Black" FontWeight="Bold" FontSize="15" IsChecked="{Binding Path=IncludeSimilarFields}"/>
+        <CheckBox x:Name="db1Only" Content="Export Database One Results Only" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segeo UI Black" FontWeight="Bold" FontSize="15" IsChecked="{Binding Path=DB1Only}"/>
+        <CheckBox x:Name="db2Only" Content="Export Database Two Results Only" HorizontalAlignment="Left" Margin="20,150,0,0" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segeo UI Black" FontWeight="Bold" FontSize="15" IsChecked="{Binding Path=DB2Only}"/>
+
+        <Button x:Name="btnLoad1" HorizontalAlignment="Left" Margin="20,400,0,0" VerticalAlignment="Top" Width="100" Height="100" Cursor="Hand" ToolTip="Export to text file." Command="{Binding Path=ExportToText}">
+            <Image Source="pack://application:,,,/Resources/txtExport.png"></Image>
+        </Button>
     </Grid>
 </UserControl>
