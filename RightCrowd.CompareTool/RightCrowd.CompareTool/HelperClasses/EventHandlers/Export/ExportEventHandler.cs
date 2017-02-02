@@ -35,8 +35,16 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Export
         public void Export(string filePath)
         {
             IExportData data = _filter.Filter(_configuration, _provider.DB1Results, _provider.DB2Results);
-            _converter.ToFile(filePath, data);
-            MessageBox.Show("Exported to " + filePath);
+            if (data == null)
+            {
+                MessageBox.Show("Error : There's no data to export");
+                return;
+            }
+            else
+            {
+                _converter.ToFile(filePath, data);
+                MessageBox.Show("Exported to " + filePath);
+            }
         }
     }
 }

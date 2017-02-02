@@ -23,6 +23,8 @@ namespace RightCrowd.CompareTool.HelperClasses.ExportHelpers.Filter
         /// <returns></returns>
         public IExportData Filter(ExportConfiguration configuration, IDisplayData db1Results, IDisplayData db2Results)
         {
+            if (db1Results == null || db2Results == null)
+                return null;
             return new ExportData(configuration.DB2Only ? null : Filter(db1Results, configuration.IncludeSimilarFields), configuration.DB1Only ? null : Filter(db2Results, configuration.IncludeSimilarFields));
         }
 
