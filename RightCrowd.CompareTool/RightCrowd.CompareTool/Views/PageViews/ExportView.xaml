@@ -30,7 +30,7 @@
         <Button x:Name="txtBtn" HorizontalAlignment="Left" Margin="20,400,0,0" VerticalAlignment="Top" Width="100" Height="100" Cursor="Hand" ToolTip="Export to text file." Command="{Binding Path=ExportToText}">
             <Image Source="pack://application:,,,/Resources/txtExport.png"></Image>
         </Button>
-        <Button x:Name="htmlBtn" HorizontalAlignment="Left" Margin="150,400,0,0" VerticalAlignment="Top" Width="100" Height="100" Cursor="Hand" ToolTip="Export to text file." Command="{Binding Path=ExportToHTML}">
+        <Button x:Name="htmlBtn" HorizontalAlignment="Left" Margin="150,400,0,0" VerticalAlignment="Top" Width="100" Height="100" Cursor="Hand" ToolTip="Export to html file." Command="{Binding Path=ExportToHTML}">
             <Image Source="pack://application:,,,/Resources/htmlExport.png"></Image>
         </Button>
     </Grid>
