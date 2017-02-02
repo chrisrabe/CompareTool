@@ -16,12 +16,14 @@ namespace RightCrowd.CompareTool
         private IDisplayDataProvider _displayDataProvider;
         private IExportFilter _exportFilter;
         private IFileConverter _txtFileConverter;
+        private IFileConverter _htmlFileConverter;
         // Flags
         private bool _includeSimilarFields;
         private bool _db1Only;
         private bool _db2Only;
         // Commands
         private ICommand _exportToText;
+        private ICommand _exportToHTML;
         #endregion // Fields
 
         #region Constructors
@@ -31,6 +33,7 @@ namespace RightCrowd.CompareTool
             _displayDataProvider = displayDataProvider;
             _exportFilter = new ExportFilter();
             _txtFileConverter = new TextFileConverter();
+            _htmlFileConverter = new HTMLFileConverter();
         }
 
         #endregion // Constructors
@@ -42,8 +45,18 @@ namespace RightCrowd.CompareTool
             get
             {
                 if (_exportToText == null)
-                    _exportToText = new RelayCommand(i => ExportToFile("txt"));
+                    _exportToText = new RelayCommand(i => ExportToFile(_exportFilter, _txtFileConverter, "txt"));
                 return _exportToText;
+            }
+        }
+
+        public ICommand ExportToHTML
+        {
+            get
+            {
+                if (_exportToHTML == null)
+                    _exportToHTML = new RelayCommand(i => ExportToFile(_exportFilter, _htmlFileConverter, "html"));
+                return _exportToHTML;
             }
         }
 
@@ -51,7 +64,7 @@ namespace RightCrowd.CompareTool
 
         #region Export Methods
 
-        private void ExportToFile(string format)
+        private void ExportToFile(IExportFilter filter, IFileConverter converter, string format)
         {
             SaveFileDialog dialog = new SaveFileDialog();
 
@@ -61,7 +74,7 @@ namespace RightCrowd.CompareTool
 
             if(dialog.ShowDialog() == DialogResult.OK)
             {
-                new ExportEventHandler(_exportFilter, _txtFileConverter, new ExportConfiguration(IncludeSimilarFields, DB1Only, DB2Only), _displayDataProvider).Export(dialog.FileName);
+                new ExportEventHandler(filter, converter, new ExportConfiguration(IncludeSimilarFields, DB1Only, DB2Only), _displayDataProvider).Export(dialog.FileName);
             }
         }
 

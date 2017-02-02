@@ -27,8 +27,11 @@
         <CheckBox x:Name="db1Only" Content="Export Database One Results Only" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segeo UI Black" FontWeight="Bold" FontSize="15" IsChecked="{Binding Path=DB1Only}"/>
         <CheckBox x:Name="db2Only" Content="Export Database Two Results Only" HorizontalAlignment="Left" Margin="20,150,0,0" VerticalAlignment="Top" Height="30" Width="1100" FontFamily="Segeo UI Black" FontWeight="Bold" FontSize="15" IsChecked="{Binding Path=DB2Only}"/>
 
-        <Button x:Name="btnLoad1" HorizontalAlignment="Left" Margin="20,400,0,0" VerticalAlignment="Top" Width="100" Height="100" Cursor="Hand" ToolTip="Export to text file." Command="{Binding Path=ExportToText}">
+        <Button x:Name="txtBtn" HorizontalAlignment="Left" Margin="20,400,0,0" VerticalAlignment="Top" Width="100" Height="100" Cursor="Hand" ToolTip="Export to text file." Command="{Binding Path=ExportToText}">
             <Image Source="pack://application:,,,/Resources/txtExport.png"></Image>
+        </Button>
+        <Button x:Name="htmlBtn" HorizontalAlignment="Left" Margin="150,400,0,0" VerticalAlignment="Top" Width="100" Height="100" Cursor="Hand" ToolTip="Export to text file." Command="{Binding Path=ExportToHTML}">
+            <Image Source="pack://application:,,,/Resources/htmlExport.png"></Image>
         </Button>
     </Grid>
 </UserControl>

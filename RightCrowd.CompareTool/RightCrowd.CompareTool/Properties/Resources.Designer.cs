@@ -103,6 +103,16 @@ namespace RightCrowd.CompareTool.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap htmlExport {
+            get {
+                object obj = ResourceManager.GetObject("htmlExport", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap load_view_logo {
             get {
                 object obj = ResourceManager.GetObject("load_view_logo", resourceCulture);
