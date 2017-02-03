@@ -11,7 +11,7 @@ namespace RightCrowd.CompareTool.HelperClasses.EventHandlers.Load
     /// This class loads the database in the background while reporting
     /// The progress back to the LoadViewModel. When the background task
     /// is complete, it automatically places the newly created database
-    /// into ApplicationViewModel's database storage.
+    /// into database storage provider.
     /// 
     /// This event handler only works with two databases.
     /// </summary>
