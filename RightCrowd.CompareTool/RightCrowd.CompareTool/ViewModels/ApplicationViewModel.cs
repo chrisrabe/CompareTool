@@ -54,26 +54,6 @@ namespace RightCrowd.CompareTool
 
         #region Properties
 
-        /// <summary>
-        /// Returns an instance of a database storage.
-        /// </summary>
-        public IListDatabaseStorage DatabaseStorage
-        {
-            get
-            {
-                return _databaseProvider.DatabaseStorage;
-            }
-        }
-
-        public IComparisonDataStorage ComparisonStorage
-        {
-            get { return _compareDataProvider.ComparisonStorage; }
-            set
-            {
-                _compareDataProvider.ComparisonStorage = value;
-            }
-        }
-
         public IPageViewModel CurrentPageViewModel
         {
             get
