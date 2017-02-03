@@ -17,10 +17,7 @@ namespace RightCrowd.CompareTool
         private IExportFilter _exportFilter;
         private IFileConverter _txtFileConverter;
         private IFileConverter _htmlFileConverter;
-        // Flags
-        private bool _includeSimilarFields;
-        private bool _db1Only;
-        private bool _db2Only;
+        private ExportConfiguration _configuration;
         // Commands
         private ICommand _exportToText;
         private ICommand _exportToHTML;
@@ -34,6 +31,7 @@ namespace RightCrowd.CompareTool
             _exportFilter = new ExportFilter();
             _txtFileConverter = new TextFileConverter();
             _htmlFileConverter = new HTMLFileConverter();
+            _configuration = new ExportConfiguration(false, false, false);
         }
 
         #endregion // Constructors
@@ -74,7 +72,7 @@ namespace RightCrowd.CompareTool
 
             if(dialog.ShowDialog() == DialogResult.OK)
             {
-                new ExportEventHandler(filter, converter, new ExportConfiguration(IncludeSimilarFields, DB1Only, DB2Only), _displayDataProvider).Export(dialog.FileName);
+                new ExportEventHandler(filter, converter, _configuration, _displayDataProvider).Export(dialog.FileName);
             }
         }
 
@@ -84,12 +82,12 @@ namespace RightCrowd.CompareTool
 
         public bool IncludeSimilarFields
         {
-            get { return _includeSimilarFields; }
+            get { return _configuration.IncludeSimilarFields; }
             set
             {
-                if (_includeSimilarFields != value)
+                if (_configuration.IncludeSimilarFields != value)
                 {
-                    _includeSimilarFields = value;
+                    _configuration.IncludeSimilarFields = value;
                     OnPropertyChanged("IncludeSimilarFields");
                 }
             }
@@ -97,14 +95,14 @@ namespace RightCrowd.CompareTool
 
         public bool DB1Only
         {
-            get { return _db1Only; }
+            get { return _configuration.DB1Only; }
             set
             {
-                if(_db1Only != value)
+                if(_configuration.DB1Only != value)
                 {
-                    _db1Only = value;
+                    _configuration.DB1Only = value;
                     OnPropertyChanged("DB1Only");
-                    if (_db1Only)
+                    if (_configuration.DB1Only)
                         DB2Only = false;
                 }
             }
@@ -112,14 +110,14 @@ namespace RightCrowd.CompareTool
 
         public bool DB2Only
         {
-            get { return _db2Only; }
+            get { return _configuration.DB2Only; }
             set
             {
-                if(_db2Only != value)
+                if(_configuration.DB2Only != value)
                 {
-                    _db2Only = value;
+                    _configuration.DB2Only = value;
                     OnPropertyChanged("DB2Only");
-                    if (_db2Only)
+                    if (_configuration.DB2Only)
                         DB1Only = false;
                 }
             }
